@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
+    <Compile Include="scheduling\Scheduler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".git\config" />
