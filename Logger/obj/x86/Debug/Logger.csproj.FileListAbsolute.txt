@@ -1,0 +1,7 @@
+C:\Users\Theo\source\repos\923-recommenders\recommenders-backend\Logger\obj\x86\Debug\Logger.csproj.AssemblyReference.cache
+C:\Users\Theo\source\repos\923-recommenders\recommenders-backend\Logger\obj\x86\Debug\Logger.csproj.CoreCompileInputs.cache
+C:\Users\Theo\source\repos\923-recommenders\recommenders-backend\Logger\bin\Debug\ConsoleApplication.exe.config
+C:\Users\Theo\source\repos\923-recommenders\recommenders-backend\Logger\bin\Debug\ConsoleApplication.exe
+C:\Users\Theo\source\repos\923-recommenders\recommenders-backend\Logger\bin\Debug\ConsoleApplication.pdb
+C:\Users\Theo\source\repos\923-recommenders\recommenders-backend\Logger\obj\x86\Debug\ConsoleApplication.exe
+C:\Users\Theo\source\repos\923-recommenders\recommenders-backend\Logger\obj\x86\Debug\ConsoleApplication.pdb
