@@ -1,0 +1,6 @@
+C:\Users\maria\Downloads\Data-Validation\recommenders-backend-main\obj\x86\Debug\recommenders-backend.csproj.AssemblyReference.cache
+C:\Users\maria\Downloads\Data-Validation\recommenders-backend-main\obj\x86\Debug\recommenders-backend.csproj.CoreCompileInputs.cache
+C:\Users\maria\Downloads\Data-Validation\recommenders-backend-main\bin\Debug\ConsoleApplication.exe
+C:\Users\maria\Downloads\Data-Validation\recommenders-backend-main\bin\Debug\ConsoleApplication.pdb
+C:\Users\maria\Downloads\Data-Validation\recommenders-backend-main\obj\x86\Debug\ConsoleApplication.exe
+C:\Users\maria\Downloads\Data-Validation\recommenders-backend-main\obj\x86\Debug\ConsoleApplication.pdb

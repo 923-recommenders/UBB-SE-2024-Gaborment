@@ -1,0 +1,5 @@
+badwords
+bad1
+bad2
+bad3
+hate
