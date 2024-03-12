@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
+    <Compile Include="scheduling\IScheduler.cs" />
+    <Compile Include="scheduling\FakeScheduler.cs" />
     <Compile Include="scheduling\Scheduler.cs" />
   </ItemGroup>
   <ItemGroup>
