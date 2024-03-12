@@ -6,3 +6,7 @@
 /bin/Debug
 /obj/x86/Debug
 /recommenders-backend.csproj.user
+/Cache
+/Data-Validation/recommenders-backend-main/obj/x86
+/obj/x86/Release
+/app.config
