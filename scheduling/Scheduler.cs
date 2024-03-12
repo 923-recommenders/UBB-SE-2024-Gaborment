@@ -27,7 +27,7 @@ public class Scheduler:IScheduler
     public void Stop()
     {
         running = false;
-        schedulerThread.Abort();
+        schedulerThread.Join();
     }
 
     public DateTime RoundDownDateTime(DateTime date, long ticks)

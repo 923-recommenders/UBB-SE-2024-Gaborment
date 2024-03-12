@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using recommenders_backend.scheduling;
 
 namespace recommenders_backend
@@ -7,9 +8,10 @@ namespace recommenders_backend
     {
         static void Main(string[] args)
         {
+            RunRealScenario();
             DateTime initialTime = new DateTime(2024, 3, 10, 10, 0, 0);
             RunTestScenario(initialTime);
-            RunRealScenario();
+            
         }
 
         static void RunRealScenario() { 
@@ -41,14 +43,10 @@ namespace recommenders_backend
             {
                 Console.WriteLine("Another Function executed at: " + DateTime.Now);
             });
-            scheduler.ScheduleFunction(DateTime.Now.AddSeconds(40), () =>
-            {
-                Console.WriteLine("Stopped executed at: " + DateTime.Now);
-                scheduler.Stop();
-            });
-            Console.ReadLine();
-
+            Thread.Sleep(10000);
             scheduler.Stop();
+            Console.WriteLine("Stopped scheduler");
+            Console.ReadLine();
         }
         static void RunTestScenario(DateTime initialTime)
         {
@@ -75,12 +73,9 @@ namespace recommenders_backend
             Console.WriteLine("Scheduled function to execute at: " + anotherExecutionTime);
 
             DateTime stopTime = initialTime.AddSeconds(40);
-            scheduler.ScheduleFunction(stopTime, () =>
-            {
-                Console.WriteLine("Stopped executed at: " + scheduler.CurrentTime);
-                scheduler.Stop();
-            });
-
+            Thread.Sleep(10000);
+            scheduler.Stop();
+            Console.WriteLine("Stopped scheduler");
             Console.ReadLine();
         }
     }

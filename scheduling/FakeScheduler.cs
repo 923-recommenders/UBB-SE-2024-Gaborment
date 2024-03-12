@@ -38,7 +38,7 @@ public class FakeScheduler : IScheduler
     public void Stop()
     {
         running = false;
-        schedulerThread.Abort();
+        schedulerThread.Join();
     }
 
     public void SetCurrentTime(DateTime time)
@@ -56,7 +56,6 @@ public class FakeScheduler : IScheduler
         while (running)
         {
             DateTime nextExecutionTime = GetNextExecutionTime();
-
             if (nextExecutionTime == DateTime.MaxValue)
             {
                 Thread.Sleep(1);
