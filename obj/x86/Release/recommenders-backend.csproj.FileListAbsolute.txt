@@ -1,0 +1,7 @@
+C:\Users\Theo\source\repos\923-recommenders\recommenders-backend\bin\Release\ConsoleApplication.exe.config
+C:\Users\Theo\source\repos\923-recommenders\recommenders-backend\bin\Release\ConsoleApplication.exe
+C:\Users\Theo\source\repos\923-recommenders\recommenders-backend\bin\Release\ConsoleApplication.pdb
+C:\Users\Theo\source\repos\923-recommenders\recommenders-backend\obj\x86\Release\recommenders-backend.csproj.AssemblyReference.cache
+C:\Users\Theo\source\repos\923-recommenders\recommenders-backend\obj\x86\Release\recommenders-backend.csproj.CoreCompileInputs.cache
+C:\Users\Theo\source\repos\923-recommenders\recommenders-backend\obj\x86\Release\ConsoleApplication.exe
+C:\Users\Theo\source\repos\923-recommenders\recommenders-backend\obj\x86\Release\ConsoleApplication.pdb
