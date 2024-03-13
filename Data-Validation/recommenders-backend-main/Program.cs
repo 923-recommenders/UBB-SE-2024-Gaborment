@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,11 +11,15 @@ namespace Laboratory2_Data_Validation_Module
     internal class DataValidation
     {
         private static Regex badWordsRegularExpression;
+        private static Regex emailRegularExpression;
+        private static Regex phoneNumberRegularExpression;
         static DataValidation()
         ///constructor for a DataValidation object
         {
             List<string> badWords = File.ReadLines("C:\\Users\\maria\\Downloads\\Data-Validation\\recommenders-backend-main\\bad_words.txt").ToList();
             badWordsRegularExpression = new Regex(@"\b(" + string.Join("|", badWords.Select(Regex.Escape)) + @")\b", RegexOptions.IgnoreCase);
+            emailRegularExpression = new Regex(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+            phoneNumberRegularExpression = new Regex( @"^\+?\d{10,}$");
         }
 
         private string SanitizeForBadWords(string inputFromUser)
@@ -69,18 +73,52 @@ namespace Laboratory2_Data_Validation_Module
             return finalSanitizedTerm;
         }
 
+        public bool ValidateEmail(string inputFromUser)
+        /// inputFromUser: string, the text the user types in the searchbar
+        /// returns a boolean value: true if the input matches the format of an email, false if it doesnt
+        {
+            if (string.IsNullOrEmpty(inputFromUser))
+                throw new ArgumentNullException("error: the input is null");
+            else
+                return emailRegularExpression.IsMatch(inputFromUser);
+        }
+
+        public bool ValidatePhoneNumber(string inputFromUser)
+        /// inputFromUser: string, the text the user types in the searchbar
+        /// returns a boolean value: true if the input matches the format of a phone number, false if it doesnt
+        {
+            if (string.IsNullOrEmpty(inputFromUser))
+                throw new ArgumentNullException("error: the input is null");
+            else
+                return phoneNumberRegularExpression.IsMatch(inputFromUser);
+        }
+
+
         static void Main()
         {
             DataValidation dataValidation = new DataValidation();
+            unit_tests.Test();
 
-            string searchTerm1 = "SELECT * FROM Users; DROP TABLE Users;";
-            string sanitizedSearchTerm1 = dataValidation.SanitizeSearchTerm(searchTerm1);
-            Console.WriteLine("intial input: " + searchTerm1 +" sanitized input: " + sanitizedSearchTerm1);
+            Console.WriteLine("This is an example of how the DataValidation class works.");
+            Console.WriteLine();
+            Console.WriteLine("Sanitize input from bad words:");
 
             string searchTerm2 = "I hate those badwords.";
             string sanitizedSearchTerm2 = dataValidation.SanitizeSearchTerm(searchTerm2);
             Console.WriteLine("intial input: " + searchTerm2 + " sanitized input: " + sanitizedSearchTerm2);
 
+            string searchTerm5 = "This is a safe search term.";
+            string sanitizedSearchTerm5 = dataValidation.SanitizeSearchTerm(searchTerm5);
+            Console.WriteLine("intial input: " + searchTerm5 + " sanitized input: " + sanitizedSearchTerm5);
+
+            Console.WriteLine();
+            Console.WriteLine("Sanitize input from sql injections:");
+
+            string searchTerm1 = "SELECT * FROM Users; DROP TABLE Users;";
+            string sanitizedSearchTerm1 = dataValidation.SanitizeSearchTerm(searchTerm1);
+            Console.WriteLine("intial input: " + searchTerm1 +" sanitized input: " + sanitizedSearchTerm1);
+
+            
             string searchTerm3 = "1'; DROP TABLE Users;--";
             string sanitizedSearchTerm3 = dataValidation.SanitizeSearchTerm(searchTerm3);
             Console.WriteLine("intial input: " + searchTerm3 + " sanitized input: " + sanitizedSearchTerm3);
@@ -89,13 +127,23 @@ namespace Laboratory2_Data_Validation_Module
             string sanitizedSearchTerm4 = dataValidation.SanitizeSearchTerm(searchTerm4);
             Console.WriteLine("intial input: " + searchTerm4 + " sanitized input: " + sanitizedSearchTerm4);
 
-            string searchTerm5 = "This is a safe search term.";
-            string sanitizedSearchTerm5 = dataValidation.SanitizeSearchTerm(searchTerm5);
-            Console.WriteLine("intial input: " + searchTerm5 + " sanitized input: " + sanitizedSearchTerm5);
+            Console.WriteLine();
+            Console.WriteLine("Validate an email input format:");
+            string email1 = "test@example.com";
+            Console.WriteLine($"Email '{email1}' is valid: {dataValidation.ValidateEmail(email1)}");
 
-            Console.WriteLine("tests: ");
+            string email2 = "invalidemail@.com";
+            Console.WriteLine($"Email '{email2}' is valid: {dataValidation.ValidateEmail(email2)}");
 
-            unit_tests.test();
+            Console.WriteLine();
+            Console.WriteLine("Validate an phone number input format:");
+            string phoneNumber1 = "1234567890";
+            Console.WriteLine($"Phone number '{phoneNumber1}' is valid: {dataValidation.ValidatePhoneNumber(phoneNumber1)}");
+
+            string phoneNumber2 = "12345";
+            Console.WriteLine($"Phone number '{phoneNumber2}' is valid: {dataValidation.ValidatePhoneNumber(phoneNumber2)}");
+
+         
         }
 
     }
