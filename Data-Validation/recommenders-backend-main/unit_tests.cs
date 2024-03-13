@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +9,7 @@ namespace Laboratory2_Data_Validation_Module
     internal class unit_tests
     {
 
-        private static bool testSanitizeSearchTerm()
+        private static bool TestSanitizeSearchTerm()
         {
             DataValidation validate = new DataValidation();
             string badWord = "bad1'--";
@@ -37,22 +37,79 @@ namespace Laboratory2_Data_Validation_Module
                 Console.WriteLine("error in function SanitizeForSqlInjection()!");
                 return false;
             }
-            Console.WriteLine($"bad input: {badWord} , sanitized input: {sanitizedWord}");
-            Console.WriteLine($"bad input: {badWord2} , sanitized input: {sanitizedWord2}");
+            
             return true;
 
         }
-        public static void test()
-        {
 
-            if (testSanitizeSearchTerm())
+        private static bool TestValidateEmail()
+        {
+            DataValidation validate = new DataValidation();
+            string validEmail = "test@example.com";
+            string invalidEmail = "invalidemail@.com";
+
+            if (!validate.ValidateEmail(validEmail))
             {
-                Console.WriteLine("tests passed!");
+                Console.WriteLine($"error: '{validEmail}' is a valid email!");
+                return false;
+            }
+
+            if (validate.ValidateEmail(invalidEmail))
+            {
+                Console.WriteLine($"error: '{invalidEmail}' is an invalid email!");
+                return false;
+            }
+
+            return true;
+        }
+
+        private static bool TestValidatePhoneNumber()
+        {
+            DataValidation validate = new DataValidation();
+            string validPhoneNumber = "1234567890";
+            string invalidPhoneNumber = "12345";
+
+            if (!validate.ValidatePhoneNumber(validPhoneNumber))
+            {
+                Console.WriteLine($"error: '{validPhoneNumber}' is a valid phone number!");
+                return false;
+            }
+
+            if (validate.ValidatePhoneNumber(invalidPhoneNumber))
+            {
+                Console.WriteLine($"error: '{invalidPhoneNumber}' is an invalid phone number!");
+                return false;
+            }
+
+            return true;
+        }
+        public static void Test()
+        {
+            bool allTestsPassed = true;
+
+            if (!TestSanitizeSearchTerm())
+            {
+                allTestsPassed = false;
+            }
+
+            if (!TestValidateEmail())
+            {
+                allTestsPassed = false;
+            }
+
+            if (!TestValidatePhoneNumber())
+            {
+                allTestsPassed = false;
+            }
+
+            if (allTestsPassed)
+            {
+                Console.WriteLine("All tests passed!");
             }
             else
             {
-                Console.WriteLine("error: tests did not pass.");
+                Console.WriteLine("Error: Some tests did not pass.");
             }
         }
-    }
+        }
 }
