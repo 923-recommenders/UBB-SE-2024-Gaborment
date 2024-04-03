@@ -6,7 +6,14 @@ namespace recommenders_backend
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            FollowTests.TestFollowClass();
+            FollowTests.TestFollowRepositoryClass();
+            BlockTests.TestBlockClass();
+            BlockTests.TestBlockRepositoryClass();
+            FollowTests.TestFollowServiceClass();
+            BlockTests.TestBlockServiceClass();
+            RequestTests.TestRequestClass();
+            RequestTests.TestRequestRepositoryClass();
         }
     }
 }
