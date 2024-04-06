@@ -9,7 +9,7 @@ using System.Text;
 //https://medium.com/@rinorhajrizi1718/designing-a-distributed-caching-mechanism-for-a-social-networking-app-f07c716856b2 - for the virtual node and consistent hash idea
 
 
-namespace recommenders_backend
+namespace UBB_SE_2024_Gaborment
 {
     public class CacheData<T>
     {

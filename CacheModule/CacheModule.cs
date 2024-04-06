@@ -9,7 +9,7 @@ using System.Security.Policy;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace recommenders_backend
+namespace UBB_SE_2024_Gaborment
 {
     public class CacheModule<T>
     {
