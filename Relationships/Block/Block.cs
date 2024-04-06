@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace recommenders_backend.Relationships.Block
+namespace UBB_SE_2024_Gaborment.Relationships.Block
 {
     internal class Block : Relationship
     {

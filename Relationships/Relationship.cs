@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace recommenders_backend.Relationships
+namespace UBB_SE_2024_Gaborment.Relationships
 {
     internal interface Relationship
     {

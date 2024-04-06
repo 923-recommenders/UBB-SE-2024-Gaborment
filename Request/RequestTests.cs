@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace recommenders_backend.Request
+namespace UBB_SE_2024_Gaborment.Request
 {
     internal class RequestTests
     {

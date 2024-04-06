@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace recommenders_backend.Relationships.Follow
+namespace UBB_SE_2024_Gaborment.Relationships.Follow
 {
     internal class FollowRepository
     {
