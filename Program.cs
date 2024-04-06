@@ -1,4 +1,7 @@
 ﻿using System;
+using recommenders_backend.Relationships.Follow;
+using recommenders_backend.Relationships.Block;
+using recommenders_backend.Request;
 
 namespace recommenders_backend
 {
