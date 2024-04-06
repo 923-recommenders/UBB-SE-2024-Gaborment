@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UBB_SE_2024_Gaborment.Relationships.Block
+﻿namespace UBB_SE_2024_Gaborment.Server.Relationships.Block
 {
     internal class Block : Relationship
     {
@@ -20,7 +14,7 @@ namespace UBB_SE_2024_Gaborment.Relationships.Block
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///CONSTRUCTOR
         ///ASSUMING A FRIENDSHIP EXPIRES BY DEFAULT AFTER AN YEAR
-        
+
         public Block(string sender, string receiver, DateTime startingTimeStamp, string reason)
         {
             this.sender = sender;
@@ -33,22 +27,22 @@ namespace UBB_SE_2024_Gaborment.Relationships.Block
         ///Getters for interface users
         public string getSender()
         {
-            return this.sender;
+            return sender;
         }
 
         public string getReceiver()
         {
-            return this.receiver;
+            return receiver;
         }
 
         public DateTime getStartingTimeStamp()
         {
-            return this.startingTimeStamp;
+            return startingTimeStamp;
         }
 
         public string getReason()
         {
-            return this.reason;
+            return reason;
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

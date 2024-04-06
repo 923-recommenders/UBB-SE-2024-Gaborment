@@ -1,11 +1,6 @@
-﻿using recommenders_backend.Relationships.Follow;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UBB_SE_2024_Gaborment.Server.Relationships.Follow;
 
-namespace UBB_SE_2024_Gaborment.Relationships.Block
+namespace UBB_SE_2024_Gaborment.Server.Relationships.Block
 {
     internal class BlockTests
     {

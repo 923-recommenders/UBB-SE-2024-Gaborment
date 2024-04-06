@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UBB_SE_2024_Gaborment.Relationships.Follow
+﻿namespace UBB_SE_2024_Gaborment.Server.Relationships.Follow
 {
     internal class FollowRepository
     {
@@ -21,12 +14,12 @@ namespace UBB_SE_2024_Gaborment.Relationships.Follow
 
         public Dictionary<string, List<Follow>> getFollowsFromDictionary()
         {
-            return this.followsFromDictionary;
+            return followsFromDictionary;
         }
 
         public Dictionary<string, List<Follow>> getFollowsToDictionary()
         {
-            return this.followsToDictionary;
+            return followsToDictionary;
         }
 
         ///TODOS - CONSTRUCTOR FRO ALREADY FORMED DICTIONARY (maybe checks?)
@@ -115,5 +108,5 @@ namespace UBB_SE_2024_Gaborment.Relationships.Follow
             }
         }
     }
-    
+
 }

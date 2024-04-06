@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UBB_SE_2024_Gaborment.Relationships.Follow
+﻿namespace UBB_SE_2024_Gaborment.Server.Relationships.Follow
 {
     internal class Follow : Relationship
     {
@@ -26,24 +20,24 @@ namespace UBB_SE_2024_Gaborment.Relationships.Follow
         {
             this.sender = sender;
             this.receiver = receiver;
-            this.isCloseFriend = false;
-            this.expirationTimeStamp = DateTime.Now.AddYears(1);
+            isCloseFriend = false;
+            expirationTimeStamp = DateTime.Now.AddYears(1);
             this.description = description;
         }
         public Follow(string sender, string receiver)
         {
             this.sender = sender;
             this.receiver = receiver;
-            this.isCloseFriend = false;
-            this.expirationTimeStamp = DateTime.Now.AddYears(1);
-            this.description = string.Empty;
+            isCloseFriend = false;
+            expirationTimeStamp = DateTime.Now.AddYears(1);
+            description = string.Empty;
         }
 
         public Follow(string sender, string receiver, DateTime expirationTimeStamp, string description)
         {
             this.sender = sender;
             this.receiver = receiver;
-            this.isCloseFriend = false;
+            isCloseFriend = false;
             this.expirationTimeStamp = expirationTimeStamp;
             this.description = description;
         }
@@ -51,47 +45,47 @@ namespace UBB_SE_2024_Gaborment.Relationships.Follow
         {
             this.sender = sender;
             this.receiver = receiver;
-            this.isCloseFriend = false;
+            isCloseFriend = false;
             this.expirationTimeStamp = expirationTimeStamp;
-            this.description = string.Empty;
+            description = string.Empty;
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///Getters for interface users
         public string getSender()
         {
-            return this.sender;
+            return sender;
         }
 
         public string getReceiver()
         {
-            return this.receiver;
+            return receiver;
         }
 
         public bool getCloseFriendStatus()
         {
-            return this.isCloseFriend;
+            return isCloseFriend;
         }
 
         public DateTime getExpirationTimeStamp()
         {
-            return this.expirationTimeStamp;
+            return expirationTimeStamp;
         }
 
         public string getDescription()
         {
-            return this.description;
+            return description;
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///tu ai pus setCloseFriend dar ma gandesc sa pun toggleCloseFriend pt a putea scoate userul de la close friend if needed
         public void toggleCloseFriend()
         {
-            this.isCloseFriend = !this.isCloseFriend;
+            isCloseFriend = !isCloseFriend;
         }
 
         public void setExpirationTimeStamp(DateTime newExpirationTimeStamp)
         {
-            this.expirationTimeStamp = newExpirationTimeStamp;
+            expirationTimeStamp = newExpirationTimeStamp;
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
