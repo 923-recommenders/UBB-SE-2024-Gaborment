@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Frontend_UBB_SE_2024_Gabornment.MVVM.ViewModel
+namespace UBB_SE_2024_Gaborment.MVVM.ViewModel
 {
-    internal class FullFriendsViewModel: BaseViewModel
+    public class FeedViewModel : BaseViewModel
     {
     }
 }

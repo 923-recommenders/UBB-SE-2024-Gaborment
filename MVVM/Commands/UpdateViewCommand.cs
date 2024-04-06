@@ -1,4 +1,4 @@
-﻿using Frontend_UBB_SE_2024_Gabornment.MVVM.ViewModel;
+﻿using UBB_SE_2024_Gaborment.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Frontend_UBB_SE_2024_Gabornment.MVVM.Commands
+namespace UBB_SE_2024_Gaborment.MVVM.Commands
 {
     public class UpdateViewCommand : ICommand
     {

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Frontend_UBB_SE_2024_Gabornment.Components
+namespace UBB_SE_2024_Gabornment.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for NavigationBar.xaml
+    /// Interaction logic for FullFriendsView.xaml
     /// </summary>
-    public partial class NavigationBar : UserControl
+    public partial class FullFriendsView : UserControl
     {
-        public NavigationBar()
+        public FullFriendsView()
         {
             InitializeComponent();
         }

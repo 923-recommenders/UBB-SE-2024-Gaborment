@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -8,20 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Frontend_UBB_SE_2024_Gabornment.MVVM.ViewModel;
 
-namespace Frontend_UBB_SE_2024_Gabornment
+namespace UBB_SE_2024_Gaborment.Components
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for NavigationBar.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class NavigationBar : UserControl
     {
-        public MainWindow()
+        public NavigationBar()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
-
         }
     }
 }
