@@ -1,11 +1,6 @@
-﻿using recommenders_backend.Relationships.Block;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UBB_SE_2024_Gaborment.Server.Relationships.Block;
 
-namespace UBB_SE_2024_Gaborment.Relationships.Follow
+namespace UBB_SE_2024_Gaborment.Server.Relationships.Follow
 {
     internal class FollowService
     {
@@ -21,34 +16,34 @@ namespace UBB_SE_2024_Gaborment.Relationships.Follow
 
         FollowRepository getFollowRepository()
         {
-            return this._followRepository;
+            return _followRepository;
         }
 
         BlockRepository getBlockRepository()
         {
-            return this._blockRepository;
+            return _blockRepository;
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
+
         public void createFollow(string sender, string receiver)
         {
-            if(!((_blockRepository.getBlocksBySender(sender).Any(b => b.getReceiver() == receiver)) || (_blockRepository.getBlocksOfReceiver(receiver).Any(b => b.getSender() == sender))))
+            if (!(_blockRepository.getBlocksBySender(sender).Any(b => b.getReceiver() == receiver) || _blockRepository.getBlocksOfReceiver(receiver).Any(b => b.getSender() == sender)))
             {
                 Follow followToBeAdded = new Follow(sender, receiver);
                 _followRepository.addFollow(followToBeAdded);
             }
         }
-        public void removeFollow(string sender, string receiver) 
+        public void removeFollow(string sender, string receiver)
         {
             _followRepository.removeFollow(sender, receiver);
         }
 
         public void updateCloseFriendStatus(string sender, string receiver)
-        { 
-            if(_followRepository.getFollowsFromDictionary().ContainsKey(sender))
+        {
+            if (_followRepository.getFollowsFromDictionary().ContainsKey(sender))
             {
                 List<Follow> SenderFollows = _followRepository.getFollowersOf(sender);
-                if(SenderFollows.Any(f => f.getReceiver() == receiver) == true)
+                if (SenderFollows.Any(f => f.getReceiver() == receiver) == true)
                 {
                     Follow follow = SenderFollows.FirstOrDefault(f => f.getReceiver() == receiver);
 

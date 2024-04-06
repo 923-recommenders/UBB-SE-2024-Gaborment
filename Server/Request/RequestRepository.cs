@@ -1,11 +1,4 @@
-﻿using recommenders_backend.Relationships.Follow;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UBB_SE_2024_Gaborment.Request
+﻿namespace UBB_SE_2024_Gaborment.Server.Request
 {
     internal class RequestRepository
     {
@@ -18,15 +11,15 @@ namespace UBB_SE_2024_Gaborment.Request
             requestsFromDictionary = new Dictionary<string, List<Request>>();
             requestsToDictionary = new Dictionary<string, List<Request>>();
         }
-        
+
         public Dictionary<string, List<Request>> getRequestsFromDictionary()
         {
-            return this.requestsFromDictionary;
+            return requestsFromDictionary;
         }
 
         public Dictionary<string, List<Request>> getRequestToDictionary()
         {
-            return this.requestsToDictionary;
+            return requestsToDictionary;
         }
         ///TODO CONSTRUCTORS FOR THE DB LIST
 

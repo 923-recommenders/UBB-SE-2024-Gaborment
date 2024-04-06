@@ -1,6 +1,4 @@
-using System;
-
-namespace recommenders
+namespace UBB_SE_2024_Gaborment
 {
     public interface ILogger
     {

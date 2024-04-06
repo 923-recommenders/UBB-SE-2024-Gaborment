@@ -1,12 +1,4 @@
-﻿using recommenders_backend.Relationships.Block;
-using recommenders_backend.Relationships.Follow;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UBB_SE_2024_Gaborment.Request
+﻿namespace UBB_SE_2024_Gaborment.Server.Request
 {
     internal class RequestService
     {
@@ -32,7 +24,7 @@ namespace UBB_SE_2024_Gaborment.Request
         public void createRequest(string sender, string receiver)
         {
             //check if the set sender-receiver is located in a follow or a block from up until now. If it is, then the operation is not completed
-            if (!((_blockService.getBlocksBy(sender).Any(b => b.getReceiver() == receiver)) || (_blockService.getBlocksOf(receiver).Any(b => b.getSender() == sender)) || (_followService.getFollowersOf(sender).Any(f => f.getReceiver() == receiver))))
+            if (!(_blockService.getBlocksBy(sender).Any(b => b.getReceiver() == receiver) || _blockService.getBlocksOf(receiver).Any(b => b.getSender() == sender) || _followService.getFollowersOf(sender).Any(f => f.getReceiver() == receiver)))
             {
                 Request requestToBeAdded = new Request(sender, receiver);
                 _requestRepository.addRequest(requestToBeAdded);
@@ -44,7 +36,7 @@ namespace UBB_SE_2024_Gaborment.Request
             _requestRepository.removeRequest(sender, receiver);
         }
 
-        public List<Request> getRequestOf(string sender) 
+        public List<Request> getRequestOf(string sender)
         {
             return _requestRepository.getRequestsOf(sender);
         }
@@ -54,7 +46,7 @@ namespace UBB_SE_2024_Gaborment.Request
             return _requestRepository.getRequestsTo(receiver);
         }
 
-        public Dictionary<string,List<Request>> getAllRequests()
+        public Dictionary<string, List<Request>> getAllRequests()
         {
             return _requestRepository.getRequestToDictionary();
         }
