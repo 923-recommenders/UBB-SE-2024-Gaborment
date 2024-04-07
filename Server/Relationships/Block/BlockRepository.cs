@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UBB_SE_2024_Gaborment.Relationships.Block
+﻿namespace UBB_SE_2024_Gaborment.Server.Relationships.Block
 {
     internal class BlockRepository
     {
@@ -16,8 +10,9 @@ namespace UBB_SE_2024_Gaborment.Relationships.Block
             blockedByDictionary = new Dictionary<string, List<Block>>();
         }
 
-        public Dictionary<string, List<Block>> getBlockedByDictionary() {
-            return this.blockedByDictionary;
+        public Dictionary<string, List<Block>> getBlockedByDictionary()
+        {
+            return blockedByDictionary;
         }
 
         ///TODOS - CONSTRUCTOR FRO ALREADY FORMED DICTIONARY (maybe checks?)
@@ -64,7 +59,7 @@ namespace UBB_SE_2024_Gaborment.Relationships.Block
             if (blockedByDictionary.ContainsKey(sender))
             {
                 List<Block> senderBlocks = blockedByDictionary[sender];
-                return senderBlocks; 
+                return senderBlocks;
             }
             return new List<Block>();
         }

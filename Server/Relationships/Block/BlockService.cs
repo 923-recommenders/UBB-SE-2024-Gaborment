@@ -1,11 +1,6 @@
-﻿using recommenders_backend.Relationships.Follow;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UBB_SE_2024_Gaborment.Server.Relationships.Follow;
 
-namespace UBB_SE_2024_Gaborment.Relationships.Block
+namespace UBB_SE_2024_Gaborment.Server.Relationships.Block
 {
     internal class BlockService
     {
@@ -21,18 +16,18 @@ namespace UBB_SE_2024_Gaborment.Relationships.Block
 
         FollowRepository getFollowRepository()
         {
-            return this._followRepository;
+            return _followRepository;
         }
 
         BlockRepository getBlockRepository()
         {
-            return this._blockRepository;
+            return _blockRepository;
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///
         public void createBlock(string sender, string receiver, string reason)
         {
-            if ((_followRepository.getFollowersOf(sender).Any(f => f.getReceiver() == receiver) == true) || (_followRepository.getFollowingOf(receiver).Any(f => f.getSender() == sender) == true))
+            if (_followRepository.getFollowersOf(sender).Any(f => f.getReceiver() == receiver) == true || _followRepository.getFollowingOf(receiver).Any(f => f.getSender() == sender) == true)
             {
                 _followRepository.removeFollow(sender, receiver);
             }
@@ -40,12 +35,12 @@ namespace UBB_SE_2024_Gaborment.Relationships.Block
             _blockRepository.addBlock(blockToBeAdded);
         }
 
-        public void RemoveBlock(string sender, string receiver) 
+        public void RemoveBlock(string sender, string receiver)
         {
             _blockRepository.removeBlock(sender, receiver);
         }
 
-        public List<Block> getBlocksBy(string sender) 
+        public List<Block> getBlocksBy(string sender)
         {
             return _blockRepository.getBlocksBySender(sender);
         }
