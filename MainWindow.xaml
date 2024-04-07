@@ -4,9 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UBB_SE_2024_Gaborment"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="The Gaborment" Height="450" Width="800"
+        xmlns:components="clr-namespace:UBB_SE_2024_Gaborment.Components"
+        Background="WhiteSmoke" >
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--Header-->
+        <Grid Grid.Row="0">
+            <components:NavigationBar />
+        </Grid>
+
+        <!-- Main Content Section -->
+        <Grid Grid.Row="1">
+            <ContentControl Content="{Binding SelectedViewModel}"/>
+        </Grid>
+
 
     </Grid>
 </Window>
