@@ -150,7 +150,7 @@ namespace UBB_SE_2024_Gaborment.FeedConfigurations
 
             if (!customFeeds.Any())
             {
-                throw new InvalidOperationException("No CustomFeed objects to append.");
+                throw new InvalidOperationException("no CustomFeed objects to save.");
             }
 
             try
