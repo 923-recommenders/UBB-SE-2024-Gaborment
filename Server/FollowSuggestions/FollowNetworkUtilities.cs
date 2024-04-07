@@ -4,7 +4,7 @@ namespace UBB_SE_2024_Gaborment.Server.FollowSuggestions
 {
     internal class FollowNetworkUtilities
     {
-        List<string> GetNumberOfLevelsOfFollowFromNetworkStartingWithUser(string user, Dictionary<string, List<Follow>> followDictionary, int numberOfLevels)
+        public static List<string> GetNumberOfLevelsOfFollowFromNetworkStartingWithUser(string user, Dictionary<string, List<Follow>> followDictionary, int numberOfLevels)
         {
             Queue<string> userQueue = new Queue<string>();
             userQueue.Enqueue(user);
@@ -40,6 +40,21 @@ namespace UBB_SE_2024_Gaborment.Server.FollowSuggestions
             }
 
             return layersOfFollows;
+        }
+
+        public static List<string> FilterOutRedundantSuggestedUserIds(List<string> suggestedUserIds,
+            List<string> followsOfUser,
+            List<string> blocksOfUser,
+            List<string> requestsOfUser
+        )
+        {
+            var redundantUserIds = new List<string>();
+            redundantUserIds.AddRange(followsOfUser);
+            redundantUserIds.AddRange(blocksOfUser);
+            redundantUserIds.AddRange(requestsOfUser);
+            var filteredSuggestedUserIds = suggestedUserIds.Except(redundantUserIds).ToList();
+
+            return filteredSuggestedUserIds;
         }
     }
 }

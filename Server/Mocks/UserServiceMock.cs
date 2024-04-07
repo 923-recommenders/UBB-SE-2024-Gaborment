@@ -13,5 +13,10 @@
         {
             return userRepository.GetAllUsers();
         }        
+
+        public UserMock GetUserById(string userId)
+        {
+            return userRepository.GetUserById(userId);
+        }
     }
 }
