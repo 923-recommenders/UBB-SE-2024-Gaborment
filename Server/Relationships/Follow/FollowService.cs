@@ -60,6 +60,20 @@ namespace UBB_SE_2024_Gaborment.Server.Relationships.Follow
             return _followRepository.getFollowersOf(sender);
         }
 
+        public List<String> getCloseFriendsOf(string sender)
+        {
+            foreach (Follow follow in _followRepository.getFollowersOf(sender))
+            {
+                if (follow.getCloseFriendStatus() == true)
+                {
+                    return follow.getReceiver();
+                }
+            }
+            //return _followRepository.getFollowersOf(sender)
+            //                        .filter( f => f.getCloseFriendStatus() == true)
+            //                        .getSender();
+        }
+
         public List<Follow> getFollowingOf(string receiver)
         {
             return _followRepository.getFollowingOf(receiver);
