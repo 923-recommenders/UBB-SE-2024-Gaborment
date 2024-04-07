@@ -1,4 +1,7 @@
-﻿namespace UBB_SE_2024_Gaborment.Server.Request
+﻿using UBB_SE_2024_Gaborment.Server.Relationships.Block;
+using UBB_SE_2024_Gaborment.Server.Relationships.Follow;
+
+namespace UBB_SE_2024_Gaborment.Server.Request
 {
     internal class RequestTests
     {
