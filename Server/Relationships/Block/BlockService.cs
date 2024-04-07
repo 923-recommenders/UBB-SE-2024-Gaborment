@@ -50,6 +50,12 @@ namespace UBB_SE_2024_Gaborment.Server.Relationships.Block
             return _blockRepository.getBlocksOfReceiver(receiver);
         }
 
+        public List<string> getBlockedUserIdsOf(string receiver)
+        {
+            return _blockRepository.getBlocksOfReceiver(receiver).Select(block => block.getSender()).ToList();
+        }
+
+
         public Dictionary<string, List<Block>> getAllBlocks()
         {
             return _blockRepository.getBlockedByDictionary();

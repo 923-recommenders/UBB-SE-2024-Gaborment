@@ -65,6 +65,11 @@ namespace UBB_SE_2024_Gaborment.Server.Relationships.Follow
             return _followRepository.getFollowingOf(receiver);
         }
 
+        public List<string> getFollowingUserIdsOf(string receiver)
+        {
+            return _followRepository.getFollowingOf(receiver).Select(follower => follower.getSender()).ToList();
+        }
+
         public Dictionary<string, List<Follow>> getAllFollowers()
         {
             return _followRepository.getFollowsFromDictionary();

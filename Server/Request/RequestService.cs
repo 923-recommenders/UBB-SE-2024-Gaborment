@@ -49,9 +49,19 @@ namespace UBB_SE_2024_Gaborment.Server.Request
             return _requestRepository.getRequestsTo(receiver);
         }
 
+        public List<string> getRequestedUserIdsBy(string sender)
+        {
+            return _requestRepository.getRequestsOf(sender).Select(request => request.getSender()).ToList();
+        }
+
         public Dictionary<string, List<Request>> getAllRequests()
         {
             return _requestRepository.getRequestToDictionary();
+        }
+
+        public bool hasRequest(string sender, string receiver)
+        {
+            return _requestRepository.getRequest(sender, receiver) != null;
         }
     }
 }
