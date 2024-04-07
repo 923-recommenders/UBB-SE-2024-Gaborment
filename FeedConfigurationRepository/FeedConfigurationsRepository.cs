@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,36 +13,23 @@ namespace UBB_SE_2024_Gaborment.FeedConfigurations
 {
     public class FeedConfigurationRepository
     {
-        private List<FeedConfiguration> feedList;
+        private List<CustomFeed> feedList;
         private int freeId;
 
         public FeedConfigurationRepository()
         {
-            FeedFactory feedFactory = new FeedFactory();
-
-            feedList = new List<FeedConfiguration>();
-
-            FeedConfiguration homeFeed = feedFactory.CreateFeed("Home");
-
-            FeedConfiguration trendingFeed = feedFactory.CreateFeed("Trending");
-
-            FeedConfiguration controversialFeed = feedFactory.CreateFeed("Controversial");
-
-            FeedConfiguration followingFeed = feedFactory.CreateFeed("Following");
-
-            feedList.Add(homeFeed);
-            feedList.Add(trendingFeed);
-            feedList.Add(controversialFeed);
-            feedList.Add(followingFeed);
-
-            freeId = 4;
+            freeId = 0;
+            feedList = new List<CustomFeed>();
         }
-        public List<FeedConfiguration> GetFeedList()
+        public List<CustomFeed> GetFeedList()
         {
-            return feedList;
+            if (feedList != null)
+                return feedList;
+            else
+                throw new Exception("the custom feed list is empty");
         }
 
-        public FeedConfiguration GetFeed(int searchedId)
+        public CustomFeed GetFeed(int searchedId)
         {
             if (feedList == null)
             {
@@ -51,7 +38,7 @@ namespace UBB_SE_2024_Gaborment.FeedConfigurations
             }
             else
             {
-                FeedConfiguration searchedFeed = null!;
+                CustomFeed searchedFeed = null!;
 
                 var templateFeed = feedList
                                     .Where(feed => feed != null && feed.GetID() == searchedId)
@@ -82,7 +69,7 @@ namespace UBB_SE_2024_Gaborment.FeedConfigurations
                 customFeedBuilder.SetLocations(locations);
             if (users != null)
                 customFeedBuilder.SetFollowedUsers(users);
-            FeedConfiguration newFeed = customFeedBuilder.Build();
+            CustomFeed newFeed = customFeedBuilder.Build();
             if (newFeed == null)
             {
                 throw new ArgumentNullException("custom feed failed to be passed in the Repository");
@@ -91,8 +78,9 @@ namespace UBB_SE_2024_Gaborment.FeedConfigurations
             {
                 feedList.Add(newFeed);
                 newFeed.SetID(freeId);
+                freeId++;
             }
-            freeId++;
+            
         }
         public void UpdateCustomFeed(int id, List<string>? hashtagsList, List<string>? locations, List<string>? users)
         {
@@ -106,7 +94,7 @@ namespace UBB_SE_2024_Gaborment.FeedConfigurations
                     customFeedBuilder.SetLocations(locations);
                 if (users != null)
                     customFeedBuilder.SetFollowedUsers(users);
-                FeedConfiguration newFeed = customFeedBuilder.Build();
+                CustomFeed newFeed = customFeedBuilder.Build();
                 toBeUpdatedFeed = newFeed;
             }
             else
@@ -117,7 +105,7 @@ namespace UBB_SE_2024_Gaborment.FeedConfigurations
 
         public void DeleteCustomFeed(int id)
         {
-            FeedConfiguration toBeDeletedFeed = GetFeed(id);
+            CustomFeed toBeDeletedFeed = GetFeed(id);
             if (toBeDeletedFeed.GetType() == typeof(CustomFeed))
             {
                 feedList.Remove(toBeDeletedFeed);
@@ -150,7 +138,7 @@ namespace UBB_SE_2024_Gaborment.FeedConfigurations
 
             if (!customFeeds.Any())
             {
-                throw new InvalidOperationException("no CustomFeed objects to save.");
+                throw new InvalidOperationException("No CustomFeed objects to append.");
             }
 
             try
