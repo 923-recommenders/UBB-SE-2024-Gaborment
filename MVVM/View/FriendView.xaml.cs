@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UBB_SE_2024_Gabornment.MVVM.View
+namespace UBB_SE_2024_Gaborment.MVVM.View
 {
     /// <summary>
     /// Interaction logic for FriendView.xaml

@@ -1,7 +1,6 @@
 ﻿<Application x:Class="UBB_SE_2024_Gaborment.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:UBB_SE_2024_Gaborment"
              xmlns:views="clr-namespace:UBB_SE_2024_Gaborment.MVVM.View"
              xmlns:viewModels="clr-namespace:UBB_SE_2024_Gaborment.MVVM.ViewModel"
              StartupUri="MainWindow.xaml">

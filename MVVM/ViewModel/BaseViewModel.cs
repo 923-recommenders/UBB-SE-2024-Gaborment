@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UBB_SE_2024_Gaborment.MVVM.ViewModel
+namespace UBB_SE_2024_Gaborment.MVVM
 {
     public class BaseViewModel : INotifyPropertyChanged
     {

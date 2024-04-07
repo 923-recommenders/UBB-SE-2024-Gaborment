@@ -1,11 +1,11 @@
-﻿<Window x:Class="Frontend_UBB_SE_2024_Gabornment.MainWindow"
+﻿<Window x:Class="UBB_SE_2024_Gaborment.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Frontend_UBB_SE_2024_Gabornment"
-        Title="The Gabornment" Height="450" Width="800"
-        xmlns:components="clr-namespace:Frontend_UBB_SE_2024_Gabornment.Components"
+        xmlns:local="clr-namespace:UBB_SE_2024_Gaborment"
+        Title="The Gaborment" Height="450" Width="800"
+        xmlns:components="clr-namespace:UBB_SE_2024_Gaborment.Components"
         Background="WhiteSmoke" >
 
     <Grid>

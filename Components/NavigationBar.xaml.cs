@@ -13,16 +13,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UBB_SE_2024_Gaborment.Components
+namespace UBB_SE_2024_Gaborment.Components;
+
+/// <summary>
+/// Interaction logic for NavigationBar.xaml
+/// </summary>
+public partial class NavigationBar : UserControl
 {
-    /// <summary>
-    /// Interaction logic for NavigationBar.xaml
-    /// </summary>
-    public partial class NavigationBar : UserControl
+    public NavigationBar()
     {
-        public NavigationBar()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
