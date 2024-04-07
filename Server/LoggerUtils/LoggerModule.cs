@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using UBB_SE_2024_Gaborment;
+using UBB_SE_2024_Gaborment.Server.LoggerUtils;
 
 public enum LogLevel
 {
