@@ -18,18 +18,42 @@ namespace FeedConfigurations.Feeds
 
         public TrendingFeed()
         {
-            this.LikeCount = 0;
-            this.ViewCount = 0;
-            this.CommentCount = 0;
-        }
-        public override int SortComparisonFunction(Post Post1, Post Post2)
-	    {
-            throw new NotImplementedException();
+            this.LikeCount = new int();
+            this.ViewCount = new int();
+            this.CommentCount = new int();
         }
 
-        public override Post[] FilterPosts(Post[] posts)
+        private int GetPopularityProportion(int desiredValue, int actualValue)
         {
-            throw new NotImplementedException();
+            if(actualValue >= (desiredValue * 3/4))
+            {
+                return 3;
+            }
+            else if(actualValue >= desiredValue/4)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            } 
+        }
+
+        public override int GetPostScore(Post post)
+        {
+            int positiveReactions = post.GetReactions()["like"] + post.GetReactions()["love"];
+            int negativeReactions = post.GetReactions()["dislike"] + post.GetReactions()["angry"];
+            if (negativeReactions > positiveReactions)
+            {
+                return 0;
+            }
+
+            int score = 0;
+            score += GetPopularityProportion(LikeCount, positiveReactions);
+            score += GetPopularityProportion(ViewCount, post.GetViews());
+            score += GetPopularityProportion(CommentCount, post.GetComments().Count);
+
+            return score;
         }
     } 
 }

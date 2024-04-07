@@ -19,14 +19,14 @@ namespace FeedConfigurations.Feeds
             this.FollowedUsers = new List<String>();
         }
 
-        public override int SortComparisonFunction(Post Post1, Post Post2)
+        public override int GetPostScore(Post post)
         {
-            throw new NotImplementedException();
-        }
-
-        public override Post[] FilterPosts(Post[] posts)
-        {
-            throw new NotImplementedException();
+            int score = 0;
+            if (FollowedUsers.Contains(post.GetOwner()))
+            {
+                score += 1;
+            }
+            return score;
         }
 
     }

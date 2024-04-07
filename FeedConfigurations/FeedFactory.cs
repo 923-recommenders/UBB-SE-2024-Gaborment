@@ -3,11 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FeedConfigurations.Feeds;
+using FeedConfigurations.Mocks;
+using UBB_SE_2024_Gaborment.Relationships.Follow;
 
 namespace UBB_SE_2024_Gaborment.FeedConfigurations
 {
-    public class FeedFactory
+    internal class FeedFactory
     {
+        FollowService followService;
+        User user;
+        List<String> closeFriends;
+
+        public FeedFactory(FollowService followService, User user)
+        {
+            this.followService = followService;
+            this.user = user;
+            this.closeFriends = followService.getCloseFriendsOf(user.GetUsername());
+        }
+
         public FeedConfiguration CreateFeed(string feedType)
         {
             if (feedType == "Controversial")
@@ -24,7 +37,7 @@ namespace UBB_SE_2024_Gaborment.FeedConfigurations
             }
             else if (feedType == "Home")
             {
-                return new HomeFeed();
+                return new HomeFeed(closeFriends);
             }
             else if (feedType == "Custom")
             {

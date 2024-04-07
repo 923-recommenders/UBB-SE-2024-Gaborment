@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FeedConfigurations.Mocks;
+using UBB_SE_2024_Gaborment.Relationships.Follow;
 
 namespace FeedConfigurations.Feeds
 {
@@ -10,8 +11,8 @@ namespace FeedConfigurations.Feeds
     {
         protected int ID { get; set; }
         protected String Name { get; set; }
-
-
+        protected int ReactionThreshold { get; set; }
+   
         public int GetID()
         {
             return ID;
@@ -30,9 +31,50 @@ namespace FeedConfigurations.Feeds
         {
             this.Name = Name;
         }
+        public int GetReactionThreshold()
+        {
+            return ReactionThreshold;
+        }
 
-        public abstract int SortComparisonFunction(Post Post1, Post Post2);
-        public abstract Post[] FilterPosts(Post[] posts);
+        public void SetReactionThreshold(int ReactionThreshold)
+        {
+            this.ReactionThreshold = ReactionThreshold;
+        }
+
+        public abstract int GetPostScore(Post post);
+
+        public List<Post> FilterPosts(List<Post> posts)
+        {
+            List<Post> filteredPosts = new List<Post>();
+            foreach (Post post in posts)
+            {
+                if (GetPostScore(post) > 0)
+                {
+                    filteredPosts.Add(post);
+                }
+            }
+            return filteredPosts;
+        }
+
+        public virtual int SortComparisonFunction(Post Post1, Post Post2)
+        {
+            int score1 = GetPostScore(Post1);
+            int score2 = GetPostScore(Post2);
+
+            if (score1 > score2)
+            {
+                return -1;
+            }
+            else if (score1 < score2)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
     }
 
 }

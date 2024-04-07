@@ -13,10 +13,11 @@ namespace FeedConfigurations.Feeds
         List<String> FollowedUsers { get; set; }
         List<String> FrequentMedia { get; set; }
         List<String> Hashtags { get; set; }
+        List<String> CloseFriends { get; set; }
         
 
         public HomeFeed(List<String> Locations, List<String> FollowedUsers,
-            List<String> FrequentMedia, List<String> Hashtags)
+            List<String> FrequentMedia, List<String> Hashtags, List<String> CloseFriends)
         {
             this.Locations = Locations;
             this.FollowedUsers = FollowedUsers;
@@ -24,22 +25,54 @@ namespace FeedConfigurations.Feeds
             this.Hashtags = Hashtags;
         }
 
-        public HomeFeed()
+        public HomeFeed(List<String> CloseFriends)
         {
-            this.FollowedUsers = new List<String>();
+            this.CloseFriends = CloseFriends;
             this.Locations = new List<String>();
+            this.FollowedUsers = new List<String>();
             this.FrequentMedia = new List<String>();
             this.Hashtags = new List<String>();
         }
 
-        public override int SortComparisonFunction(Post Post1, Post Post2)
+
+        public override int GetPostScore(Post post)
         {
-            throw new NotImplementedException();
+            int score = 0;
+
+            foreach(String hashtag in post.GetHashtags())
+            {
+                if (Hashtags.Contains(hashtag))
+                {
+                    score += 1;
+                }
+            }
+
+            if (FollowedUsers.Contains(post.GetOwner()))
+            {
+                if(CloseFriends.Contains(post.GetOwner()))
+                {
+                    score += 3;
+                }
+                else
+                {
+                    score += 1;
+                }
+            }
+
+            if (FrequentMedia.Contains(post.GetMediaType()))
+            {
+                score += 1;
+            }
+
+            if (Locations.Contains(post.GetLocation()))
+            {
+                score += 1;
+            }
+
+            score += (post.GetReactions().Values.Sum() / ReactionThreshold);
+
+            return score;
         }
 
-        public override Post[] FilterPosts(Post[] posts)
-        {
-            throw new NotImplementedException();    
-        }
     }
 }

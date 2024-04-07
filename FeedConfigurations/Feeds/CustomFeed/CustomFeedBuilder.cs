@@ -35,14 +35,10 @@ namespace FeedConfigurations.Feeds
             return customFeed;
         }
 
-        public override int SortComparisonFunction(Post Post1, Post Post2)
+    
+        public override int GetPostScore(Post post)
         {
-            throw new NotImplementedException();
-        }
-
-        public override Post[] FilterPosts(Post[] posts)
-        {
-            throw new NotImplementedException();
+            throw new Exception("The feed builder does not have a score function.");
         }
 
     }
