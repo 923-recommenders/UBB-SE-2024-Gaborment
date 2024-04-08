@@ -14,16 +14,16 @@ public enum LogLevel
 
 public class LoggerHelper
 {
-    public static String GetFilePathForCurrentDate()
+    public static string GetFilePathForCurrentDate()
     {
         /*
          * Input: None
-         * Return: String
+         * Return: string
          * Description: Computes the current date in the format "yyyy-MM-dd" and 
          *              returns the path to the corresponding log file
          */
 
-        String CurrentDate = DateTime.Today.ToString("yyyy-MM-dd");
+        string CurrentDate = DateTime.Today.ToString("yyyy-MM-dd");
         string ProjectDirectoryPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
         return Path.Combine(ProjectDirectoryPath, "Logger", CurrentDate);
     }
@@ -59,7 +59,7 @@ public class Logger : ILogger
     public void Log(string level, string message)
     {
         /*
-         * Input: String, String
+         * Input: string, string
          * Return: None
          * Description: Logs the messages according to the level provided and checked
          *              against the LogLevel enum. The INFO messages are buffered and 
@@ -105,7 +105,7 @@ public class Logger : ILogger
     private static void WriteToLogFile(string logEntry)
     {
         /*
-         * Input: String
+         * Input: string
          * Return: None
          * Description: Writes the logEntry to the log file. If the file does not exist, 
          *              it is created. If the file exists, the logEntry is appended to the file.
