@@ -12,12 +12,12 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
     {
         public void TestPostsServiceMock()
         {
-            UserMock user1 = new UserMock("1", "User1", true, new List<string> { "Tag1" }, new List<string> { "Group1" }, new List<string> { "Location1" });
-            UserMock user2 = new UserMock("2", "User2", false, new List<string> { "Tag2" }, new List<string> { "Group2" }, new List<string> { "Location2" });
-            UserMock user3 = new UserMock("3", "User3", true, new List<string> { "Tag3" }, new List<string> { "Group3" }, new List<string> { "Location3" });
-            UserMock user4 = new UserMock("4", "User4", false, new List<string> { "Tag4" }, new List<string> { "Group4" }, new List<string> { "Location4" });
-            UserMock user5 = new UserMock("5", "User5", true, new List<string> { "Tag5" }, new List<string> { "Group5" }, new List<string> { "Location5" });
-            UserMock user6 = new UserMock("6", "User6", false, new List<string> { "Tag6" }, new List<string> { "Group6" }, new List<string> { "Location6" });
+            UserMock user1 = new UserMock("1", "User1", true, new List<string> { "Tag1" }, new List<string> { "Group1" }, new List<string> { "Organization1" }, "Location1" );
+            UserMock user2 = new UserMock("2", "User2", false, new List<string> { "Tag2" }, new List<string> { "Group2" }, new List<string> { "Organization2" }, "Location2" );
+            UserMock user3 = new UserMock("3", "User3", true, new List<string> { "Tag3" }, new List<string> { "Group3" }, new List<string> { "Organization3" }, "Location3" );
+            UserMock user4 = new UserMock("4", "User4", false, new List<string> { "Tag4" }, new List<string> { "Group4" }, new List<string> { "Organization4" }, "Location4" );
+            UserMock user5 = new UserMock("5", "User5", true, new List<string> { "Tag5" }, new List<string> { "Group5" }, new List<string> { "Organization5" }, "Location5" );
+            UserMock user6 = new UserMock("6", "User6", false, new List<string> { "Tag6" }, new List<string> { "Group6" }, new List<string> { "Organization6" }, "Location6" );
 
             PostMock post1 = new PostMock();
             post1.SetOwner(user1);

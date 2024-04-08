@@ -31,7 +31,7 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
             this.MediaType = MediaType;
             this.Hashtags = Hashtags;
             this.ReactionsDictionary = new Dictionary<String, List<UserMock>>();
-            this.PostingDate = PostingDate; //TODO: give PostingDate as parameter or not
+            this.PostingDate = PostingDate;
         }
         public PostMock()
         {
@@ -77,11 +77,6 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
         {
             this.ID = ID;
         }
-
-        /*public String GetOwner()
-        {
-            return Owner.username;
-        }*/
 
         public UserMock GetOwner()
         {
