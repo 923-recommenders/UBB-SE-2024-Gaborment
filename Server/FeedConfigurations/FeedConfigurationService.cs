@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,29 +22,29 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurationService
             this.applicationContext = applicationContext;
         }
 
-        public List<CustomFeed> GetFeedList()
+        public List<CustomFeed> GetFeedList(string userId)
         {
-            return this.applicationContext.GetFeedList();
+            return this.applicationContext.GetFeedList(userId);
         }
 
-        public CustomFeed GetFeed(int searchedId)
+        public CustomFeed GetFeed(string userId, int searchedId)
         {
-            return this.applicationContext.GetFeed(searchedId);
+            return this.applicationContext.GetFeed(userId, searchedId);
         }
 
-        public void AddCustomFeed(List<string>? hashtagsList, List<string>? locations, List<string>? users)
+        public void AddCustomFeed(string userId, List<string>? hashtagsList, List<string>? locations, List<string>? users)
         {
-            this.applicationContext.AddCustomFeedToRepository(hashtagsList, locations, users);
+            this.applicationContext.AddCustomFeedToRepository(userId, hashtagsList, locations, users);
         }
 
-        public void UpdateCustomFeed(int id, List<string>? hashtagsList, List<string>? locations, List<string>? users)
+        public void UpdateCustomFeed(string userId, int id, List<string>? hashtagsList, List<string>? locations, List<string>? users)
         {
-            this.applicationContext.UpdateCustomFeed(id, hashtagsList, locations, users);
+            this.applicationContext.UpdateCustomFeed(userId, id, hashtagsList, locations, users);
         }
 
-        public void DeleteCustomFeed(int id)
+        public void DeleteCustomFeed(string userId, int id)
         {
-            this.applicationContext.DeleteCustomFeed(id);
+            this.applicationContext.DeleteCustomFeed(userId, id);
         }
     }
 }
