@@ -13,14 +13,12 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
         User user;
         List<String> closeFriends;
 
-        public FeedFactory(FollowService followService, User user)
+        public FeedFactory(FollowService followService)
         {
             this.followService = followService;
-            this.user = user;
-            this.closeFriends = followService.getCloseFriendsOf(user.GetUsername());
         }
 
-        public FeedConfiguration CreateFeed(string feedType)
+        public FeedConfiguration CreateFeed(string feedType, string Username)
         {
             if (feedType == "Controversial")
             {
@@ -36,6 +34,7 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
             }
             else if (feedType == "Home")
             {
+                closeFriends = followService.getCloseFriendsOf(Username);
                 return new HomeFeed(closeFriends);
             }
             else if (feedType == "Custom")
