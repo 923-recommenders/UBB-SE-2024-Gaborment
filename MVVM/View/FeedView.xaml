@@ -16,17 +16,38 @@
             <!-- Left Side Navigation Menu -->
             <!--Header-->
             <Grid Grid.Row="0">
-                <components:Carousel/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <!--<components:Carousel/>-->
+                <Button Grid.Column="0" Height="23"  VerticalAlignment="Center" 
+                Name="btnPrev" Width="40" Click="btnPrev_Click" 
+                Opacity="0.75" Content="&lt;" HorizontalAlignment="Left"/>
+                <DataGrid Style="{DynamicResource FeedDataGridStyle}" Grid.Column="1" x:Name="dataGrid" HeadersVisibility="Column" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Style="{DynamicResource BasicCarouselButtonStyle}" Content="{Binding}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                    <DataGrid.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Rows="1"/>
+                        </ItemsPanelTemplate>
+                    </DataGrid.ItemsPanel>
+                </DataGrid>
+
+                <Button Grid.Column="2" Height="23" HorizontalAlignment="Right" 
+                Name="btnNext" VerticalAlignment="Center" Width="40" 
+                Content="&gt;" Click="btnNext_Click" Opacity="0.75"/>
             </Grid>
 
             <!-- Main Content Area -->
-            <Border Grid.Row="1" Background="White">
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock FontWeight="Bold" Text="Content"/>
-                    <!-- Display Friends, Following, Followers, Blocked, or Requests based on selection -->
-                    <!-- You will populate this area dynamically based on user selection from the left side menu -->
-                </StackPanel>
-            </Border>
 
         </Grid>
     </Grid>
