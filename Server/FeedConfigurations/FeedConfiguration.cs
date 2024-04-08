@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using UBB_SE_2024_Gaborment.Server.Relationships.Follow;
+using UBB_SE_2024_Gaborment.Server.Mocks;
 
 namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
 {
@@ -40,12 +40,12 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
             this.ReactionThreshold = ReactionThreshold;
         }
 
-        public abstract int GetPostScore(Post post);
+        public abstract int GetPostScore(PostMock post);
 
-        public List<Post> FilterPosts(List<Post> posts)
+        public List<PostMock> FilterPosts(List<PostMock> posts)
         {
-            List<Post> filteredPosts = new List<Post>();
-            foreach (Post post in posts)
+            List<PostMock> filteredPosts = new List<PostMock>();
+            foreach (PostMock post in posts)
             {
                 if (GetPostScore(post) > 0)
                 {
@@ -55,7 +55,7 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
             return filteredPosts;
         }
 
-        public virtual int SortComparisonFunction(Post Post1, Post Post2)
+        public virtual int SortComparisonFunction(PostMock Post1, PostMock Post2)
         {
             int score1 = GetPostScore(Post1);
             int score2 = GetPostScore(Post2);

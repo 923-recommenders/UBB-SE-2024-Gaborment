@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UBB_SE_2024_Gaborment.Server.FeedConfigurations;
 
 
-namespace UBB_SE_2024_Gaborment.Server.FeedConfigurationService
+namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
 {
     internal class FeedConfigurationService
     {

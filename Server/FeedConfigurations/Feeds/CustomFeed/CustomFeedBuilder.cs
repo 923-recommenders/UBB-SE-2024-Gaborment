@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UBB_SE_2024_Gaborment.Server.Mocks;
 
 namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
 {
@@ -41,7 +42,7 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
         }
 
     
-        public override int GetPostScore(Post post)
+        public override int GetPostScore(PostMock post)
         {
             throw new Exception("The feed builder does not have a score function.");
         }
