@@ -133,46 +133,54 @@ namespace UBB_SE_2024_Gaborment.FeedConfigurations
         }
 
         public void SaveCustomFeedsToXML(string filePath)
+{
+    var customFeeds = feedList.OfType<CustomFeed>().ToList();
+
+    if (!customFeeds.Any())
+    {
+        throw new InvalidOperationException("No CustomFeed objects to append.");
+    }
+
+    try
+    {
+        XDocument xdoc;
+        if (File.Exists(filePath))
         {
-            var customFeeds = feedList.OfType<CustomFeed>().ToList();
-
-            if (!customFeeds.Any())
+            string xmlContent = File.ReadAllText(filePath);
+            if (string.IsNullOrWhiteSpace(xmlContent) || !xmlContent.Contains("<CustomFeeds>"))
             {
-                throw new InvalidOperationException("No CustomFeed objects to append.");
+                xdoc = new XDocument(new XElement("CustomFeeds"));
             }
-
-            try
+            else
             {
-
-                XDocument xdoc = File.Exists(filePath) ? XDocument.Load(filePath) : new XDocument();
-
-
-                XElement root = xdoc.Element("CustomFeeds");
-                if (root == null)
-                {
-                    root = new XElement("CustomFeeds");
-                    xdoc.Add(root);
-                }
-
-
-                foreach (var customFeed in customFeeds)
-                {
-                    XmlSerializer serializer = new XmlSerializer(typeof(CustomFeed));
-                    using (var stringWriter = new StringWriter())
-                    {
-                        serializer.Serialize(stringWriter, customFeed);
-                        XElement customFeedElement = XElement.Parse(stringWriter.ToString());
-                        root.Add(customFeedElement);
-                    }
-                }
-
-                xdoc.Save(filePath);
+                
+                xdoc = XDocument.Parse(xmlContent);
             }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException("an error occurred while saving to the XML file", ex);
-            }
-
         }
+        else
+        {
+            xdoc = new XDocument(new XElement("CustomFeeds"));
+        }
+
+        XElement root = xdoc.Element("CustomFeeds");
+
+        foreach (var customFeed in customFeeds)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(CustomFeed));
+            using (var stringWriter = new StringWriter())
+            {
+                serializer.Serialize(stringWriter, customFeed);
+                XElement customFeedElement = XElement.Parse(stringWriter.ToString());
+                root.Add(customFeedElement);
+            }
+        }
+
+        xdoc.Save(filePath);
+    }
+    catch (Exception ex)
+    {
+        throw new InvalidOperationException("An error occurred while saving to the XML file", ex);
+    }
+}
     }
 }
