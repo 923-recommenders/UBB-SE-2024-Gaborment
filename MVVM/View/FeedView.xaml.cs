@@ -53,17 +53,49 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
             return null;
         }
 
+        public class FeedTemp
+        {
+            public string id { get; set; }
+            public string content { get; set; }
+        }
+
+        private List<FeedTemp> getFeeds()
+        {
+            List<FeedTemp> temp = new List<FeedTemp> ();
+            for(int i=1;i<=7;i++) {
+                FeedTemp feed = new FeedTemp();
+                feed.id = "Feed"+i.ToString();
+                feed.content = feed.id;
+                temp.Add(feed); }
+            return temp;
+        }
+
         private List<Button> GetData()
         {
             List<Button> buttonList = new List<Button>();
-            for (int i = 0; i < feedCount; i++)
-            {
-                Button button = new Button();
-                button.Content = "Button " + i.ToString();
-                buttonList.Add(button);
-            }
+            foreach(FeedTemp feed in getFeeds())
+                {
+                    Button button = new Button();
+                    button.Content = "Button " + feed.id;
+                    buttonList.Add(button);
+                    button.Click += Button_Click;
+                    button.Name = feed.id.ToString();
+                }
             return buttonList;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            // Cast the sender object to a Button to access its properties
+            Button clickedButton = sender as Button;
+
+            // Check if the clickedButton is not null and save its name in the variable
+            if (clickedButton != null)
+            {
+
+            }
+        }
+
 
         private void Navigate(int mode)
         {
