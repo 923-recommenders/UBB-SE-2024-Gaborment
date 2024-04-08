@@ -9,13 +9,13 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
 {
     internal class CustomFeed:FeedConfiguration
     {
-        public List<String> Hashtags { get; set; }
-        public List<String> Locations { get; set; }
-        public List<String> FollowedUsers { get; set; }
+        public List<string> Hashtags { get; set; }
+        public List<string> Locations { get; set; }
+        public List<string> FollowedUsers { get; set; }
         public string User { get; set; }
 
-        public CustomFeed(List<String> Hashtags, List<String> Locations, 
-            List<String> FollowedUsers, string User)
+        public CustomFeed(List<string> Hashtags, List<string> Locations, 
+            List<string> FollowedUsers, string User)
         {
             this.Hashtags = Hashtags;
             this.Locations = Locations;
@@ -25,17 +25,17 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
 
         public CustomFeed()
         {
-            this.Hashtags = new List<String>();
-            this.Locations = new List<String>();
-            this.FollowedUsers = new List<String>();
+            this.Hashtags = new List<string>();
+            this.Locations = new List<string>();
+            this.FollowedUsers = new List<string>();
             this.User = "";
         }
 
         public CustomFeed(string User)
         {
-            this.Hashtags = new List<String>();
-            this.Locations = new List<String>();
-            this.FollowedUsers = new List<String>();
+            this.Hashtags = new List<string>();
+            this.Locations = new List<string>();
+            this.FollowedUsers = new List<string>();
             this.User = User;
         }
 
@@ -62,7 +62,7 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
             // Filter by Matching Hashtags
             int hashtagNumber = Hashtags.Count;
             int hashtagMatch = 0;
-            foreach(String hashtag in post.GetHashtags())
+            foreach(string hashtag in post.GetHashtags())
             {
                 if (Hashtags.Contains(hashtag))
                 {
