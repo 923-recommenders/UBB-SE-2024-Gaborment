@@ -12,6 +12,12 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
             customFeed = new CustomFeed();
         }
 
+        public CustomFeedBuilder(string user)
+        {
+            customFeed = new CustomFeed(user);
+        }
+
+
         public CustomFeedBuilder SetHashtags(List<String> newHashtagList)
         {
             customFeed.Hashtags = newHashtagList;

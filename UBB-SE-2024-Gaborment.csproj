@@ -10,7 +10,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Fonts\Font Awesome 6 Free Regular.otf" />
+    <None Remove="Fonts\Font Awesome 6 Free Solid.otf" />
+    <None Remove="Images\gabornment.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="ResourceDictionary.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Server\Sorting\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\Font Awesome 6 Free Regular.otf" />
+    <Resource Include="Fonts\Font Awesome 6 Free Solid.otf" />
+    <Resource Include="Images\gabornment.png" />
+    <Resource Include="ResourceDictionary.xaml" />
   </ItemGroup>
 
 </Project>
