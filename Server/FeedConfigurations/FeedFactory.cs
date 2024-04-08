@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using UBB_SE_2024_Gaborment.Server.Relationships.Block;
 using UBB_SE_2024_Gaborment.Server.Relationships.Follow;
 
 namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations

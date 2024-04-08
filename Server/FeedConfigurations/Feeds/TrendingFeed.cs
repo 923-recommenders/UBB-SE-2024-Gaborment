@@ -1,4 +1,5 @@
 ﻿using System;
+using UBB_SE_2024_Gaborment.Server.Mocks;
 
 namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
 {
@@ -38,7 +39,7 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
             } 
         }
 
-        public override int GetPostScore(Post post)
+        public override int GetPostScore(PostMock post)
         {
             int positiveReactions = post.GetReactions()["like"] + post.GetReactions()["love"];
             int negativeReactions = post.GetReactions()["dislike"] + post.GetReactions()["angry"];
