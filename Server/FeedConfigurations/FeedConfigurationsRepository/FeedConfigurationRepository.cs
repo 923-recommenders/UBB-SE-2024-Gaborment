@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using UBB_SE_2024_Gaborment.Server.FeedConfigurations;
 
 namespace UBB_SE_2024_Gaborment.FeedConfigurations.FeedConfigurationsRepository
 {
-    public class FeedConfigurationRepository
+    internal class FeedConfigurationRepository
     {
         private List<CustomFeed> feedList;
         private int freeId;
