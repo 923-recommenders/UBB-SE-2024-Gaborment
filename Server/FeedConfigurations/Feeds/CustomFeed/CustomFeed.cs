@@ -11,13 +11,15 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
         public List<String> Hashtags { get; set; }
         public List<String> Locations { get; set; }
         public List<String> FollowedUsers { get; set; }
+        public string User { get; set; }
 
         public CustomFeed(List<String> Hashtags, List<String> Locations, 
-            List<String> FollowedUsers)
+            List<String> FollowedUsers, string User)
         {
             this.Hashtags = Hashtags;
             this.Locations = Locations;
             this.FollowedUsers = FollowedUsers;
+            this.User = User;
         }
 
         public CustomFeed()
@@ -25,6 +27,25 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
             this.Hashtags = new List<String>();
             this.Locations = new List<String>();
             this.FollowedUsers = new List<String>();
+            this.User = "";
+        }
+
+        public CustomFeed(string User)
+        {
+            this.Hashtags = new List<String>();
+            this.Locations = new List<String>();
+            this.FollowedUsers = new List<String>();
+            this.User = User;
+        }
+
+        public void SetUserID(string User)
+        {
+            this.User = User;
+        }
+
+        public string GetUserID()
+        {
+            return User;
         }
 
         public override int GetPostScore(Post post)
