@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-using UBB_SE_2024_Gaborment.Server.FeedConfigurations;
 
-namespace UBB_SE_2024_Gaborment.FeedConfigurations.FeedConfigurationsRepository
+namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
 {
     internal class FeedConfigurationRepository
     {
@@ -136,12 +135,12 @@ namespace UBB_SE_2024_Gaborment.FeedConfigurations.FeedConfigurationsRepository
         public void SaveCustomFeedsToXML(string filePath)
         {
             var customFeeds = feedList.OfType<CustomFeed>().ToList();
-        
+
             if (!customFeeds.Any())
             {
                 throw new InvalidOperationException("no CustomFeed objects to append.");
             }
-        
+
             try
             {
                 XDocument xdoc;
@@ -153,17 +152,17 @@ namespace UBB_SE_2024_Gaborment.FeedConfigurations.FeedConfigurationsRepository
                 {
                     xdoc = new XDocument(new XElement("CustomFeeds"));
                 }
-        
+
                 XElement root = xdoc.Element("CustomFeeds");
-        
-               
+
+
                 HashSet<int> existingFeedIds = new HashSet<int>(
                     root.Elements("CustomFeed")
                         .Select(feedElement => (int)feedElement.Attribute("FeedID")));
-        
+
                 foreach (var customFeed in customFeeds)
                 {
-                   
+
                     if (!existingFeedIds.Contains(customFeed.GetID()))
                     {
                         XmlSerializer serializer = new XmlSerializer(typeof(CustomFeed));
@@ -171,7 +170,7 @@ namespace UBB_SE_2024_Gaborment.FeedConfigurations.FeedConfigurationsRepository
                         {
                             serializer.Serialize(stringWriter, customFeed);
                             XElement customFeedElement = XElement.Parse(stringWriter.ToString());
-                            
+
                             customFeedElement.SetAttributeValue("FeedID", customFeed.GetID());
                             root.Add(customFeedElement);
                         }
@@ -180,11 +179,11 @@ namespace UBB_SE_2024_Gaborment.FeedConfigurations.FeedConfigurationsRepository
                     {
                         XElement existingFeedElement = root.Elements("CustomFeed")
                                                 .FirstOrDefault(e => (int)e.Attribute("FeedID") == customFeed.GetID());
-        
+
                         UpdateCustomFeedElement(existingFeedElement, customFeed);
                     }
                 }
-        
+
                 xdoc.Save(filePath);
             }
             catch (Exception ex)
@@ -195,13 +194,13 @@ namespace UBB_SE_2024_Gaborment.FeedConfigurations.FeedConfigurationsRepository
 
         private void UpdateCustomFeedElement(XElement existingFeedElement, CustomFeed customFeed)
         {
-            
+
             existingFeedElement.Element("Hashtags").ReplaceAll(customFeed.Hashtags.Select(h => new XElement("string", h)));
-        
-            
+
+
             existingFeedElement.Element("Locations").ReplaceAll(customFeed.Locations.Select(l => new XElement("string", l)));
-        
-           
+
+
             existingFeedElement.Element("FollowedUsers").ReplaceAll(customFeed.FollowedUsers.Select(u => new XElement("string", u)));
         }
 

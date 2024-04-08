@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UBB_SE_2024_Gaborment.FeedRepo;
+using UBB_SE_2024_Gaborment.Server.FeedConfigurations;
+
 
 namespace UBB_SE_2024_Gaborment.Server.FeedConfigurationService
 {
@@ -21,29 +22,29 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurationService
             this.applicationContext = applicationContext;
         }
 
-        public List<FeedConfiguration> getFeedList()
+        public List<CustomFeed> GetFeedList()
         {
             return this.applicationContext.GetFeedList();
         }
 
-        public FeedConfiguration getFeed(int id)
+        public CustomFeed GetFeed(int searchedId)
         {
-            return this.applicationContext.getFeed(id);
+            return this.applicationContext.GetFeed(searchedId);
         }
 
-        public void addCustomFeed(string[]? hashtagsList, string[]? locations, string[]? users)
+        public void AddCustomFeed(List<string>? hashtagsList, List<string>? locations, List<string>? users)
         {
-            this.applicationContext.addCustomFeedToRepository(hashtagsList, locations, users);
+            this.applicationContext.AddCustomFeedToRepository(hashtagsList, locations, users);
         }
 
-        public void updateCustomFeed(int id, string[]? hashtagsList, string[]? locations, string[]? users)
+        public void UpdateCustomFeed(int id, List<string>? hashtagsList, List<string>? locations, List<string>? users)
         {
-            this.applicationContext.updateCustomFeed(id, hashtagsList, locations, users);
+            this.applicationContext.UpdateCustomFeed(id, hashtagsList, locations, users);
         }
 
-        public void deleteCustomFeed(int id)
+        public void DeleteCustomFeed(int id)
         {
-            this.applicationContext.deleteCustomFeed(id);
+            this.applicationContext.DeleteCustomFeed(id);
         }
     }
 }
