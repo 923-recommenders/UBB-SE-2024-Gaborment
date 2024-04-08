@@ -13,7 +13,6 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!-- Left Side Navigation Menu -->
             <!--Header-->
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
@@ -25,7 +24,7 @@
                 <Button Grid.Column="0" Height="23"  VerticalAlignment="Center" 
                 Name="btnPrev" Width="40" Click="btnPrev_Click" 
                 Opacity="0.75" Content="&lt;" HorizontalAlignment="Left"/>
-                <DataGrid Style="{DynamicResource FeedDataGridStyle}" Grid.Column="1" x:Name="dataGrid" HeadersVisibility="Column" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}">
+                <DataGrid Style="{DynamicResource FeedDataGridStyle}" Grid.Column="1" x:Name="dataGrid" RowHeight="50" ColumnWidth="100" HeadersVisibility="Column" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
@@ -35,6 +34,12 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Padding" Value="10"/>
+                            <!-- Adjust padding to increase cell size -->
+                        </Style>
+                    </DataGrid.CellStyle>
                     <DataGrid.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Rows="1"/>
@@ -46,6 +51,8 @@
                 Name="btnNext" VerticalAlignment="Center" Width="40" 
                 Content="&gt;" Click="btnNext_Click" Opacity="0.75"/>
             </Grid>
+            <TextBlock x:Name="feedTextBlock" Grid.Row="1" HorizontalAlignment="Center" />
+
 
             <!-- Main Content Area -->
 
