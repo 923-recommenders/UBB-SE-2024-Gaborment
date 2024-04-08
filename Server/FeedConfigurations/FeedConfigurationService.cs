@@ -7,7 +7,7 @@ using UBB_SE_2024_Gaborment.FeedRepo;
 
 namespace UBB_SE_2024_Gaborment.Server.FeedConfigurationService
 {
-    public class FeedConfigurationService
+    internal class FeedConfigurationService
     {
         private FeedConfigurationRepository applicationContext;
 
