@@ -29,7 +29,7 @@
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Style="{DynamicResource BasicCarouselButtonStyle}" Content="{Binding}" />
+                                    <Button Style="{DynamicResource BasicCarouselButtonStyle}" Click="CarouselButtonClicked" Content="{Binding}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -51,7 +51,9 @@
                 Name="btnNext" VerticalAlignment="Center" Width="40" 
                 Content="&gt;" Click="btnNext_Click" Opacity="0.75"/>
             </Grid>
-            <TextBlock x:Name="feedTextBlock" Grid.Row="1" HorizontalAlignment="Center" />
+            <TextBlock x:Name="feedTextBlock" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock.Text>aaaa</TextBlock.Text>
+            </TextBlock>
 
 
             <!-- Main Content Area -->

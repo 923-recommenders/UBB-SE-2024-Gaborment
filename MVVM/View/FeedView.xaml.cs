@@ -26,10 +26,12 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
         private enum PagingMode { Next = 1, Previous = 2 };
         List<Button> myList = new List<Button>();
         private int feedCount;
+        List<FeedTemp> feedList= new List<FeedTemp>();
         public FeedView()
         {
             InitializeComponent();
             feedCount = getAllFeedsCount();
+            setFeeds();
             this.myList = GetData();
             dataGrid.ItemsSource = myList.Take(numberOfRecPerPage);
         }
@@ -59,42 +61,59 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
             public string content { get; set; }
         }
 
-        private List<FeedTemp> getFeeds()
-        {
-            List<FeedTemp> temp = new List<FeedTemp> ();
+        private void setFeeds()
+        {       
             for(int i=1;i<=7;i++) {
                 FeedTemp feed = new FeedTemp();
                 feed.id = "Feed"+i.ToString();
                 feed.content = feed.id;
-                temp.Add(feed); }
-            return temp;
+                feedList.Add(feed); }
         }
+
 
         private List<Button> GetData()
         {
             List<Button> buttonList = new List<Button>();
-            foreach(FeedTemp feed in getFeeds())
+            foreach(FeedTemp feed in feedList)
                 {
                     Button button = new Button();
                     button.Content = "Button " + feed.id;
-                    buttonList.Add(button);
-                    button.Click += Button_Click;
                     button.Name = feed.id.ToString();
+                    button.Tag = feed.id;
+                    buttonList.Add(button);
                 }
             return buttonList;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void CarouselButtonClicked(object sender, RoutedEventArgs e)
         {
-            // Cast the sender object to a Button to access its properties
-            Button clickedButton = sender as Button;
+            // ATTENTION!!!!
+            // Convert sender to Button type
+            Button tempButton = sender as Button;
 
-            // Check if the clickedButton is not null and save its name in the variable
-            if (clickedButton != null)
+            // Get the string representation of the Button
+            string buttonString = tempButton.ToString();
+
+            // Find the index of the substring "Button" which marks the start of the name
+            int startIndex = buttonString.IndexOf("Button ");
+
+            // Extract the substring starting from "Button " IMPORTANT WITH SPACE!!! to the end to get the name
+            string nameString = buttonString.Substring(startIndex);
+
+            // The name of the button is on pos 1
+            string[] parts = nameString.Split(' ');
+            string buttonName = parts[1];
+
+            foreach (FeedTemp feed in feedList)
             {
-
+                if (feed.id == buttonName)
+                {
+                    feedTextBlock.Text = feed.content;
+                    break;
+                }
             }
         }
+
 
 
         private void Navigate(int mode)
