@@ -60,9 +60,22 @@ namespace UBB_SE_2024_Gaborment.Server.Relationships.Follow
             return _followRepository.getFollowersOf(sender);
         }
 
+        public List<string> getCloseFriendsOf(string sender)
+        {
+            return _followRepository.getFollowersOf(sender)
+                            .Where(follow => follow.getCloseFriendStatus() == true)
+                            .Select(follow => follow.getReceiver())
+                            .ToList();  
+        }
+
         public List<Follow> getFollowingOf(string receiver)
         {
             return _followRepository.getFollowingOf(receiver);
+        }
+
+        public List<string> getFollowingUserIdsOf(string receiver)
+        {
+            return _followRepository.getFollowingOf(receiver).Select(follower => follower.getSender()).ToList();
         }
 
         public Dictionary<string, List<Follow>> getAllFollowers()
