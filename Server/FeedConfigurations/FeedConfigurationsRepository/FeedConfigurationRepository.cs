@@ -135,52 +135,73 @@ namespace UBB_SE_2024_Gaborment.FeedConfigurations.FeedConfigurationsRepository
         public void SaveCustomFeedsToXML(string filePath)
         {
             var customFeeds = feedList.OfType<CustomFeed>().ToList();
-
+        
             if (!customFeeds.Any())
             {
-                throw new InvalidOperationException("No CustomFeed objects to append.");
+                throw new InvalidOperationException("no CustomFeed objects to append.");
             }
-
+        
             try
             {
                 XDocument xdoc;
                 if (File.Exists(filePath))
                 {
-                    string xmlContent = File.ReadAllText(filePath);
-                    if (string.IsNullOrWhiteSpace(xmlContent) || !xmlContent.Contains("<CustomFeeds>"))
-                    {
-                        xdoc = new XDocument(new XElement("CustomFeeds"));
-                    }
-                    else
-                    {
-                        
-                        xdoc = XDocument.Parse(xmlContent);
-                    }
+                    xdoc = XDocument.Load(filePath);
                 }
                 else
                 {
                     xdoc = new XDocument(new XElement("CustomFeeds"));
                 }
-
+        
                 XElement root = xdoc.Element("CustomFeeds");
-
+        
+               
+                HashSet<int> existingFeedIds = new HashSet<int>(
+                    root.Elements("CustomFeed")
+                        .Select(feedElement => (int)feedElement.Attribute("FeedID")));
+        
                 foreach (var customFeed in customFeeds)
                 {
-                    XmlSerializer serializer = new XmlSerializer(typeof(CustomFeed));
-                    using (var stringWriter = new StringWriter())
+                   
+                    if (!existingFeedIds.Contains(customFeed.GetID()))
                     {
-                        serializer.Serialize(stringWriter, customFeed);
-                        XElement customFeedElement = XElement.Parse(stringWriter.ToString());
-                        root.Add(customFeedElement);
+                        XmlSerializer serializer = new XmlSerializer(typeof(CustomFeed));
+                        using (var stringWriter = new StringWriter())
+                        {
+                            serializer.Serialize(stringWriter, customFeed);
+                            XElement customFeedElement = XElement.Parse(stringWriter.ToString());
+                            
+                            customFeedElement.SetAttributeValue("FeedID", customFeed.GetID());
+                            root.Add(customFeedElement);
+                        }
+                    }
+                    else
+                    {
+                        XElement existingFeedElement = root.Elements("CustomFeed")
+                                                .FirstOrDefault(e => (int)e.Attribute("FeedID") == customFeed.GetID());
+        
+                        UpdateCustomFeedElement(existingFeedElement, customFeed);
                     }
                 }
-
+        
                 xdoc.Save(filePath);
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException("An error occurred while saving to the XML file", ex);
+                throw new InvalidOperationException("an error occurred while saving to the XML file", ex);
             }
+        }
+
+        private void UpdateCustomFeedElement(XElement existingFeedElement, CustomFeed customFeed)
+        {
+            
+            existingFeedElement.Element("Hashtags").ReplaceAll(customFeed.Hashtags.Select(h => new XElement("string", h)));
+        
+            
+            existingFeedElement.Element("Locations").ReplaceAll(customFeed.Locations.Select(l => new XElement("string", l)));
+        
+           
+            existingFeedElement.Element("FollowedUsers").ReplaceAll(customFeed.FollowedUsers.Select(u => new XElement("string", u)));
         }
 
     }
