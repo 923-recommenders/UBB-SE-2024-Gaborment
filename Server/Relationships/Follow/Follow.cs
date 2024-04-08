@@ -41,6 +41,15 @@
             this.expirationTimeStamp = expirationTimeStamp;
             this.description = description;
         }
+
+        public Follow(string sender, string receiver,bool isCloseFriend, DateTime expirationTimeStamp, string description)
+        {
+            this.sender = sender;
+            this.receiver = receiver;
+            this.isCloseFriend = isCloseFriend;
+            this.expirationTimeStamp = expirationTimeStamp;
+            this.description = description;
+        }
         public Follow(string sender, string receiver, DateTime expirationTimeStamp)
         {
             this.sender = sender;

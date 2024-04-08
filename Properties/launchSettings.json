@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "UBB-SE-2024-Gaborment": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DB_IP": "34.65.109.121",
+        "DB_USER": "sqlserver",
+        "DB_PASS": "1OG9iMXKcutz<0eU",
+        "DB_SCHEMA": "FriendNetworkDatabase"
+      },
+      "remoteDebugEnabled": false
+    }
+  }
+}
