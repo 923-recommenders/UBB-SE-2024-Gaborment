@@ -3,10 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:components="clr-namespace:UBB_SE_2024_Gaborment.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             Background="LightBlue">
-    <Grid>
-            
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="WhiteSmoke">
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Left Side Navigation Menu -->
+            <!--Header-->
+            <Grid Grid.Row="0">
+                <components:Carousel/>
+            </Grid>
+
+            <!-- Main Content Area -->
+            <Border Grid.Row="1" Background="White">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock FontWeight="Bold" Text="Content"/>
+                    <!-- Display Friends, Following, Followers, Blocked, or Requests based on selection -->
+                    <!-- You will populate this area dynamically based on user selection from the left side menu -->
+                </StackPanel>
+            </Border>
+
+        </Grid>
     </Grid>
 </UserControl>

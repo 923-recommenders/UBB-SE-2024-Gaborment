@@ -22,5 +22,10 @@ namespace UBB_SE_2024_Gaborment
             DataContext = new MainViewModel();
 
         }
+
+        private void NavigationBar_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
