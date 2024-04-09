@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace UBB_SE_2024_Gaborment.MVVM.Model
+{
+    public class UserModel
+    {
+        public string Username { get; set; }
+        public string FirstName { get; set; }
+        public string username {  get; set; }
+    }
+}
