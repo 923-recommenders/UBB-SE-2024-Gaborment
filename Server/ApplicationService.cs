@@ -71,5 +71,9 @@ internal class ApplicationService
 
     }
 
+    public List<FeedConfigurationDetails> getFeedConfigurationDetailsForUser(string userId)
+    {
+        return feedService.getFeedConfigurationDetailsForUser(userId);
+    }
 
 }

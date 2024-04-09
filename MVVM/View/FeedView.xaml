@@ -6,7 +6,8 @@
              xmlns:components="clr-namespace:UBB_SE_2024_Gaborment.Components"
              xmlns:vm="clr-namespace:UBB_SE_2024_Gaborment.MVVM.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="White">
     <UserControl.DataContext>
         <vm:FeedViewModel />
     </UserControl.DataContext>
@@ -28,7 +29,7 @@
                 <Button Grid.Column="0" Height="23"  VerticalAlignment="Center" 
                 Name="btnPrev" Width="40" Click="btnPrev_Click" 
                 Opacity="0.75" Content="&lt;" HorizontalAlignment="Left"/>
-                <DataGrid Style="{DynamicResource FeedDataGridStyle}" Grid.Column="1" x:Name="dataGrid" RowHeight="50" ColumnWidth="100" HeadersVisibility="Column" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}">
+                <DataGrid Style="{DynamicResource FeedDataGridStyle}" Grid.Column="1" x:Name="dataGrid" RowHeight="50" ColumnWidth="150" HeadersVisibility="Column" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
@@ -58,7 +59,7 @@
             <!--<TextBlock x:Name="feedTextBlock" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock.Text>aaaa</TextBlock.Text>
             </TextBlock>-->
-            <ScrollViewer Grid.Row="1">
+            <!--<ScrollViewer Grid.Row="1">
                 <ItemsControl ItemsSource="{Binding Posts}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -70,7 +71,7 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-            </ScrollViewer>
+            </ScrollViewer>-->
 
             <!-- Main Content Area -->
 

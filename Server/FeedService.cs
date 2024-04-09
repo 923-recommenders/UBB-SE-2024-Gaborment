@@ -52,14 +52,17 @@ namespace UBB_SE_2024_Gaborment.Server
         public List<FeedConfigurationDetails> getFeedConfigurationDetailsForUser(string userId)
         {
             List<FeedConfigurationDetails> list = new List<FeedConfigurationDetails>();
-            list.Add(new FeedConfigurationDetails("Home Feed", FeedTypes.HomeFeed, -1));
-            list.Add(new FeedConfigurationDetails("Following Feed", FeedTypes.FollowingFeed, -1));
-            list.Add(new FeedConfigurationDetails("Trending Feed", FeedTypes.TrendingFeed, -1));
-            list.Add(new FeedConfigurationDetails("Controversial Feed", FeedTypes.ControversialFeed, -1));
-            foreach(CustomFeed customFeed in this.feedConfigurationService.GetFeedList(userId))
+            list.Add(new FeedConfigurationDetails("HomeFeed", FeedTypes.HomeFeed, -1));
+            list.Add(new FeedConfigurationDetails("FollowingFeed", FeedTypes.FollowingFeed, -1));
+            list.Add(new FeedConfigurationDetails("TrendingFeed", FeedTypes.TrendingFeed, -1));
+            list.Add(new FeedConfigurationDetails("ControversialFeed", FeedTypes.ControversialFeed, -1));
+            try
             {
-                list.Add(new FeedConfigurationDetails(customFeed.GetName(), FeedTypes.CustomFeed, customFeed.GetID()));
-            }
+                foreach (CustomFeed customFeed in this.feedConfigurationService.GetFeedList(userId))
+                {
+                    list.Add(new FeedConfigurationDetails(customFeed.GetName(), FeedTypes.CustomFeed, customFeed.GetID()));
+                }
+            }catch (Exception ex) { }
 
             return list;
         }
