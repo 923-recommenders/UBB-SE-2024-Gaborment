@@ -10,6 +10,7 @@ using UBB_SE_2024_Gaborment.Server.FeedConfigurations;
 using Microsoft.VisualBasic.ApplicationServices;
 using Bogus;
 using UBB_SE_2024_Gaborment.Session;
+using UBB_SE_2024_Gaborment.Server.Mocks.UserGeneration;
 
 
 namespace UBB_SE_2024_Gaborment.Server.LoggerUtils;
@@ -48,7 +49,11 @@ internal class ApplicationService
             userServiceMock,
             logger
         );
-        postRepositoryMock = new PostRepositoryMock();
+
+        int numberOfUserMock = 5;
+        List<UserMock> userMocks = GenerateUsers.GenerateRandomUsers(numberOfUserMock);
+        List<PostMock> postMocks = GeneratePosts.generateRandomPosts(20,userMocks);
+        postRepositoryMock = new PostRepositoryMock(postMocks);
         postServiceMock = new PostServiceMock(postRepositoryMock, followService);
         feedConfigurationService = new FeedConfigurationService();
         feedService = new FeedService(postServiceMock,feedConfigurationService,followService);
