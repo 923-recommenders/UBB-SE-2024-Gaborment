@@ -33,7 +33,7 @@
                         <!-- Display Friends, Following, Followers, Blocked, or Requests based on selection -->
                         <!-- You will populate this area dynamically based on user selection from the left side menu -->
                     </StackPanel>
-                    </Grid>
+                </Grid>
             </Border>
 
             <!-- Recent Friend Requests Section -->
