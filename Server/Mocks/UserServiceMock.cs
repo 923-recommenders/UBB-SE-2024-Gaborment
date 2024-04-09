@@ -1,4 +1,6 @@
-﻿namespace UBB_SE_2024_Gaborment.Server.Mocks
+﻿using System.Text;
+
+namespace UBB_SE_2024_Gaborment.Server.Mocks
 {
     internal class UserServiceMock
     {
@@ -21,7 +23,22 @@
 
         public List<UserMock> searchUsers(string searchToken)
         {
-            return new List<UserMock>();
+            searchToken = searchToken.Normalize(NormalizationForm.FormD).ToLowerInvariant().Replace(" ", ""); ;
+            var allUsers = userRepository.GetAllUsers();
+
+            var filteredUsers = allUsers.Where(user =>
+            {
+               
+                string username = user.username.Normalize(NormalizationForm.FormD).ToLowerInvariant();
+                string firstname = user.firstname.Normalize(NormalizationForm.FormD).ToLowerInvariant();
+                string lastname = user.lastname.Normalize(NormalizationForm.FormD).ToLowerInvariant();
+
+                return username.Contains(searchToken) ||
+                       firstname.Contains(searchToken) ||
+                       lastname.Contains(searchToken);
+            }).ToList();
+
+            return filteredUsers;
         }
     }
 }
