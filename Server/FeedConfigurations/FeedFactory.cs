@@ -16,26 +16,26 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
             this.followService = followService;
         }
 
-        public FeedConfiguration CreateFeed(string feedType, string user)
+        public FeedConfiguration CreateFeed(FeedTypes feedType, string user)
         {
-            if (feedType == "Controversial")
+            if (feedType == FeedTypes.ControversialFeed)
             {
                 return new ControversialFeed();
             }
-            else if (feedType == "Following")
+            else if (feedType == FeedTypes.FollowingFeed)
             {
                 return new FollowingFeed();
             }
-            else if (feedType == "Trending")
+            else if (feedType == FeedTypes.TrendingFeed)
             {
                 return new TrendingFeed();
             }
-            else if (feedType == "Home")
+            else if (feedType == FeedTypes.HomeFeed)
             {
                 closeFriends = followService.getCloseFriendsOf(user);
                 return new HomeFeed(closeFriends);
             }
-            else if (feedType == "Custom")
+            else if (feedType == FeedTypes.CustomFeed)
             {
                 return new CustomFeedBuilder(user);
             }
