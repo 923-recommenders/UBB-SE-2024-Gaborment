@@ -1,7 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using UBB_SE_2024_Gaborment.Server;
 using UBB_SE_2024_Gaborment.Server.LoggerUtils;
+using UBB_SE_2024_Gaborment.Session;
 
 namespace UBB_SE_2024_Gaborment.MVVM.View
 {
@@ -14,22 +16,12 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
         const int numberOfRecPerPage = 5;
         private enum PagingMode { Next = 1, Previous = 2 };
         List<Button> myList = new List<Button>();
-        private int feedCount;
-        List<FeedTemp> feedList= new List<FeedTemp>();
-        List<string> posts = new List<string>();
         public FeedView()
         {
             InitializeComponent();
-            feedCount = getAllFeedsCount();
-            setFeeds();
             this.myList = GetButtonData();
-            this.posts= feedList[0].posts;
-
             dataGrid.ItemsSource = myList.Take(numberOfRecPerPage);
         }
-
-        int getAllFeedsCount() { return 7; }
-
 
         private DataGrid FindDataGrid(DependencyObject parent)
         {
@@ -47,51 +39,34 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
             return null;
         }
 
-        public class FeedTemp
-        {
-            public string id { get; set; }
-            public string name { get; set; }
-
-            public List<string> posts { get; set; }
-        }
-
-        private void setFeeds()
-        {
-            // Fetch the feed configuration details for the current user
-            var applicationService = ApplicationService.Instance;
-            var feedConfigurationDetails = applicationService.getFeedConfigurationDetailsForUser("userId"); // Replace "userId" with the actual user ID
-
-            foreach (var feedDetail in feedConfigurationDetails)
-            {
-                FeedTemp feed = new FeedTemp();
-                feed.id = feedDetail.feedId == -1 ? feedDetail.feedName : feedDetail.feedId.ToString();
-                feed.name = feedDetail.feedName;
-                feed.posts = new List<string> { $"{feedDetail.feedName} post" };
-                feedList.Add(feed);
-            }
-        }
-
-
 
         private List<Button> GetButtonData()
         {
             List<Button> buttonList = new List<Button>();
-            foreach(FeedTemp feed in feedList){
+            var applicationService = ApplicationService.Instance;
+            var feedConfigurationDetails = applicationService.getFeedConfigurationDetailsForUser(ApplicationSession.Instance.CurrentUserId);
+            foreach(FeedConfigurationDetails feedConfig in feedConfigurationDetails)
+            {
                 Button button = new Button();
-                if (feed.id != "-1")
-                    button.Content = feed.name;
-                if (feed.id == "HomeFeed")
-                    button.Content = "Home Feed";
-                if (feed.id == "TrendingFeed")
-                    button.Content = "Trending Feed";
-                if (feed.id == "FollowingFeed")
-                    button.Content = "Following Feed";
-                if (feed.id == "ControversialFeed")
-                    button.Content = "Controversial Feed";
-                button.Name = feed.id.ToString();
-                button.Tag = feed.id;
+                if (feedConfig.feedId != -1)
+                {
+                    button.Content = feedConfig.feedName;
+                    button.Name = feedConfig.feedId.ToString();
+                }
+                else
+                {
+                    if (feedConfig.feedName == "HomeFeed")
+                        button.Content = "Home Feed";
+                    if (feedConfig.feedName == "TrendingFeed")
+                        button.Content = "Trending Feed";
+                    if (feedConfig.feedName == "FollowingFeed")
+                        button.Content = "Following Feed";
+                    if (feedConfig.feedName == "ControversialFeed")
+                        button.Content = "Controversial Feed";
+                    button.Name = feedConfig.feedName;
+                }
                 buttonList.Add(button);
-            }
+            } 
             return buttonList;
         }
 
@@ -116,19 +91,14 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
             parts = tempButtonName.Split(' ');
             string buttonId = $"{parts[1]}{parts[2]}";
 
-            foreach (FeedTemp feed in feedList)
-            {
-                if (feed.id == buttonId)
-                {
-                    break;
+            var applicationService = ApplicationService.Instance;
+            var feedConfigurationDetails = applicationService.getFeedConfigurationDetailsForUser(ApplicationSession.Instance.CurrentUserId);
+            FeedConfigurationDetails selectedFeedConfiguration = feedConfigurationDetails.FirstOrDefault(feed => feed.feedId.ToString() == buttonId || feed.feedName == buttonId);
 
-                    //feedTextBlock.Text = feed.content;
-                    //break;
+            if (selectedFeedConfiguration != null)
+                ApplicationSession.Instance.CurrentFeedConfiguration = selectedFeedConfiguration;
 
-                }
-            }
         }
-
 
 
         private void Navigate(int mode)

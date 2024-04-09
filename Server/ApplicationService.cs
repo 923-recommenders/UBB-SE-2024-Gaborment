@@ -7,6 +7,8 @@ using UBB_SE_2024_Gaborment.Server.Relationships.Follow;
 using UBB_SE_2024_Gaborment.Server.Request;
 using UBB_SE_2024_Gaborment.Server.FeedConfigurations;
 using Microsoft.VisualBasic.ApplicationServices;
+using Bogus;
+using UBB_SE_2024_Gaborment.Session;
 
 
 namespace UBB_SE_2024_Gaborment.Server.LoggerUtils;
@@ -63,16 +65,22 @@ internal class ApplicationService
         }
     }
 
-    public List<PostMock> getFeedConfiguredPosts(string idUser, string idFeed)
+    public List<PostMock> getFeedConfiguredPosts()
     {
-        DateTime startDate = DateTime.Now.AddHours(-3);
-        DateTime endDate = DateTime.Now;
-        
-        return postServiceMock.searchVisiblePosts(idUser, startDate, endDate);
+        //This is for the basic case
+        //DateTime startDate = DateTime.Now.AddHours(-3);
+        //DateTime endDate = DateTime.Now;
+        DateTime startDate = DateTime.Now.AddDays(-2);
+        DateTime endDate = DateTime.Now.AddDays(-1);
 
-    }
+        var session = ApplicationSession.Instance;
+        //Temporary, then we use getfeedconfiguredposts for custom feed or getpostsforfeed
+        //return postServiceMock.searchVisiblePosts(idUser, startDate, endDate);
+        return feedService.getPostsForFeed(session.CurrentUserId, startDate, endDate,session.CurrentFeedConfiguration);
 
-    public List<FeedConfigurationDetails> getFeedConfigurationDetailsForUser(string userId)
+}
+
+public List<FeedConfigurationDetails> getFeedConfigurationDetailsForUser(string userId)
     {
         return feedService.getFeedConfigurationDetailsForUser(userId);
     }

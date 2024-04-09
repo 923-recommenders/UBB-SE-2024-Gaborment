@@ -11,3 +11,4 @@ namespace UBB_SE_2024_Gaborment.MVVM.ViewModel
     {
     }
 }
+
