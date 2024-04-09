@@ -34,8 +34,8 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
             this.Hashtags = new List<string>();
         }
 
-
         public override int GetPostScore(PostMock post)
+
         {
             int score = 0;
 

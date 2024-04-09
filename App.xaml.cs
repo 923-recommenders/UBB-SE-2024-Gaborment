@@ -8,7 +8,11 @@ namespace UBB_SE_2024_Gaborment
     /// </summary>
     public partial class App : Application
     {
-        public App() { }
+        public App() {
+            InitializeComponent();
+            var _ = ApplicationService.Instance;
+        }
+
     }
 
 }

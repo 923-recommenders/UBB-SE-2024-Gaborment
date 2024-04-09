@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using UBB_SE_2024_Gaborment.Server.LoggerUtils;
 
 namespace UBB_SE_2024_Gaborment.MVVM.View
 {
@@ -27,12 +16,15 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
         List<Button> myList = new List<Button>();
         private int feedCount;
         List<FeedTemp> feedList= new List<FeedTemp>();
+        List<string> posts = new List<string>();
         public FeedView()
         {
             InitializeComponent();
             feedCount = getAllFeedsCount();
             setFeeds();
-            this.myList = GetData();
+            this.myList = GetButtonData();
+            this.posts= feedList[0].posts;
+
             dataGrid.ItemsSource = myList.Take(numberOfRecPerPage);
         }
 
@@ -58,30 +50,48 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
         public class FeedTemp
         {
             public string id { get; set; }
-            public string content { get; set; }
+            public string name { get; set; }
+
+            public List<string> posts { get; set; }
         }
 
         private void setFeeds()
-        {       
-            for(int i=1;i<=7;i++) {
+        {
+            // Fetch the feed configuration details for the current user
+            var applicationService = ApplicationService.Instance;
+            var feedConfigurationDetails = applicationService.getFeedConfigurationDetailsForUser("userId"); // Replace "userId" with the actual user ID
+
+            foreach (var feedDetail in feedConfigurationDetails)
+            {
                 FeedTemp feed = new FeedTemp();
-                feed.id = "Feed"+i.ToString();
-                feed.content = feed.id;
-                feedList.Add(feed); }
+                feed.id = feedDetail.feedId == -1 ? feedDetail.feedName : feedDetail.feedId.ToString();
+                feed.name = feedDetail.feedName;
+                feed.posts = new List<string> { $"{feedDetail.feedName} post" };
+                feedList.Add(feed);
+            }
         }
 
 
-        private List<Button> GetData()
+
+        private List<Button> GetButtonData()
         {
             List<Button> buttonList = new List<Button>();
-            foreach(FeedTemp feed in feedList)
-                {
-                    Button button = new Button();
-                    button.Content = "Button " + feed.id;
-                    button.Name = feed.id.ToString();
-                    button.Tag = feed.id;
-                    buttonList.Add(button);
-                }
+            foreach(FeedTemp feed in feedList){
+                Button button = new Button();
+                if (feed.id != "-1")
+                    button.Content = feed.name;
+                if (feed.id == "HomeFeed")
+                    button.Content = "Home Feed";
+                if (feed.id == "TrendingFeed")
+                    button.Content = "Trending Feed";
+                if (feed.id == "FollowingFeed")
+                    button.Content = "Following Feed";
+                if (feed.id == "ControversialFeed")
+                    button.Content = "Controversial Feed";
+                button.Name = feed.id.ToString();
+                button.Tag = feed.id;
+                buttonList.Add(button);
+            }
             return buttonList;
         }
 
@@ -95,21 +105,26 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
             string buttonString = tempButton.ToString();
 
             // Find the index of the substring "Button" which marks the start of the name
-            int startIndex = buttonString.IndexOf("Button ");
+            int startIndex = buttonString.IndexOf("Button: ");
 
             // Extract the substring starting from "Button " IMPORTANT WITH SPACE!!! to the end to get the name
             string nameString = buttonString.Substring(startIndex);
 
             // The name of the button is on pos 1
-            string[] parts = nameString.Split(' ');
-            string buttonName = parts[1];
+            string[] parts = nameString.Split(':');
+            string tempButtonName = parts[1];
+            parts = tempButtonName.Split(' ');
+            string buttonId = $"{parts[1]}{parts[2]}";
 
             foreach (FeedTemp feed in feedList)
             {
-                if (feed.id == buttonName)
+                if (feed.id == buttonId)
                 {
+                    break;
+
                     //feedTextBlock.Text = feed.content;
                     //break;
+
                 }
             }
         }

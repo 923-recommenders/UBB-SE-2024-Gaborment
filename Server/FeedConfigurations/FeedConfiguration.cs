@@ -10,7 +10,7 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
     {
         protected int ID { get; set; }
         protected string Name { get; set; }
-        protected int ReactionThreshold { get; set; }
+        protected int _ReactionThreshold;
    
         public int GetID()
         {
@@ -35,9 +35,20 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
             return ReactionThreshold;
         }
 
-        public void SetReactionThreshold(int ReactionThreshold)
+        public int ReactionThreshold
         {
-            this.ReactionThreshold = ReactionThreshold;
+            get { return _ReactionThreshold; }
+            set
+            {
+                if (value >= 0)
+                {
+                    _ReactionThreshold = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Reaction threshold must be a non-negative, valid number.");
+                }
+            }
         }
 
         public abstract int GetPostScore(PostMock post);
