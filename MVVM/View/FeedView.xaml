@@ -59,6 +59,16 @@
             <!--<TextBlock x:Name="feedTextBlock" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock.Text>aaaa</TextBlock.Text>
             </TextBlock>-->
+
+            <ScrollViewer Grid.Row="1" Margin="30 0 30 0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <WrapPanel>
+                    <components:Post Username="User1" Reactions="2000" Comments="2000" Views="200" TextContent="232aa" Margin="10 10 10 10"/>
+                    <components:Post Username="User2" Reactions="2000" Comments="2000" Views="200" TextContent="232aa" Margin="10 10 10 10"/>
+                    <components:Post Username="User3" Reactions="2000" Comments="2000" Views="200" TextContent="232aa" Margin="10 10 10 10"/>
+                    <components:Post Username="User4" Reactions="2000" Comments="2000" Views="200" TextContent="232aa" Margin="10 10 10 10"/>
+                </WrapPanel>
+            </ScrollViewer>
+
             <ScrollViewer Grid.Row="1">
                 <ItemsControl ItemsSource="{Binding Posts}">
                     <ItemsControl.ItemTemplate>

@@ -51,7 +51,7 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
             int score = 0;
             score += GetPopularityProportion(LikeCount, positiveReactions);
             score += GetPopularityProportion(ViewCount, post.GetViews());
-            score += GetPopularityProportion(CommentCount, post.GetComments().Count);
+            score += GetPopularityProportion(CommentCount, post.GetNumberOfComments());
 
             return score;
         }
