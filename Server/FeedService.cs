@@ -17,44 +17,36 @@ namespace UBB_SE_2024_Gaborment.Server
         private FollowService followService;
         private FeedFactory feedFactory;
 
-        public List<PostMock> getPostsForFeed(string userId, FeedTypes feedType, DateTime startDate, DateTime endDate, int? feedId)
+        public FeedService(PostServiceMock postsService, FeedConfigurationService feedConfigurationService, FollowService followService)
+        {
+            this.postsService = postsService;
+            this.feedConfigurationService = feedConfigurationService;
+            this.followService = followService;
+            this.feedFactory = new FeedFactory(followService);
+        }
+
+        public List<PostMock> getPostsForFeed(string userId, DateTime startDate, DateTime endDate, FeedConfigurationDetails feedConfigurationDetails)
         {
             List<PostMock> resultPosts = this.postsService.searchVisiblePosts(userId, startDate, endDate);
-            string feedTypeAsString;
             FeedConfiguration feed;
-            if(feedType == FeedTypes.HomeFeed)
+
+            if(feedConfigurationDetails.feedType == FeedTypes.CustomFeed)
             {
-                feedTypeAsString = "Home";
-                feed = this.feedFactory.CreateFeed(feedTypeAsString, userId);
+                feed = this.feedConfigurationService.GetFeed(userId, feedConfigurationDetails.feedId);
             }
-            if(feedType == FeedTypes.FollowingFeed)
+            else
             {
-                feedTypeAsString = "Following";
-                feed = this.feedFactory.CreateFeed(feedTypeAsString, userId);
-            }
-            if(feedType == FeedTypes.TrendingFeed)
-            {
-                feedTypeAsString = "Trending";
-                feed = this.feedFactory.CreateFeed(feedTypeAsString, userId);
-            }
-            if(feedType == FeedTypes.ControversialFeed)
-            {
-                feedTypeAsString = "Controversial";
-                feed = this.feedFactory.CreateFeed(feedTypeAsString, userId);
-            }
-            if(feedType == FeedTypes.CustomFeed)
-            {
-                int feedIdInt = feedId ?? 0;
-                feed = this.feedConfigurationService.GetFeed(userId, feedIdInt);
+                feed = this.feedFactory.CreateFeed(feedConfigurationDetails.feedType, userId);
             }
 
             List<PostMock> filteredPosts = feed.FilterPosts(resultPosts);
 
             ISorter<PostMock> sorter = new MergeSort<PostMock>();
+            Func<PostMock, PostMock, int> comparisonFunction = (post1, post2) => feed.SortComparisonFunction(post1, post2);
 
-
-
-            return;
+            sorter.SortAscending(filteredPosts, comparisonFunction);
+            filteredPosts.Reverse();
+            return filteredPosts;
         }
 
         public List<FeedConfigurationDetails> getFeedConfigurationDetailsForUser(string userId)

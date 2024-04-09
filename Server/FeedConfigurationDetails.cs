@@ -3,18 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UBB_SE_2024_Gaborment.Server.FeedConfigurations;
 
 namespace UBB_SE_2024_Gaborment.Server
 {
-    public enum FeedTypes
-    {
-        CustomFeed,
-        TrendingFeed,
-        ControversialFeed,
-        HomeFeed,
-        FollowingFeed
-    }
-
     internal class FeedConfigurationDetails
     {
         public FeedConfigurationDetails(string feedName, FeedTypes feedType, int feedId)
