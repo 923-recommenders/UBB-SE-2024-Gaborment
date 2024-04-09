@@ -22,5 +22,16 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
             this.organizations = organizations;
             this.location = location;
         }
+
+        public UserMock()
+        {
+            this.userId = "";
+            this.username = "";
+            this.isPublic = false;
+            this.tags = new List<string>();
+            this.groups = new List<string>();
+            this.organizations = new List<string>();
+            this.location = "";
+        }
     }
 }
