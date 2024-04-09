@@ -18,6 +18,38 @@ namespace UBB_SE_2024_Gaborment.Server
 
         public List<PostMock> getPostsForFeed(string userId, FeedTypes feedType, DateTime startDate, DateTime endDate, int? feedId)
         {
+            List<PostMock> resultPosts = this.postsService.searchVisiblePosts(userId, startDate, endDate);
+            string feedTypeAsString;
+            FeedConfiguration feed;
+            if(feedType == FeedTypes.HomeFeed)
+            {
+                feedTypeAsString = "Home";
+                feed = this.feedFactory.CreateFeed(feedTypeAsString, userId);
+            }
+            if(feedType == FeedTypes.FollowingFeed)
+            {
+                feedTypeAsString = "Following";
+                feed = this.feedFactory.CreateFeed(feedTypeAsString, userId);
+            }
+            if(feedType == FeedTypes.TrendingFeed)
+            {
+                feedTypeAsString = "Trending";
+                feed = this.feedFactory.CreateFeed(feedTypeAsString, userId);
+            }
+            if(feedType == FeedTypes.ControversialFeed)
+            {
+                feedTypeAsString = "Controversial";
+                feed = this.feedFactory.CreateFeed(feedTypeAsString, userId);
+            }
+            if(feedType == FeedTypes.CustomFeed)
+            {
+                int feedIdInt = feedId ?? 0;
+                feed = this.feedConfigurationService.GetFeed(userId, feedIdInt);
+            }
+
+
+
+
             return;
         }
 
