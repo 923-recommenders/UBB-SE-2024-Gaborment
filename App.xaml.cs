@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using UBB_SE_2024_Gaborment.Server;
 using UBB_SE_2024_Gaborment.Server.LoggerUtils;
 
 namespace UBB_SE_2024_Gaborment
@@ -10,7 +11,10 @@ namespace UBB_SE_2024_Gaborment
     {
         public App() {
             InitializeComponent();
-            var _ = ApplicationService.Instance;
+            var appService = ApplicationService.Instance;
+            var session = Session.ApplicationSession.Instance;
+            FeedConfigurationDetails feedConfigurationDetails = new FeedConfigurationDetails("Home Feed", Server.FeedConfigurations.FeedTypes.HomeFeed,-1);
+            session.CurrentFeedConfiguration = feedConfigurationDetails;
         }
 
     }
