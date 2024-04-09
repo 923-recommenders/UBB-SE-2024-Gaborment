@@ -59,6 +59,8 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks.UserGeneration
 
                 string userId = i.ToString();
                 string username = faker.Person.UserName;
+                string firstname = faker.Person.FirstName;
+                string lastname = faker.Person.LastName;
                 bool isPublic = faker.Random.Bool();
 
                 List<string> tags = new List<string>();
@@ -108,7 +110,7 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks.UserGeneration
                     }
                 }
 
-                var user = new UserMock(userId, username, isPublic, tags, groups, organizations, location);
+                var user = new UserMock(userId, username, isPublic, tags, groups, organizations, location, firstname, lastname);
                 users.Add(user);
             }
             return users;
