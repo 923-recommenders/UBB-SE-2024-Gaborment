@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace UBB_SE_2024_Gaborment.Server.FollowSuggestions
 {
-    internal class FollowSuggestion
+    internal class FollowSuggestion:IComparable<FollowSuggestion>
     {
-        private string userId { get; set; }
-        private string username { get; set; }
+        public string userId;
+        public string username;
 
-        private int numberOfCommonFriends {  get; set; }
-        private int numberOfCommonGroups { get; set; }
-        private int numberOfCommonOrganizations { get; set; }
-        private int numberOfCommonTags { get; set; }
-        private string location { get; set; }
+        public int numberOfCommonFriends;
+        public int numberOfCommonGroups; 
+        public int numberOfCommonOrganizations; 
+        public int numberOfCommonTags;
+        public string location;
 
         public FollowSuggestion(string userId, string username, int numberOfCommonFriends, int numberOfCommonGroups, int numberOfCommonOrganizations, int numberOfCommonTags, string location)
         {
@@ -28,5 +28,9 @@ namespace UBB_SE_2024_Gaborment.Server.FollowSuggestions
             this.location = location;
         }
 
+        public int CompareTo(FollowSuggestion? other)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
