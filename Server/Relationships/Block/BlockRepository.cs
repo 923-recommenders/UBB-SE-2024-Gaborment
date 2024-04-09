@@ -1,90 +1,125 @@
-﻿namespace UBB_SE_2024_Gaborment.Server.Relationships.Block
+﻿using Microsoft.Data.SqlClient;
+using UBB_SE_2024_Gaborment.Database;
+
+namespace UBB_SE_2024_Gaborment.Server.Relationships.Block
 {
     internal class BlockRepository
     {
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///INITIALIZATION
-        private Dictionary<string, List<Block>> blockedByDictionary;
-        public BlockRepository()
+        private readonly ApplicationDatabaseContext _databaseHelper;
+
+        public BlockRepository(ApplicationDatabaseContext databaseHelper)
         {
-            blockedByDictionary = new Dictionary<string, List<Block>>();
+            _databaseHelper = databaseHelper;
         }
 
-        public Dictionary<string, List<Block>> getBlockedByDictionary()
+        public void AddBlock(Block blockToBeAdded)
         {
-            return blockedByDictionary;
-        }
-
-        ///TODOS - CONSTRUCTOR FRO ALREADY FORMED DICTIONARY (maybe checks?)
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///
-        public void addBlock(Block blockToBeAdded)
-        {
-            // Check if there is a blocklist associated with the sender
-            if (!blockedByDictionary.ContainsKey(blockToBeAdded.getSender()))
+            using (var connection = _databaseHelper.GetConnection())
             {
-                // If not, create a new blocklist for the sender
-                blockedByDictionary[blockToBeAdded.getSender()] = new List<Block>();
-            }
-
-            // Check if there is not already a block on the receiver for this sender
-            List<Block> senderBlocks = blockedByDictionary[blockToBeAdded.getSender()];
-            bool alreadyBlocked = senderBlocks.Exists(block => block.getReceiver() == blockToBeAdded.getReceiver());
-
-            if (!alreadyBlocked)
-            {
-                // Add the receiver to the sender's block list if not already blocked
-                senderBlocks.Add(blockToBeAdded);
-            }
-        }
-
-        public void removeBlock(string sender, string receiver)
-        {
-            if (blockedByDictionary.ContainsKey(sender))
-            {
-                //check if there is a block on the receiver from this sender
-                List<Block> senderBlocks = blockedByDictionary[sender];
-                bool isBlocked = senderBlocks.Exists(block => block.getReceiver() == receiver);
-                if (isBlocked == true)
+                connection.Open();
+                using (var command = new SqlCommand("INSERT INTO Blocks (Sender, Receiver, StartingTimeStamp, Reason) VALUES (@Sender, @Receiver, @StartingTimeStamp, @Reason)", connection))
                 {
-                    Block blockToRemove = senderBlocks.Find(block => block.getReceiver() == receiver);
-                    senderBlocks.Remove(blockToRemove);
+                    command.Parameters.AddWithValue("@Sender", blockToBeAdded.getSender());
+                    command.Parameters.AddWithValue("@Receiver", blockToBeAdded.getReceiver());
+                    command.Parameters.AddWithValue("@StartingTimeStamp", blockToBeAdded.getStartingTimeStamp());
+                    command.Parameters.AddWithValue("@Reason", blockToBeAdded.getReason());
+                    command.ExecuteNonQuery();
                 }
             }
         }
 
-        public List<Block> getBlocksBySender(string sender)
+        public void RemoveBlock(string sender, string receiver)
         {
-            if (blockedByDictionary.ContainsKey(sender))
+            using (var connection = _databaseHelper.GetConnection())
             {
-                List<Block> senderBlocks = blockedByDictionary[sender];
-                return senderBlocks;
-            }
-            return new List<Block>();
-        }
-
-        //???
-        public List<Block> getBlocksOfReceiver(string receiver)
-        {
-
-            //get all blocks from all all senders from this receiver
-            List<Block> blocksOfReceiver = new List<Block>();
-
-            foreach (var senderBlocks in blockedByDictionary.Values)
-            {
-                // Check if there are blocks from this sender to the specified receiver
-                Block blockOfReceiver = senderBlocks.Find(potentialBlockOfReceiver => potentialBlockOfReceiver.getReceiver() == receiver);
-                if (blockOfReceiver != null)
+                connection.Open();
+                using (var command = new SqlCommand("DELETE FROM Blocks WHERE Sender = @Sender AND Receiver = @Receiver", connection))
                 {
-                    // Add the block to the list if found
-                    blocksOfReceiver.Add(blockOfReceiver);
+                    command.Parameters.AddWithValue("@Sender", sender);
+                    command.Parameters.AddWithValue("@Receiver", receiver);
+                    command.ExecuteNonQuery();
                 }
             }
-
-            return blocksOfReceiver;
         }
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public List<Block> GetBlocksBySender(string sender)
+        {
+            var blocks = new List<Block>();
+            using (var connection = _databaseHelper.GetConnection())
+            {
+                connection.Open();
+                using (var command = new SqlCommand("SELECT Receiver, StartingTimeStamp, Reason FROM Blocks WHERE Sender = @Sender", connection))
+                {
+                    command.Parameters.AddWithValue("@Sender", sender);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            blocks.Add(new Block
+                            (
+                                sender,
+                                reader.GetString(0),
+                                reader.GetDateTime(1),
+                                reader.GetString(2)
+                            ));
+                        }
+                    }
+                }
+            }
+            return blocks;
+        }
+
+        public List<Block> GetBlocksOfReceiver(string receiver)
+        {
+            var blocks = new List<Block>();
+            using (var connection = _databaseHelper.GetConnection())
+            {
+                connection.Open();
+                using (var command = new SqlCommand("SELECT Sender, StartingTimeStamp, Reason FROM Blocks WHERE Receiver = @Receiver", connection))
+                {
+                    command.Parameters.AddWithValue("@Receiver", receiver);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            blocks.Add(new Block
+                            (
+                                reader.GetString(0),
+                                receiver,
+                                reader.GetDateTime(1),
+                                reader.GetString(2)
+                            ));
+                        }
+                    }
+                }
+            }
+            return blocks;
+        }
+
+        public List<Block> GetBlocks()
+        {
+            var blocks = new List<Block>();
+            using (var connection = _databaseHelper.GetConnection())
+            {
+                connection.Open();
+                using (var command = new SqlCommand("SELECT Sender, Receiver, StartingTimeStamp, Reason FROM Blocks", connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            blocks.Add(new Block
+                            (
+                                reader.GetString(0),
+                                reader.GetString(1),
+                                reader.GetDateTime(2),
+                                reader.GetString(3)
+                            ));
+                        }
+                    }
+                }
+            }
+            return blocks;
+        }
     }
 }

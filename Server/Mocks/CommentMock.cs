@@ -9,9 +9,9 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
     internal class CommentMock
     {
         public UserMock Owner { get; set; }
-        public String Text { get; set; }
+        public string Text { get; set; }
 
-        public CommentMock(UserMock Owner, String Text)
+        public CommentMock(UserMock Owner, string Text)
         {
             this.Owner = Owner;
             this.Text = Text;
@@ -23,12 +23,12 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
             this.Text = "";
         }
 
-        public String getOwner()
+        public string getOwner()
         {
             return Owner.username;
         }
 
-        public String getText()
+        public string getText()
         {
             return Text;
         }

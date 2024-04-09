@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UBB_SE_2024_Gaborment.Server.FeedConfigurations;
+using UBB_SE_2024_Gaborment.Server.Mocks;
 
 namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
 {
     internal class HomeFeed:FeedConfiguration
     {
-        List<String> Locations { get; set; }
-        List<String> FollowedUsers { get; set; }
-        List<String> FrequentMedia { get; set; }
-        List<String> Hashtags { get; set; }
-        List<String> CloseFriends { get; set; }
+        List<string> Locations { get; set; }
+        List<string> FollowedUsers { get; set; }
+        List<string> FrequentMedia { get; set; }
+        List<string> Hashtags { get; set; }
+        List<string> CloseFriends { get; set; }
         
 
-        public HomeFeed(List<String> Locations, List<String> FollowedUsers,
-            List<String> FrequentMedia, List<String> Hashtags, List<String> CloseFriends)
+        public HomeFeed(List<string> Locations, List<string> FollowedUsers,
+            List<string> FrequentMedia, List<string> Hashtags, List<string> CloseFriends)
         {
             this.Locations = Locations;
             this.FollowedUsers = FollowedUsers;
@@ -24,21 +25,21 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
             this.Hashtags = Hashtags;
         }
 
-        public HomeFeed(List<String> CloseFriends)
+        public HomeFeed(List<string> CloseFriends)
         {
             this.CloseFriends = CloseFriends;
-            this.Locations = new List<String>();
-            this.FollowedUsers = new List<String>();
-            this.FrequentMedia = new List<String>();
-            this.Hashtags = new List<String>();
+            this.Locations = new List<string>();
+            this.FollowedUsers = new List<string>();
+            this.FrequentMedia = new List<string>();
+            this.Hashtags = new List<string>();
         }
 
 
-        public override int GetPostScore(Post post)
+        public override int GetPostScore(PostMock post)
         {
             int score = 0;
 
-            foreach(String hashtag in post.GetHashtags())
+            foreach(string hashtag in post.GetHashtags())
             {
                 if (Hashtags.Contains(hashtag))
                 {
@@ -46,9 +47,9 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
                 }
             }
 
-            if (FollowedUsers.Contains(post.GetOwner()))
+            if (FollowedUsers.Contains(post.GetOwner().username))
             {
-                if(CloseFriends.Contains(post.GetOwner()))
+                if(CloseFriends.Contains(post.GetOwner().username))
                 {
                     score += 3;
                 }

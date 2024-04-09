@@ -15,7 +15,7 @@
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///CONSTRUCTOR
         ///ASSUMING A FRIENDSHIP EXPIRES BY DEFAULT AFTER AN YEAR
-        //ALSO ASSUMING THAT IF THE THERE IS NO DESCRIPTION THE STRING IS JUST EMPTY :)
+        //ALSO ASSUMING THAT IF THE THERE IS NO DESCRIPTION THE string IS JUST EMPTY :)
         public Follow(string sender, string receiver, string description)
         {
             this.sender = sender;
@@ -38,6 +38,15 @@
             this.sender = sender;
             this.receiver = receiver;
             isCloseFriend = false;
+            this.expirationTimeStamp = expirationTimeStamp;
+            this.description = description;
+        }
+
+        public Follow(string sender, string receiver,bool isCloseFriend, DateTime expirationTimeStamp, string description)
+        {
+            this.sender = sender;
+            this.receiver = receiver;
+            this.isCloseFriend = isCloseFriend;
             this.expirationTimeStamp = expirationTimeStamp;
             this.description = description;
         }

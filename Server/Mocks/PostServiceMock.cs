@@ -18,7 +18,7 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
             this.followService = followService;
         }
 
-        public List<PostMock> searchVisiblePosts(String userId, DateTime startDate, DateTime endDate)
+        public List<PostMock> searchVisiblePosts(string userId, DateTime startDate, DateTime endDate)
         {
             List<Follow> followers = this.followService.getFollowersOf(userId);
             List<PostMock> postsFromStartDateToEndDate = this.postsRepo.getPostsFromStartDateToEndDate(startDate, endDate);

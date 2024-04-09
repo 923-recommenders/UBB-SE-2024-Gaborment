@@ -1,111 +1,108 @@
-﻿namespace UBB_SE_2024_Gaborment.Server.Request
+﻿using Microsoft.Data.SqlClient;
+using UBB_SE_2024_Gaborment.Database;
+
+
+namespace UBB_SE_2024_Gaborment.Server.Request
 {
     internal class RequestRepository
     {
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private Dictionary<string, List<Request>> requestsFromDictionary;
-        private Dictionary<string, List<Request>> requestsToDictionary;
+        private readonly ApplicationDatabaseContext _databaseHelper;
 
-        public RequestRepository()
+        public RequestRepository(ApplicationDatabaseContext databaseHelper)
         {
-            requestsFromDictionary = new Dictionary<string, List<Request>>();
-            requestsToDictionary = new Dictionary<string, List<Request>>();
+            _databaseHelper = databaseHelper;
         }
 
-        public Dictionary<string, List<Request>> getRequestsFromDictionary()
+        public void AddRequest(Request request)
         {
-            return requestsFromDictionary;
-        }
-
-        public Dictionary<string, List<Request>> getRequestToDictionary()
-        {
-            return requestsToDictionary;
-        }
-        ///TODO CONSTRUCTORS FOR THE DB LIST
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///
-
-        public void addRequest(Request request)
-        {
-            // Check if a list exists for the sender and the receiver. 
-            // If it does not exist for any of them, create it
-            if (!requestsFromDictionary.ContainsKey(request.getSender()))
+            using (var connection = _databaseHelper.GetConnection())
             {
-                requestsFromDictionary[request.getSender()] = new List<Request>();
-            }
-            if (!requestsToDictionary.ContainsKey(request.getReceiver()))
-            {
-                requestsToDictionary[request.getReceiver()] = new List<Request>();
-            }
-
-            // Check if the request already exists for the sender
-            List<Request> senderFollows = requestsFromDictionary[request.getSender()];
-            bool followExists = senderFollows.Any(f => f.getReceiver() == request.getReceiver());
-            if (!followExists)
-            {
-                // Add it in the requestsFromDictionary at the sender key
-                requestsFromDictionary[request.getSender()].Add(request);
-                // Add it in the requestsToDictionary at the receiver key
-                requestsToDictionary[request.getReceiver()].Add(request);
-            }
-        }
-
-        public void removeRequest(string sender, string receiver)
-        {
-            // Check if the sender exists in followsFromDictionary
-            if (requestsFromDictionary.ContainsKey(sender) && requestsToDictionary.ContainsKey(receiver))
-            {
-                List<Request> senderFollows = requestsFromDictionary[sender];
-
-                // Check if there are follows from this sender to the receiver
-                bool followExists = senderFollows.Any(f => f.getReceiver() == receiver);
-
-                if (followExists)
+                connection.Open();
+                using (var command = new SqlCommand("INSERT INTO Requests (Sender, Receiver) VALUES (@Sender, @Receiver)", connection))
                 {
-                    // Remove the Follow from the sender key from followsFromDictionary
-                    requestsFromDictionary[sender].RemoveAll(f => f.getReceiver() == receiver);
-
-                    // Remove the follow from the receiver key from followsToDictionary 
-                    requestsToDictionary[receiver].RemoveAll(f => f.getSender() == sender);
+                    command.Parameters.AddWithValue("@Sender", request.getSender());
+                    command.Parameters.AddWithValue("@Receiver", request.getReceiver());
+                    command.ExecuteNonQuery();
                 }
             }
         }
 
-        public List<Request> getRequestsOf(string sender)
+        public void RemoveRequest(string sender, string receiver)
         {
-            if (requestsFromDictionary.ContainsKey(sender))
+            using (var connection = _databaseHelper.GetConnection())
             {
-                return requestsFromDictionary[sender];
-            }
-            else
-            {
-                return new List<Request>(); // Return an empty list if no following found
+                connection.Open();
+                using (var command = new SqlCommand("DELETE FROM Requests WHERE Sender = @Sender AND Receiver = @Receiver", connection))
+                {
+                    command.Parameters.AddWithValue("@Sender", sender);
+                    command.Parameters.AddWithValue("@Receiver", receiver);
+                    command.ExecuteNonQuery();
+                }
             }
         }
 
-        public List<Request> getRequestsTo(string receiver)
+        public List<Request> GetRequestsOf(string sender)
         {
-            if (requestsToDictionary.ContainsKey(receiver))
+            var requests = new List<Request>();
+            using (var connection = _databaseHelper.GetConnection())
             {
-                return requestsToDictionary[receiver];
+                connection.Open();
+                using (var command = new SqlCommand("SELECT Receiver FROM Requests WHERE Sender = @Sender", connection))
+                {
+                    command.Parameters.AddWithValue("@Sender", sender);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            requests.Add(new Request(sender, reader.GetString(0)));
+                        }
+                    }
+                }
             }
-            else
-            {
-                return new List<Request>(); // Return an empty list if no followers found
-            }
+            return requests;
         }
 
-        public Request getRequest(string sender, string receiver)
+        public List<Request> GetRequestsTo(string receiver)
         {
-            if (requestsFromDictionary.ContainsKey(sender))
+            var requests = new List<Request>();
+            using (var connection = _databaseHelper.GetConnection())
             {
-                return requestsFromDictionary[sender].FirstOrDefault(f => f.getReceiver() == receiver);
+                connection.Open();
+                using (var command = new SqlCommand("SELECT Sender FROM Requests WHERE Receiver = @Receiver", connection))
+                {
+                    command.Parameters.AddWithValue("@Receiver", receiver);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            requests.Add(new Request(reader.GetString(0), receiver));
+                        }
+                    }
+                }
             }
-            else
+            return requests;
+        }
+
+        public Request GetRequest(string sender, string receiver)
+        {
+            Request request = null;
+            using (var connection = _databaseHelper.GetConnection())
             {
-                return null; // Return null if the sender doesn't exist or no follow relationship found
+                connection.Open();
+                using (var command = new SqlCommand("SELECT Sender, Receiver FROM Requests WHERE Sender = @Sender AND Receiver = @Receiver", connection))
+                {
+                    command.Parameters.AddWithValue("@Sender", sender);
+                    command.Parameters.AddWithValue("@Receiver", receiver);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            request = new Request(sender, receiver);
+                        }
+                    }
+                }
             }
+            return request;
         }
     }
 }

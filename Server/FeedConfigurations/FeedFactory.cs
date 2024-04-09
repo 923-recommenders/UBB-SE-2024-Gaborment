@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using UBB_SE_2024_Gaborment.Server.Relationships.Block;
 using UBB_SE_2024_Gaborment.Server.Relationships.Follow;
 
 namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
@@ -10,7 +9,7 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
     internal class FeedFactory
     {
         FollowService followService;
-        List<String> closeFriends;
+        List<string> closeFriends;
 
         public FeedFactory(FollowService followService)
         {

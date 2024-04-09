@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UBB_SE_2024_Gaborment.Server.Mocks;
 
 namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
 {
@@ -18,19 +19,19 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
         }
 
 
-        public CustomFeedBuilder SetHashtags(List<String> newHashtagList)
+        public CustomFeedBuilder SetHashtags(List<string> newHashtagList)
         {
             customFeed.Hashtags = newHashtagList;
             return this; 
         }
 
-        public CustomFeedBuilder SetLocations(List<String> newLocationList)
+        public CustomFeedBuilder SetLocations(List<string> newLocationList)
         {
             customFeed.Locations = newLocationList;
             return this; 
         }
 
-        public CustomFeedBuilder SetFollowedUsers(List<String> newFollowedUsersList)
+        public CustomFeedBuilder SetFollowedUsers(List<string> newFollowedUsersList)
         {
             customFeed.FollowedUsers = newFollowedUsersList;
             return this; 
@@ -41,7 +42,7 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
         }
 
     
-        public override int GetPostScore(Post post)
+        public override int GetPostScore(PostMock post)
         {
             throw new Exception("The feed builder does not have a score function.");
         }

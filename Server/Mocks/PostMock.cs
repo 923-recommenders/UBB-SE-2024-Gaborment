@@ -11,18 +11,18 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
     {
         Guid ID { get; set; }
         UserMock Owner { get; set; }
-        String Text { get; set; }
-        String Location { get; set; }
-        String MediaType { get; set; } // a file
-        List<String> Hashtags { get; set; }
+        string Text { get; set; }
+        string Location { get; set; }
+        string MediaType { get; set; } // a file
+        List<string> Hashtags { get; set; }
         List<CommentMock> Comments { get; set; }
         int NumberOfViews { get; set; }
-        Dictionary<String, List<UserMock>> ReactionsDictionary { get; set; }
+        Dictionary<string, List<UserMock>> ReactionsDictionary { get; set; }
         public DateTime PostingDate { get; set; }
 
 
-        public PostMock(UserMock Owner, String Text, String Location,
-            String MediaType, List<String> Hashtags, DateTime PostingDate)
+        public PostMock(UserMock Owner, string Text, string Location,
+            string MediaType, List<string> Hashtags, DateTime PostingDate)
         {
             this.ID = Guid.NewGuid();
             this.Owner = Owner;
@@ -30,7 +30,7 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
             this.Location = Location;
             this.MediaType = MediaType;
             this.Hashtags = Hashtags;
-            this.ReactionsDictionary = new Dictionary<String, List<UserMock>>();
+            this.ReactionsDictionary = new Dictionary<string, List<UserMock>>();
             this.PostingDate = PostingDate;
         }
         public PostMock()
@@ -40,13 +40,13 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
             this.Text = "";
             this.Location = "";
             this.MediaType = "";
-            this.Hashtags = new List<String>();
-            this.ReactionsDictionary = new Dictionary<String, List<UserMock>>();
+            this.Hashtags = new List<string>();
+            this.ReactionsDictionary = new Dictionary<string, List<UserMock>>();
             this.PostingDate = DateTime.Now;
         }
 
 
-        public void AddReaction(String reaction, UserMock user)
+        public void AddReaction(string reaction, UserMock user)
         {
             if (ReactionsDictionary.ContainsKey(reaction))
             {
@@ -58,12 +58,12 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
             }
         }
 
-        public List<String> GetHashtags()
+        public List<string> GetHashtags()
         {
             return Hashtags;
         }
 
-        public void setHashtags(List<String> Hashtags)
+        public void setHashtags(List<string> Hashtags)
         {
             this.Hashtags = Hashtags;
         }
@@ -83,7 +83,7 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
             return Owner;
         }
 
-        public String GetUsernameOwner()
+        public string GetUsernameOwner()
         {
             return Owner.username;
         }
@@ -94,32 +94,32 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
         }
 
 
-        public String GetText()
+        public string GetText()
         {
             return Text;
         }
 
-        public void SetText(String Text)
+        public void SetText(string Text)
         {
             this.Text = Text;
         }
 
-        public String GetMediaType()
+        public string GetMediaType()
         {
             return MediaType;
         }
 
-        public void SetMediaType(String MediaType)
+        public void SetMediaType(string MediaType)
         {
             this.MediaType = MediaType;
         }
 
-        public String GetLocation()
+        public string GetLocation()
         {
             return Location;
         }
 
-        public void SetLocation(String Location)
+        public void SetLocation(string Location)
         {
             this.Location = Location;
         }
@@ -134,10 +134,10 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
             this.NumberOfViews = NumberOfViews;
         }
 
-        public Dictionary<String, int> GetReactions()
+        public Dictionary<string, int> GetReactions()
         {
-            Dictionary<String, int> reactions = new Dictionary<String, int>();
-            foreach (String reaction in ReactionsDictionary.Keys)
+            Dictionary<string, int> reactions = new Dictionary<string, int>();
+            foreach (string reaction in ReactionsDictionary.Keys)
             {
                 reactions.Add(reaction, ReactionsDictionary[reaction].Count);
             }

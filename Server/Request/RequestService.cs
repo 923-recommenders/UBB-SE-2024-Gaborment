@@ -30,38 +30,28 @@ namespace UBB_SE_2024_Gaborment.Server.Request
             if (!(_blockService.getBlocksBy(sender).Any(b => b.getReceiver() == receiver) || _blockService.getBlocksOf(receiver).Any(b => b.getSender() == sender) || _followService.getFollowersOf(sender).Any(f => f.getReceiver() == receiver)))
             {
                 Request requestToBeAdded = new Request(sender, receiver);
-                _requestRepository.addRequest(requestToBeAdded);
+                _requestRepository.AddRequest(requestToBeAdded);
             }
         }
 
         public void removeRequest(string sender, string receiver)
         {
-            _requestRepository.removeRequest(sender, receiver);
+            _requestRepository.RemoveRequest(sender, receiver);
         }
 
         public List<Request> getRequestOf(string sender)
         {
-            return _requestRepository.getRequestsOf(sender);
+            return _requestRepository.GetRequestsOf(sender);
         }
 
         public List<Request> getRequestTo(string receiver)
         {
-            return _requestRepository.getRequestsTo(receiver);
+            return _requestRepository.GetRequestsTo(receiver);
         }
 
         public List<string> getRequestedUserIdsBy(string sender)
         {
-            return _requestRepository.getRequestsOf(sender).Select(request => request.getSender()).ToList();
-        }
-
-        public Dictionary<string, List<Request>> getAllRequests()
-        {
-            return _requestRepository.getRequestToDictionary();
-        }
-
-        public bool hasRequest(string sender, string receiver)
-        {
-            return _requestRepository.getRequest(sender, receiver) != null;
+            return _requestRepository.GetRequestsOf(sender).Select(request => request.getSender()).ToList();
         }
     }
 }
