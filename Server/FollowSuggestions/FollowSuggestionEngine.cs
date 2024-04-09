@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UBB_SE_2024_Gaborment.Server.Mocks;
+﻿using UBB_SE_2024_Gaborment.Server.Mocks;
 using UBB_SE_2024_Gaborment.Server.Relationships.Block;
 using UBB_SE_2024_Gaborment.Server.Relationships.Follow;
 using UBB_SE_2024_Gaborment.Server.Request;
+using UBB_SE_2024_Gaborment.Server.Sorting;
 
 namespace UBB_SE_2024_Gaborment.Server.FollowSuggestions
 {
@@ -29,7 +25,7 @@ namespace UBB_SE_2024_Gaborment.Server.FollowSuggestions
             this.userService = userService;
         }
 
-        public List<FollowSuggestion> GetFollowSuggestionsForUser(string userId)
+        public List<FollowSuggestion> GetFollowSuggestionsForUser(string userId, AccountType accountType)
         {
             List<string> closeInNetworkUserIds = FollowNetworkUtilities.GetNumberOfLevelsOfFollowFromNetworkStartingWithUser(
                     userId,
@@ -87,6 +83,27 @@ namespace UBB_SE_2024_Gaborment.Server.FollowSuggestions
             return commonCount;
         }
 
+
+        private List<FollowSuggestion> GetCustomSortedFollowSuggestions(List<FollowSuggestion> followSuggestions, AccountType accountType)
+        {
+            List<Func<FollowSuggestion, FollowSuggestion, int>> followSuggestionSortingCriterias = FollowSuggestionsSortingOrders.GetSortingOrderForAccountType(accountType);
+            int numberOfSortedSuggestions = followSuggestions.Count();
+            ISorter<FollowSuggestion> sorter = new MergeSort<FollowSuggestion>();
+            for (int i = 1; i < followSuggestionSortingCriterias.Count; i++)
+            {
+                if (numberOfSortedSuggestions < 2)
+                {
+                    break;
+                }
+                List<FollowSuggestion> firstQuarter = followSuggestions.Take(numberOfSortedSuggestions).ToList();
+                List<FollowSuggestion> otherQuarters = followSuggestions.Skip(numberOfSortedSuggestions).ToList();
+                sorter.SortAscending(firstQuarter, followSuggestionSortingCriterias[i]);
+
+                numberOfSortedSuggestions = numberOfSortedSuggestions / 4;
+                followSuggestions = firstQuarter.Concat(otherQuarters).ToList();
+            }
+            return followSuggestions;
+        }
         private int CalculateCommonFriends(string userId, string suggestedUserId)
         {
             var userFriends = followService.getFollowingUserIdsOf(userId);

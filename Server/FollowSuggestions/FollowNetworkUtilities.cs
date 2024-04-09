@@ -42,7 +42,8 @@ namespace UBB_SE_2024_Gaborment.Server.FollowSuggestions
             return layersOfFollows;
         }
 
-        public static List<string> FilterOutRedundantSuggestedUserIds(List<string> suggestedUserIds,
+        public static List<string> FilterOutRedundantSuggestedUserIds(
+            List<string> suggestedUserIds,
             List<string> followsOfUser,
             List<string> blocksOfUser,
             List<string> requestsOfUser
@@ -56,5 +57,6 @@ namespace UBB_SE_2024_Gaborment.Server.FollowSuggestions
 
             return filteredSuggestedUserIds;
         }
+
     }
 }
