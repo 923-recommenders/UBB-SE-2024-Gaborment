@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bogus;
+using Bogus.DataSets;
 
 namespace UBB_SE_2024_Gaborment.Server.Mocks.UserGeneration
 {
@@ -82,7 +83,42 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks.UserGeneration
             return posts;
         }
 
-       
+        public static List<PostMock> generateSomeGuaranteedControversialPosts(int count, int numberOfControversialPosts, List<UserMock> users)
+        {
+            List<string> predefinedReactions = new List<string>
+            {
+                "like", "love", "dislike", "angry"
+            };
+
+            List<PostMock> posts = generateRandomPosts(numberOfControversialPosts, users);
+            foreach (PostMock post in posts)
+            {
+                int likeLoveCount= post.GetReactions()["like"] + post.GetReactions()["love"];
+                int dislikeAngryCount = post.GetReactions()["dislike"] + post.GetReactions()["angry"];
+                int reactionDifference = Math.Abs(likeLoveCount - dislikeAngryCount);
+
+                Dictionary<string, List<UserMock>> reactions = new Dictionary<string, List<UserMock>>();
+                while (reactionDifference > 5)
+                {
+                    foreach (string reaction in predefinedReactions)
+                    {
+                        List<UserMock> rand_users = new List<UserMock>();
+                        int number_of_users = faker.Random.Int(0, 1000);
+                        for (int j = 0; j < number_of_users; j++)
+                        {
+                            rand_users.Add(new UserMock());
+                        }
+                        reactions.Add(reaction, rand_users);
+
+                    }
+                }
+                post.SetReactions(reactions);
+            }
+            return posts;
+
+        }
+
+
     }
 
     //class Program
