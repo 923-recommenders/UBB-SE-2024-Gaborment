@@ -27,7 +27,9 @@ namespace UBB_SE_2024_Gaborment.Server.Relationships.Block
         ///
         public void createBlock(string sender, string receiver, string reason)
         {
-            if (_followRepository.GetFollowersOf(sender).Any(f => f.getReceiver() == receiver) == true || _followRepository.GetFollowingOf(receiver).Any(f => f.getSender() == sender) == true)
+            if (_followRepository.GetFollowersOf(sender)
+                .Any(f => f.getReceiver() == receiver) == true || _followRepository.GetFollowingOf(receiver)
+                .Any(f => f.getSender() == sender) == true)
             {
                 _followRepository.RemoveFollow(sender, receiver);
             }
@@ -54,7 +56,6 @@ namespace UBB_SE_2024_Gaborment.Server.Relationships.Block
         {
             return _blockRepository.GetBlocksOfReceiver(receiver).Select(block => block.getSender()).ToList();
         }
-
 
         public List<Block> getAllBlocks()
         {

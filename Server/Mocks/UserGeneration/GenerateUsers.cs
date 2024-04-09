@@ -25,6 +25,31 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks.UserGeneration
                 "Bratislava"
             };
 
+            List<string> predefinedOrganizations = new List<string>
+            {
+                "United Nations",
+                "Doctors Without Borders",
+                "Greenpeace",
+                "World Wildlife Fund",
+                "Amnesty International",
+                "Red Cross",
+                "Oxfam"
+            };
+
+            List<string> predefinedGroups = new List<string>
+            {
+                "Study Group Alpha",
+                "Coding Club",
+                "Chess Society",
+                "Book Club",
+                "Environmental Awareness Group",
+                "Community Outreach Team",
+                "Photography Club",
+                "Dance Ensemble",
+                "Debating Society",
+                "Music Band"
+            };
+
 
 
             for (int i = 0; i < numberOfUsers; i++)
@@ -48,19 +73,41 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks.UserGeneration
                 string location = predefinedLocations[random.Next(0, predefinedLocations.Count)];
 
                 List<string> groups = new List<string>();
-                string[] rand_groups = faker.Random.WordsArray(2);
-                foreach (string group in rand_groups)
+                HashSet<string> selectedGroups = new HashSet<string>();
+
+                int rand_number_of_groups = faker.Random.Int(1, predefinedGroups.Count);
+
+                while (groups.Count < rand_number_of_groups)
                 {
-                    groups.Add(group);
+                    int randomIndex = faker.Random.Int(0, predefinedGroups.Count - 1);
+                    string selectedGroup = predefinedGroups[randomIndex];
+
+                    // Check if the group has already been selected
+                    if (!selectedGroups.Contains(selectedGroup))
+                    {
+                        groups.Add(selectedGroup);
+                        selectedGroups.Add(selectedGroup);
+                    }
                 }
 
                 List<string> organizations = new List<string>();
-                string[] rand_organizations = faker.Random.WordsArray(2);
-                foreach (string organization in rand_organizations)
+                HashSet<string> selectedOrganizations = new HashSet<string>();
+
+                int rand_number_of_organizations = faker.Random.Int(1, predefinedOrganizations.Count);
+
+                while (organizations.Count < rand_number_of_organizations)
                 {
-                    organizations.Add(organization);
+                    int randomIndex = faker.Random.Int(0, predefinedOrganizations.Count - 1);
+                    string selectedOrganization = predefinedOrganizations[randomIndex];
+
+                    // Check if the organization has already been selected
+                    if (!selectedOrganizations.Contains(selectedOrganization))
+                    {
+                        organizations.Add(selectedOrganization);
+                        selectedOrganizations.Add(selectedOrganization);
+                    }
                 }
-                
+
                 var user = new UserMock(userId, username, isPublic, tags, groups, organizations, location);
                 users.Add(user);
             }
