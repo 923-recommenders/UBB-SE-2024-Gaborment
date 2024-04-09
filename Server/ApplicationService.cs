@@ -140,6 +140,7 @@ public List<FeedConfigurationDetails> getFeedConfigurationDetailsForUser(string 
         feedConfigurationService.DeleteCustomFeed(userId, customFeedId);
     }
 
+    /*
     public List<PostMock> getFeedConfiguredPosts(string userId, int feedId)
     {
         List<FeedConfigurationDetails> feedConfigurationDetails = feedService.getFeedConfigurationDetailsForUser(userId);
@@ -151,4 +152,5 @@ public List<FeedConfigurationDetails> getFeedConfigurationDetailsForUser(string 
         }
         return feedService.getPostsForFeed(userId, DateTime.Now.AddDays(-30), DateTime.Now, currentFeedConfigurations);
     }
+    */
 }
