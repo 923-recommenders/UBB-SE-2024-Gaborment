@@ -26,9 +26,10 @@ internal class ApplicationService
         FollowRepository followRepository = new FollowRepository(applicationDatabaseContext);
         followRepository.GetFollowers().ForEach(follower => Console.WriteLine(follower.getSender(), follower.getReceiver()));
         BlockRepository blockRepository = new BlockRepository(applicationDatabaseContext);
-        followService = new FollowService(blockRepository, followRepository);
-        blockService = new BlockService(blockRepository, followRepository);
-        requestService = new RequestService(requestRepository, followService, blockService);
+        UserServiceMock userServiceMock = new UserServiceMock();    
+        followService = new FollowService(blockRepository, followRepository, userServiceMock);
+        blockService = new BlockService(blockRepository, followRepository, userServiceMock);
+        requestService = new RequestService(requestRepository, followService, blockService, userServiceMock);
         userServiceMock = new UserServiceMock();
         followSuggestionEngine = new FollowSuggestionEngine(
             followService,
