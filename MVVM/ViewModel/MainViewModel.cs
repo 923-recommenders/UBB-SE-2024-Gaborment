@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using UBB_SE_2024_Gaborment.Server.LoggerUtils;
 
 namespace UBB_SE_2024_Gaborment.MVVM.ViewModel
 {
@@ -27,6 +28,7 @@ namespace UBB_SE_2024_Gaborment.MVVM.ViewModel
         public MainViewModel()
         {
             UpdateViewCommand = new UpdateViewCommand(this);
+            Console.Write(ApplicationService.Instance);
         }
     }
 }
