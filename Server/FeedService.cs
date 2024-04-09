@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UBB_SE_2024_Gaborment.Server.Mocks;
 using UBB_SE_2024_Gaborment.Server.FeedConfigurations;
 using UBB_SE_2024_Gaborment.Server.Relationships.Follow;
+using UBB_SE_2024_Gaborment.Server.Sorting;
 
 namespace UBB_SE_2024_Gaborment.Server
 {
@@ -47,6 +48,9 @@ namespace UBB_SE_2024_Gaborment.Server
                 feed = this.feedConfigurationService.GetFeed(userId, feedIdInt);
             }
 
+            List<PostMock> filteredPosts = feed.FilterPosts(resultPosts);
+
+            ISorter<PostMock> sorter = new MergeSort<PostMock>();
 
 
 

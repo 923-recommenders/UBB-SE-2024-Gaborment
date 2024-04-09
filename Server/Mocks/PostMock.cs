@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace UBB_SE_2024_Gaborment.Server.Mocks
 {
-    internal class PostMock
+    internal class PostMock : IComparable<PostMock>
     {
         Guid ID { get; set; }
         UserMock Owner { get; set; }
@@ -147,6 +147,15 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
         public List<CommentMock> GetComments()
         {
             return Comments;
+        }
+
+        public int CompareTo(PostMock other)
+        {
+            if (other == null)
+                return 1; // If the other object is null, this instance comes after it.
+
+            // Compare by PostingDate
+            return this.PostingDate.CompareTo(other.PostingDate);
         }
 
     }
