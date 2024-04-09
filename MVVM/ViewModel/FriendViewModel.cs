@@ -28,22 +28,8 @@ namespace UBB_SE_2024_Gaborment.MVVM.ViewModel
         {
             ApplicationService service = ApplicationService.Instance;
             List<UserMock> users = new List<UserMock>();
-            for (int i = 0; i < 10; i++)
-            {
-                UserMock user = new UserMock(
-                    userId: $"user_{i}",
-                    username: $"username_{i}",
-                    isPublic: true,
-                    tags: new List<string> { $"tag_{i}" },
-                    groups: new List<string> { $"group_{i}" },
-                    organizations: new List<string> { $"organization_{i}" },
-                    location: $"Location_{i}",
-                    firstname: $"Firstname_{i}",
-                    lastname: $"Lastname_{i}"
-                );
-                users.Add(user);
-                
-            }
+            
+            users = service.getPeopleUserIsFollowing("1");
             Users = new ObservableCollection<UserMock>(users);
         }
     }
