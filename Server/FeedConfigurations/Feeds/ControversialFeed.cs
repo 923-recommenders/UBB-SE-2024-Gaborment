@@ -27,7 +27,7 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
         {
             int numberOfReactions = post.GetReactions().Values.Sum();
             if (numberOfReactions < MinimumReactionCount ||
-                post.GetComments().Count < MinimumCommentCount)
+                post.GetNumberOfComments() < MinimumCommentCount)
             {
                 return 0;
             }

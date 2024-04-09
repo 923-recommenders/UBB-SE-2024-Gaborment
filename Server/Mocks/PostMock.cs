@@ -15,7 +15,6 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
         string Location { get; set; }
         string MediaType { get; set; } // a file
         List<string> Hashtags { get; set; }
-        List<CommentMock> Comments { get; set; }
         int NumberOfComments { get; set; }
         int NumberOfViews { get; set; }
         Dictionary<string, List<UserMock>> ReactionsDictionary { get; set; }
@@ -157,11 +156,6 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
                 reactions.Add(reaction, ReactionsDictionary[reaction].Count);
             }
             return reactions;
-        }
-
-        public List<CommentMock> GetComments()
-        {
-            return Comments;
         }
 
 
