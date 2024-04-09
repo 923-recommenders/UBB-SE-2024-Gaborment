@@ -1,12 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using UBB_SE_2024_Gaborment.MVVM.Model;
+using UBB_SE_2024_Gaborment.Server.LoggerUtils;
+using UBB_SE_2024_Gaborment.Server;
+using UBB_SE_2024_Gaborment.Session;
+using UBB_SE_2024_Gaborment.Server.Mocks;
+using UBB_SE_2024_Gaborment.Components;
 
 namespace UBB_SE_2024_Gaborment.MVVM.ViewModel
 {
     public class FeedViewModel : BaseViewModel
     {
+        private ObservableCollection<PostMock> Posts { get; set; }
+        public FeedViewModel()
+        {
+            Posts = new ObservableCollection<PostMock>();
+            LoadPosts();
+        }
+
+        private void LoadPosts()
+        {
+            var applicationService = ApplicationService.Instance;
+            var postsMock = applicationService.getFeedConfiguredPosts();
+            Posts = new ObservableCollection<PostMock>(postsMock);
+        }
     }
 }

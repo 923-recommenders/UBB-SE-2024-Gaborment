@@ -4,8 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:components="clr-namespace:UBB_SE_2024_Gaborment.Components"
+             xmlns:vm="clr-namespace:UBB_SE_2024_Gaborment.MVVM.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="White">
+    <UserControl.DataContext>
+        <vm:FeedViewModel />
+    </UserControl.DataContext>
     <Grid Background="WhiteSmoke">
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
@@ -24,7 +29,7 @@
                 <Button Grid.Column="0" Height="23"  VerticalAlignment="Center" 
                 Name="btnPrev" Width="40" Click="btnPrev_Click" 
                 Opacity="0.75" Content="&lt;" HorizontalAlignment="Left"/>
-                <DataGrid Style="{DynamicResource FeedDataGridStyle}" Grid.Column="1" x:Name="dataGrid" RowHeight="50" ColumnWidth="100" HeadersVisibility="Column" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}">
+                <DataGrid Style="{DynamicResource FeedDataGridStyle}" Grid.Column="1" x:Name="dataGrid" RowHeight="50" ColumnWidth="150" HeadersVisibility="Column" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
@@ -54,20 +59,19 @@
             <!--<TextBlock x:Name="feedTextBlock" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock.Text>aaaa</TextBlock.Text>
             </TextBlock>-->
-            <ScrollViewer Grid.Row="1" Margin="30 0 30 0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                <WrapPanel>
-                    <components:Post Username="aaa" Reactions="2000" Comments="2000" Views="200" TextContent="232aa"/>
-                    <components:Post Username="aaa" Reactions="2000" Comments="2000" Views="200" TextContent="232aa"/>
-
-                    <components:Post Username="aaa" Reactions="2000" Comments="2000" Views="200" TextContent="232aa"/>
-
-                    <components:Post Username="aaa" Reactions="2000" Comments="2000" Views="200" TextContent="232aa"/>
-
-                    <components:Post Username="aaa" Reactions="2000" Comments="2000" Views="200" TextContent="232aa"/>
-
-                </WrapPanel>
+            <ScrollViewer Grid.Row="1">
+                <ItemsControl ItemsSource="{Binding Posts}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding Username}" FontWeight="Bold" />
+                                <TextBlock Text="{Binding TextContent}" />
+                                <TextBlock Text="{Binding ID}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </ScrollViewer>
-
 
             <!-- Main Content Area -->
 
