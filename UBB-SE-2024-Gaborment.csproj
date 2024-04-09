@@ -7,6 +7,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <StartupObject>UBB_SE_2024_Gaborment.App</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,6 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
     <Resource Include="Fonts\Font Awesome 6 Free Regular.otf" />
     <Resource Include="Fonts\Font Awesome 6 Free Solid.otf" />
     <Resource Include="Images\gabornment.png" />

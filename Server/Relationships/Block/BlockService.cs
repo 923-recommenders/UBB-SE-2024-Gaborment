@@ -27,38 +27,38 @@ namespace UBB_SE_2024_Gaborment.Server.Relationships.Block
         ///
         public void createBlock(string sender, string receiver, string reason)
         {
-            if (_followRepository.getFollowersOf(sender).Any(f => f.getReceiver() == receiver) == true || _followRepository.getFollowingOf(receiver).Any(f => f.getSender() == sender) == true)
+            if (_followRepository.GetFollowersOf(sender).Any(f => f.getReceiver() == receiver) == true || _followRepository.GetFollowingOf(receiver).Any(f => f.getSender() == sender) == true)
             {
-                _followRepository.removeFollow(sender, receiver);
+                _followRepository.RemoveFollow(sender, receiver);
             }
             Block blockToBeAdded = new Block(sender, receiver, DateTime.Now, reason);
-            _blockRepository.addBlock(blockToBeAdded);
+            _blockRepository.AddBlock(blockToBeAdded);
         }
 
         public void RemoveBlock(string sender, string receiver)
         {
-            _blockRepository.removeBlock(sender, receiver);
+            _blockRepository.RemoveBlock(sender, receiver);
         }
 
         public List<Block> getBlocksBy(string sender)
         {
-            return _blockRepository.getBlocksBySender(sender);
+            return _blockRepository.GetBlocksBySender(sender);
         }
 
         public List<Block> getBlocksOf(string receiver)
         {
-            return _blockRepository.getBlocksOfReceiver(receiver);
+            return _blockRepository.GetBlocksOfReceiver(receiver);
         }
 
         public List<string> getBlockedUserIdsOf(string receiver)
         {
-            return _blockRepository.getBlocksOfReceiver(receiver).Select(block => block.getSender()).ToList();
+            return _blockRepository.GetBlocksOfReceiver(receiver).Select(block => block.getSender()).ToList();
         }
 
 
-        public Dictionary<string, List<Block>> getAllBlocks()
+        public List<Block> getAllBlocks()
         {
-            return _blockRepository.getBlockedByDictionary();
+            return _blockRepository.GetBlocks();
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

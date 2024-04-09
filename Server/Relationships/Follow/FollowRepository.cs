@@ -1,112 +1,158 @@
-﻿namespace UBB_SE_2024_Gaborment.Server.Relationships.Follow
+﻿using Microsoft.Data.SqlClient;
+using UBB_SE_2024_Gaborment.Database;
+
+
+namespace UBB_SE_2024_Gaborment.Server.Relationships.Follow
 {
     internal class FollowRepository
     {
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private Dictionary<string, List<Follow>> followsFromDictionary;
-        private Dictionary<string, List<Follow>> followsToDictionary;
+        private readonly ApplicationDatabaseContext _databaseHelper;
 
-        public FollowRepository()
+        public FollowRepository(ApplicationDatabaseContext databaseHelper)
         {
-            followsFromDictionary = new Dictionary<string, List<Follow>>();
-            followsToDictionary = new Dictionary<string, List<Follow>>();
+            _databaseHelper = databaseHelper;
         }
 
-        public Dictionary<string, List<Follow>> getFollowsFromDictionary()
+        public void AddFollow(Follow follow)
         {
-            return followsFromDictionary;
-        }
-
-        public Dictionary<string, List<Follow>> getFollowsToDictionary()
-        {
-            return followsToDictionary;
-        }
-
-        ///TODOS - CONSTRUCTOR FRO ALREADY FORMED DICTIONARY (maybe checks?)
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///
-        public void addFollow(Follow follow)
-        {
-            // Check if a list exists for the sender and the receiver. 
-            // If it does not exist for any of them, create it
-            if (!followsFromDictionary.ContainsKey(follow.getSender()))
+            using (var connection = _databaseHelper.GetConnection())
             {
-                followsFromDictionary[follow.getSender()] = new List<Follow>();
-            }
-            if (!followsToDictionary.ContainsKey(follow.getReceiver()))
-            {
-                followsToDictionary[follow.getReceiver()] = new List<Follow>();
-            }
-
-            // Check if the follow already exists for the sender
-            List<Follow> senderFollows = followsFromDictionary[follow.getSender()];
-            bool followExists = senderFollows.Any(f => f.getReceiver() == follow.getReceiver());
-            if (!followExists)
-            {
-                // Add it in the followsFromDictionary at the sender key
-                followsFromDictionary[follow.getSender()].Add(follow);
-                // Add it in the followsToDictionary at the receiver key
-                followsToDictionary[follow.getReceiver()].Add(follow);
-            }
-        }
-
-        public void removeFollow(string sender, string receiver)
-        {
-            // Check if the sender exists in followsFromDictionary
-            if (followsFromDictionary.ContainsKey(sender) && followsToDictionary.ContainsKey(receiver))
-            {
-                List<Follow> senderFollows = followsFromDictionary[sender];
-
-                // Check if there are follows from this sender to the receiver
-                bool followExists = senderFollows.Any(f => f.getReceiver() == receiver);
-
-                if (followExists)
+                connection.Open();
+                using (var command = new SqlCommand("INSERT INTO Follows (Sender, Receiver, IsCloseFriend, ExpirationTimeStamp, Description) VALUES (@Sender, @Receiver, @IsCloseFriend, @ExpirationTimeStamp, @Description)", connection))
                 {
-                    // Remove the Follow from the sender key from followsFromDictionary
-                    followsFromDictionary[sender].RemoveAll(f => f.getReceiver() == receiver);
-
-                    // Remove the follow from the receiver key from followsToDictionary 
-                    followsToDictionary[receiver].RemoveAll(f => f.getSender() == sender);
+                    command.Parameters.AddWithValue("@Sender", follow.getSender());
+                    command.Parameters.AddWithValue("@Receiver", follow.getReceiver());
+                    command.Parameters.AddWithValue("@IsCloseFriend", follow.getCloseFriendStatus());
+                    command.Parameters.AddWithValue("@ExpirationTimeStamp", follow.getExpirationTimeStamp());
+                    command.Parameters.AddWithValue("@Description", follow.getDescription());
+                    command.ExecuteNonQuery();
                 }
             }
         }
 
-        public List<Follow> getFollowersOf(string sender)
+        public void RemoveFollow(string sender, string receiver)
         {
-            if (followsFromDictionary.ContainsKey(sender))
+            using (var connection = _databaseHelper.GetConnection())
             {
-                return followsFromDictionary[sender];
-            }
-            else
-            {
-                return new List<Follow>(); // Return an empty list if no following found
+                connection.Open();
+                using (var command = new SqlCommand("DELETE FROM Follows WHERE Sender = @Sender AND Receiver = @Receiver", connection))
+                {
+                    command.Parameters.AddWithValue("@Sender", sender);
+                    command.Parameters.AddWithValue("@Receiver", receiver);
+                    command.ExecuteNonQuery();
+                }
             }
         }
 
-        public List<Follow> getFollowingOf(string receiver)
+        public List<Follow> GetFollowersOf(string sender)
         {
-            if (followsToDictionary.ContainsKey(receiver))
+            var follows = new List<Follow>();
+            using (var connection = _databaseHelper.GetConnection())
             {
-                return followsToDictionary[receiver];
+                connection.Open();
+                using (var command = new SqlCommand("SELECT Receiver, IsCloseFriend, ExpirationTimeStamp, Description FROM Follows WHERE Sender = @Sender", connection))
+                {
+                    command.Parameters.AddWithValue("@Sender", sender);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            follows.Add(new Follow(
+                                sender,
+                                reader.GetString(0),
+                                reader.GetBoolean(1),
+                                reader.GetDateTime(2),
+                                reader.GetString(3)
+                            ));
+                        }
+                    }
+                }
             }
-            else
-            {
-                return new List<Follow>(); // Return an empty list if no followers found
-            }
+            return follows;
         }
 
-        public Follow getFollow(string sender, string receiver)
+        public List<Follow> GetFollowingOf(string receiver)
         {
-            if (followsFromDictionary.ContainsKey(sender))
+            var follows = new List<Follow>();
+            using (var connection = _databaseHelper.GetConnection())
             {
-                return followsFromDictionary[sender].FirstOrDefault(f => f.getReceiver() == receiver);
+                connection.Open();
+                using (var command = new SqlCommand("SELECT Sender, IsCloseFriend, ExpirationTimeStamp, Description FROM Follows WHERE Receiver = @Receiver", connection))
+                {
+                    command.Parameters.AddWithValue("@Receiver", receiver);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            follows.Add(new Follow
+                            (
+                                reader.GetString(0),
+                                receiver,
+                                reader.GetBoolean(1),
+                                reader.GetDateTime(2),
+                                reader.GetString(3)
+                            ));
+                        }
+                    }
+                }
             }
-            else
+            return follows;
+        }
+
+
+        public List<Follow> GetFollowers()
+        {
+            var follows = new List<Follow>();
+            using (var connection = _databaseHelper.GetConnection())
             {
-                return null; // Return null if the sender doesn't exist or no follow relationship found
+                connection.Open();
+                using (var command = new SqlCommand("SELECT Sender, Receiver, IsCloseFriend, ExpirationTimeStamp, Description FROM Follows", connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            follows.Add(new Follow
+                            (
+                                reader.GetString(0),
+                                reader.GetString(1),
+                                reader.GetBoolean(2),
+                                reader.GetDateTime(3),
+                                reader.GetString(4)
+                            ));
+                        }
+                    }
+                }
             }
+            return follows;
+        }
+
+        public Follow GetFollow(string sender, string receiver)
+        {
+            Follow follow = null;
+            using (var connection = _databaseHelper.GetConnection())
+            {
+                connection.Open();
+                using (var command = new SqlCommand("SELECT Sender, Receiver, IsCloseFriend, ExpirationTimeStamp, Description FROM Follows WHERE Sender = @Sender AND Receiver = @Receiver", connection))
+                {
+                    command.Parameters.AddWithValue("@Sender", sender);
+                    command.Parameters.AddWithValue("@Receiver", receiver);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            follow = new Follow(
+                                reader.GetString(0),
+                                reader.GetString(1),
+                                reader.GetBoolean(2),
+                                reader.GetDateTime(3),
+                                reader.GetString(4)
+                            );
+                        }
+                    }
+                }
+            }
+            return follow;
         }
     }
-
 }
