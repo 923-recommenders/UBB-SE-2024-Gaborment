@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:UBB_SE_2024_Gaborment="clr-namespace:UBB_SE_2024_Gaborment" x:Class="UBB_SE_2024_Gaborment.MVVM.View.FriendView" 
+             xmlns:UBB_SE_2024_Gaborment="clr-namespace:UBB_SE_2024_Gaborment" xmlns:viewmodel="clr-namespace:UBB_SE_2024_Gaborment.MVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:FriendViewModel}" x:Class="UBB_SE_2024_Gaborment.MVVM.View.FriendView" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="Beige">
@@ -27,14 +27,24 @@
             <!-- Main Content Area -->
             <Border Grid.Column="1" Background="White">
                 <Grid>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="Content"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="Content"/>
 
-                        <!-- Display Friends, Following, Followers, Blocked, or Requests based on selection -->
-                        <!-- You will populate this area dynamically based on user selection from the left side menu -->
-                    </StackPanel>
+                            <!-- Display UserCards for each user -->
+                            <!-- You will populate this area dynamically based on user selection from the left side menu -->
+                            <ItemsControl ItemsSource="{Binding Users}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <UBB_SE_2024_Gaborment:UserCard FirstName="{Binding firstname}" LastName="{Binding lastname}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </ScrollViewer>
                 </Grid>
             </Border>
+
 
             <!-- Recent Friend Requests Section -->
             <StackPanel Grid.Column="2" MinWidth="200">
