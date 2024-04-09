@@ -67,34 +67,45 @@ namespace UBB_SE_2024_Gaborment.Server.Relationships.Follow
                 }
             }
         }
-        
+
         public List<Follow> getFollowersOf(string sender)
         {
-            return _followRepository.GetFollowersOf(sender);
+            DateTime now = DateTime.Now;
+            return _followRepository.GetFollowersOf(sender).Where(follow => follow.getExpirationTimeStamp() >= now)
+                .ToList();
         }
 
         public List<string> getCloseFriendsOf(string sender)
         {
+            DateTime now = DateTime.Now;
             return _followRepository.GetFollowersOf(sender)
-                            .Where(follow => follow.getCloseFriendStatus() == true)
-                            .Select(follow => follow.getReceiver())
-                            .ToList();  
+                .Where(follow => follow.getCloseFriendStatus() && follow.getExpirationTimeStamp() >= now)
+                .Select(follow => follow.getReceiver())
+                .ToList();
         }
 
         public List<Follow> getFollowingOf(string receiver)
         {
-            return _followRepository.GetFollowingOf(receiver);
+            DateTime now = DateTime.Now;
+            return _followRepository.GetFollowingOf(receiver)
+                .Where(follow => follow.getExpirationTimeStamp() >= now)
+                .ToList();
         }
 
         public List<string> getFollowingUserIdsOf(string receiver)
         {
-            return _followRepository.GetFollowingOf(receiver).Select(follower => follower.getSender()).ToList();
+            DateTime now = DateTime.Now;
+            return _followRepository.GetFollowingOf(receiver)
+                .Where(follow => follow.getExpirationTimeStamp() >= now)
+                .Select(follower => follower.getSender())
+                .ToList();
         }
 
-        
         public Dictionary<string, List<Follow>> getAllFollowers()
         {
+            DateTime now = DateTime.Now;
             return _followRepository.GetFollowers()
+                .Where(follow => follow.getExpirationTimeStamp() >= now)
                 .GroupBy(follow => follow.getSender())
                 .ToDictionary(group => group.Key, group => group.ToList());
         }
@@ -103,9 +114,13 @@ namespace UBB_SE_2024_Gaborment.Server.Relationships.Follow
 
         public List<UserMock> getFollowersOfAsUserList(string sender)
         {
-            List<string> followList = _followRepository.GetFollowersOf(sender).Select(follower => follower.getReceiver()).ToList(); ;
+            DateTime now = DateTime.Now;
+            List<string> followList = _followRepository.GetFollowersOf(sender)
+                .Where(follow => follow.getExpirationTimeStamp() >= now)
+                .Select(follow => follow.getReceiver())
+                .ToList();
             List<UserMock> followListUser = new List<UserMock>();
-            foreach (string user in followList) 
+            foreach (string user in followList)
             {
                 UserMock FollowedUser = _userServiceMock.GetUserById(user);
                 followListUser.Add(FollowedUser);
@@ -115,10 +130,11 @@ namespace UBB_SE_2024_Gaborment.Server.Relationships.Follow
 
         public List<UserMock> getCloseFriendsOfAsUserList(string sender)
         {
+            DateTime now = DateTime.Now;
             List<string> ClosefollowList = _followRepository.GetFollowersOf(sender)
-                            .Where(follow => follow.getCloseFriendStatus() == true)
-                            .Select(follow => follow.getReceiver())
-                            .ToList();
+                .Where(follow => follow.getCloseFriendStatus() && follow.getExpirationTimeStamp() >= now)
+                .Select(follow => follow.getReceiver())
+                .ToList();
             List<UserMock> followListUser = new List<UserMock>();
             foreach (string user in ClosefollowList)
             {
@@ -130,7 +146,11 @@ namespace UBB_SE_2024_Gaborment.Server.Relationships.Follow
 
         public List<UserMock> getFollowingOfAsUserList(string receiver)
         {
-            List<string> followList = _followRepository.GetFollowingOf(receiver).Select(follower => follower.getSender()).ToList();
+            DateTime now = DateTime.Now;
+            List<string> followList = _followRepository.GetFollowingOf(receiver)
+                .Where(follow => follow.getExpirationTimeStamp() >= now)
+                .Select(follow => follow.getSender())
+                .ToList();
             List<UserMock> followListUser = new List<UserMock>();
             foreach (string user in followList)
             {
@@ -139,5 +159,7 @@ namespace UBB_SE_2024_Gaborment.Server.Relationships.Follow
             }
             return followListUser;
         }
+
     }
 }
+
