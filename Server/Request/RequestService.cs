@@ -12,7 +12,6 @@ namespace UBB_SE_2024_Gaborment.Server.Request
         private BlockService _blockService;
         private UserServiceMock _userServiceMock;
              
-
         public RequestService(RequestRepository _requestRepository, FollowService _followService, BlockService _blockService)
         {
             this._requestRepository = _requestRepository;
@@ -81,7 +80,6 @@ namespace UBB_SE_2024_Gaborment.Server.Request
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///
 
-        //!
         public List<UserMock> getRequestOfAsUserList(string sender)
         {
             List<string> requestList = _requestRepository.GetRequestsOf(sender).Select(request => request.getReceiver()).ToList();
@@ -94,7 +92,6 @@ namespace UBB_SE_2024_Gaborment.Server.Request
             return followListUser;
         }
 
-        //!
         public List<UserMock> getRequestToAsUserList(string receiver)
         {
             List<string> requestList = _requestRepository.GetRequestsTo(receiver).Select(request => request.getSender()).ToList();
