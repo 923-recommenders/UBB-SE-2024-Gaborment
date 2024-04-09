@@ -51,7 +51,6 @@ internal class ApplicationService
             return _instance;
         }
     }
-
     public List<UserMock> getRequestsUserSent(string userId)
     {
         return requestService.getRequestOfAsUserList(userId);
