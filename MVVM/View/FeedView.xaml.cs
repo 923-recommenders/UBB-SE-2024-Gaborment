@@ -108,8 +108,8 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
             {
                 if (feed.id == buttonName)
                 {
-                    feedTextBlock.Text = feed.content;
-                    break;
+                    //feedTextBlock.Text = feed.content;
+                    //break;
                 }
             }
         }
