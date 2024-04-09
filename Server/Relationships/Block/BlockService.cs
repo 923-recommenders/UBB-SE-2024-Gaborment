@@ -35,7 +35,9 @@ namespace UBB_SE_2024_Gaborment.Server.Relationships.Block
         
         public void createBlock(string sender, string receiver, string reason)
         {
-            if (_followRepository.GetFollowersOf(sender).Any(f => f.getReceiver() == receiver) == true || _followRepository.GetFollowingOf(receiver).Any(f => f.getSender() == sender) == true || (!_blockRepository.GetBlocksBySender(sender).Any(b => b.getReceiver() == receiver)))
+            if (_followRepository.GetFollowersOf(sender)
+                .Any(f => f.getReceiver() == receiver) == true || _followRepository.GetFollowingOf(receiver)
+                .Any(f => f.getSender() == sender) == true)
             {
                 _followRepository.RemoveFollow(sender, receiver);
             }
