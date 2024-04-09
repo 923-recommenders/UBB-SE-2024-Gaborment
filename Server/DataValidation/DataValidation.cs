@@ -13,10 +13,12 @@ namespace UBB_SE_2024_Gaborment.Server.DataValidation
         private static Regex badWordsRegularExpression;
         private static Regex emailRegularExpression;
         private static Regex phoneNumberRegularExpression;
-        private static readonly string badWordsFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "bad_words.txt");
+        private readonly string badWordsFilePath;
         public DataValidation()
         ///constructor for a DataValidation object
         {
+            badWordsFilePath = GenerateDefaultFilePath();
+            
             if (!File.Exists(badWordsFilePath))
             {
               
@@ -44,6 +46,11 @@ namespace UBB_SE_2024_Gaborment.Server.DataValidation
             badWordsRegularExpression = new Regex(@"\b(" + string.Join("|", badWordsList.Select(Regex.Escape)) + @")\b", RegexOptions.IgnoreCase);
             emailRegularExpression = new Regex(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
             phoneNumberRegularExpression = new Regex(@"^\+?\d{10,}$");
+        }
+
+        private string GenerateDefaultFilePath()
+        {
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BadWords.txt");
         }
 
         private string SanitizeForBadWords(string inputFromUser)
