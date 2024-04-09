@@ -16,13 +16,16 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
         string MediaType { get; set; } // a file
         List<string> Hashtags { get; set; }
         List<CommentMock> Comments { get; set; }
+        int NumberOfComments { get; set; }
         int NumberOfViews { get; set; }
         Dictionary<string, List<UserMock>> ReactionsDictionary { get; set; }
         public DateTime PostingDate { get; set; }
 
 
         public PostMock(UserMock Owner, string Text, string Location,
-            string MediaType, List<string> Hashtags, DateTime PostingDate)
+            string MediaType, List<string> Hashtags, int NumberOfViews,
+            int NumberOfComments, Dictionary<string, List<UserMock>> Reactions,
+            DateTime PostingDate)
         {
             this.ID = Guid.NewGuid();
             this.Owner = Owner;
@@ -30,7 +33,9 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
             this.Location = Location;
             this.MediaType = MediaType;
             this.Hashtags = Hashtags;
-            this.ReactionsDictionary = new Dictionary<string, List<UserMock>>();
+            this.NumberOfViews = NumberOfViews;
+            this.NumberOfComments = NumberOfComments;
+            this.ReactionsDictionary = Reactions;
             this.PostingDate = PostingDate;
         }
         public PostMock()
@@ -134,6 +139,16 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
             this.NumberOfViews = NumberOfViews;
         }
 
+        public int GetNumberOfComments()
+        {
+            return NumberOfComments;
+        }
+
+        public void SetNumberOfComments(int NumberOfComments)
+        {
+            this.NumberOfComments = NumberOfComments;
+        }
+
         public Dictionary<string, int> GetReactions()
         {
             Dictionary<string, int> reactions = new Dictionary<string, int>();
@@ -149,6 +164,7 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
             return Comments;
         }
 
+
         public int CompareTo(PostMock other)
         {
             if (other == null)
@@ -157,6 +173,5 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
             // Compare by PostingDate
             return this.PostingDate.CompareTo(other.PostingDate);
         }
-
     }
 }
