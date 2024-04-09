@@ -59,7 +59,6 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
          if (!userFeeds.ContainsKey(userId))
          {
              userFeeds[userId] = new Dictionary<int, CustomFeed>();
-             Console.WriteLine($"added a new user {userId}");
          }
 
          CustomFeedBuilder customFeedBuilder = new CustomFeedBuilder();

@@ -21,8 +21,7 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
         public DateTime PostingDate { get; set; }
 
 
-        public PostMock(UserMock Owner, string Text, string Location,
-            string MediaType, List<string> Hashtags, DateTime PostingDate)
+        public PostMock(UserMock Owner, string Text, string Location, string MediaType, List<string> Hashtags, DateTime PostingDate)
         {
             this.ID = Guid.NewGuid();
             this.Owner = Owner;
@@ -30,17 +29,36 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
             this.Location = Location;
             this.MediaType = MediaType;
             this.Hashtags = Hashtags;
+            this.Comments = new List<CommentMock>();
+            this.NumberOfViews = 0;
             this.ReactionsDictionary = new Dictionary<string, List<UserMock>>();
             this.PostingDate = PostingDate;
         }
+
+        public PostMock(Guid iD, UserMock owner, string text, string location, string mediaType, List<string> hashtags, List<CommentMock> comments, int numberOfViews, Dictionary<string, List<UserMock>> reactionsDictionary, DateTime postingDate)
+        {
+            ID = iD;
+            Owner = owner;
+            Text = text;
+            Location = location;
+            MediaType = mediaType;
+            Hashtags = hashtags;
+            Comments = comments;
+            NumberOfViews = numberOfViews;
+            ReactionsDictionary = reactionsDictionary;
+            PostingDate = postingDate;
+        }
+
         public PostMock()
         {
             this.ID = Guid.NewGuid();
-            this.Owner = null;
+            this.Owner = new UserMock();
             this.Text = "";
             this.Location = "";
             this.MediaType = "";
             this.Hashtags = new List<string>();
+            this.Comments = new List<CommentMock>();
+            this.NumberOfViews = 0;
             this.ReactionsDictionary = new Dictionary<string, List<UserMock>>();
             this.PostingDate = DateTime.Now;
         }
@@ -149,7 +167,7 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
             return Comments;
         }
 
-        public int CompareTo(PostMock other)
+        public int CompareTo(PostMock? other)
         {
             if (other == null)
                 return 1; // If the other object is null, this instance comes after it.

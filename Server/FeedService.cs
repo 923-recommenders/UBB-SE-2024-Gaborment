@@ -16,13 +16,15 @@ namespace UBB_SE_2024_Gaborment.Server
         private FeedConfigurationService feedConfigurationService;
         private FollowService followService;
         private FeedFactory feedFactory;
+        private Logger logger;
 
-        public FeedService(PostServiceMock postsService, FeedConfigurationService feedConfigurationService, FollowService followService)
+        public FeedService(PostServiceMock postsService, FeedConfigurationService feedConfigurationService, FollowService followService, Logger logger)
         {
             this.postsService = postsService;
             this.feedConfigurationService = feedConfigurationService;
             this.followService = followService;
             this.feedFactory = new FeedFactory(followService);
+            this.logger = logger;
         }
 
         public List<PostMock> getPostsForFeed(string userId, DateTime startDate, DateTime endDate, FeedConfigurationDetails feedConfigurationDetails)
