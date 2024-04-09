@@ -27,12 +27,15 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
         List<Button> myList = new List<Button>();
         private int feedCount;
         List<FeedTemp> feedList= new List<FeedTemp>();
+        List<string> posts = new List<string>();
         public FeedView()
         {
             InitializeComponent();
             feedCount = getAllFeedsCount();
             setFeeds();
-            this.myList = GetData();
+            this.myList = GetButtonData();
+            this.posts= feedList[0].posts;
+
             dataGrid.ItemsSource = myList.Take(numberOfRecPerPage);
         }
 
@@ -59,6 +62,8 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
         {
             public string id { get; set; }
             public string content { get; set; }
+
+            public List<string> posts { get; set; }
         }
 
         private void setFeeds()
@@ -67,11 +72,13 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
                 FeedTemp feed = new FeedTemp();
                 feed.id = "Feed"+i.ToString();
                 feed.content = feed.id;
-                feedList.Add(feed); }
+                feed.posts = [$"Feed{i} post"];
+                feedList.Add(feed);
+                }
         }
 
 
-        private List<Button> GetData()
+        private List<Button> GetButtonData()
         {
             List<Button> buttonList = new List<Button>();
             foreach(FeedTemp feed in feedList)
@@ -108,8 +115,12 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
             {
                 if (feed.id == buttonName)
                 {
+                    posts = feed.posts;
+                    break;
+
                     //feedTextBlock.Text = feed.content;
                     //break;
+
                 }
             }
         }
