@@ -8,8 +8,9 @@ namespace UBB_SE_2024_Gaborment.MVVM.Model
 {
     public class UserModel
     {
-        public string Username { get; set; }
+        public string LastName { get; set; }
         public string FirstName { get; set; }
         public string username {  get; set; }
+        public string userId {  get; set; }
     }
 }
