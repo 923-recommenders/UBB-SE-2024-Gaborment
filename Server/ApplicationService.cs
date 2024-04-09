@@ -76,8 +76,8 @@ internal class ApplicationService
         //This is for the basic case
         //DateTime startDate = DateTime.Now.AddHours(-3);
         //DateTime endDate = DateTime.Now;
-        DateTime startDate = DateTime.Now.AddDays(-2);
-        DateTime endDate = DateTime.Now.AddDays(-1);
+        DateTime startDate = DateTime.Now.AddYears(-2);
+        DateTime endDate = DateTime.Now;
 
         var session = ApplicationSession.Instance;
         //Temporary, then we use getfeedconfiguredposts for custom feed or getpostsforfeed
