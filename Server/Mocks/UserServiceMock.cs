@@ -18,5 +18,10 @@
         {
             return userRepository.GetUserById(userId);
         }
+
+        public List<UserMock> searchUsers(string searchToken)
+        {
+            return new List<UserMock>();
+        }
     }
 }
