@@ -9,7 +9,7 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
     internal abstract class FeedConfiguration
     {
         protected int ID { get; set; }
-        protected String Name { get; set; }
+        protected string Name { get; set; }
         protected int ReactionThreshold { get; set; }
    
         public int GetID()
@@ -21,12 +21,12 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
             this.ID = ID;
         }
 
-        public String GetName()
+        public string GetName()
         {
             return Name;
         }
 
-        public void SetName(String Name)
+        public void SetName(string Name)
         {
             this.Name = Name;
         }

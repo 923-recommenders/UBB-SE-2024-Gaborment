@@ -9,7 +9,7 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
     internal class FeedFactory
     {
         FollowService followService;
-        List<String> closeFriends;
+        List<string> closeFriends;
 
         public FeedFactory(FollowService followService)
         {
