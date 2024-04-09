@@ -81,6 +81,8 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks.UserGeneration
 
             return posts;
         }
+
+       
     }
 
     //class Program
@@ -104,7 +106,7 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks.UserGeneration
     //            {
     //                Console.WriteLine($"{reaction}: {post.GetReactions()[reaction]}");
     //            }
-               
+
     //        }
     //    }
     //}
