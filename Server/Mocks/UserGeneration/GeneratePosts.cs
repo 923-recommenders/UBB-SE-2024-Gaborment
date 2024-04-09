@@ -83,29 +83,29 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks.UserGeneration
         }
     }
 
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            List<UserMock> users = GenerateUsers.GenerateRandomUsers(10);
-            List<PostMock> posts = GeneratePosts.generateRandomPosts(20, users);
-            foreach (PostMock post in posts)
-            {
-                Console.WriteLine("-------------------------------------------------");
-                Console.WriteLine($"Post ID: {post.GetID()}");
-                Console.WriteLine($"Owner: {post.GetOwner().username}");
-                Console.WriteLine($"Text: {post.GetText()}");
-                Console.WriteLine($"Location: {post.GetLocation()}");
-                Console.WriteLine($"Media Type: {post.GetMediaType()}");
-                Console.WriteLine($"Number of Views: {post.GetViews()}");
-                Console.WriteLine($"Number of comments: {post.GetNumberOfComments()}");
-                Console.WriteLine("Reactions: ");
-                foreach (string reaction in post.GetReactions().Keys)
-                {
-                    Console.WriteLine($"{reaction}: {post.GetReactions()[reaction]}");
-                }
+    //class Program
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        List<UserMock> users = GenerateUsers.GenerateRandomUsers(10);
+    //        List<PostMock> posts = GeneratePosts.generateRandomPosts(20, users);
+    //        foreach (PostMock post in posts)
+    //        {
+    //            Console.WriteLine("-------------------------------------------------");
+    //            Console.WriteLine($"Post ID: {post.GetID()}");
+    //            Console.WriteLine($"Owner: {post.GetOwner().username}");
+    //            Console.WriteLine($"Text: {post.GetText()}");
+    //            Console.WriteLine($"Location: {post.GetLocation()}");
+    //            Console.WriteLine($"Media Type: {post.GetMediaType()}");
+    //            Console.WriteLine($"Number of Views: {post.GetViews()}");
+    //            Console.WriteLine($"Number of comments: {post.GetNumberOfComments()}");
+    //            Console.WriteLine("Reactions: ");
+    //            foreach (string reaction in post.GetReactions().Keys)
+    //            {
+    //                Console.WriteLine($"{reaction}: {post.GetReactions()[reaction]}");
+    //            }
                
-            }
-        }
-    }
+    //        }
+    //    }
+    //}
 }
