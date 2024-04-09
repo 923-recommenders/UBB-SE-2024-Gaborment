@@ -56,15 +56,8 @@
             </TextBlock>-->
             <ScrollViewer Grid.Row="1" Margin="30 0 30 0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <WrapPanel>
-                    <components:Post Username="aaa" Reactions="2000" Comments="2000" Views="200" TextContent="232aa"/>
-                    <components:Post Username="aaa" Reactions="2000" Comments="2000" Views="200" TextContent="232aa"/>
-
-                    <components:Post Username="aaa" Reactions="2000" Comments="2000" Views="200" TextContent="232aa"/>
-
-                    <components:Post Username="aaa" Reactions="2000" Comments="2000" Views="200" TextContent="232aa"/>
-
-                    <components:Post Username="aaa" Reactions="2000" Comments="2000" Views="200" TextContent="232aa"/>
-
+                    <!--<components:Post Username="aaa" Reactions="2000" Comments="2000" Views="200" TextContent="232aa" Margin="10 10 10 10"/>-->
+                    <!--<components:Post Content="{Binding}"/>-->
                 </WrapPanel>
             </ScrollViewer>
 
