@@ -76,39 +76,4 @@ internal class ApplicationService
         return feedService.getFeedConfigurationDetailsForUser(userId);
     }
 
-    public List<UserMock> getRequestsUserSent(string userId)
-    {
-        return requestService.getRequestOfAsUserList(userId);
-    }
-
-    public List<UserMock> getRequestsUserReceived(string userId)
-    {
-        return requestService.getRequestToAsUserList(userId);
-    }
-
-    public List<UserMock> getPeopleUserIsFollowing(string userId)
-    {
-        return followService.getFollowersOfAsUserList(userId);
-    }
-
-    public List<UserMock> getPeopleUserIsBeingFollowedBy(string userId)
-    {
-        return followService.getFollowingOfAsUserList(userId);
-    }
-
-    public List<UserMock> getAllCloseFriendsOfAnUser(string userId)
-    {
-        return followService.getCloseFriendsOfAsUserList(userId);
-    }
-
-    public List<UserMock> getPeopleUserBlocked(string userId)
-    {
-        return blockService.getBlocksByAsUserList(userId);
-    }
-
-    public List<UserMock> getPeopleUserIsBeingBlockedBy(string userId)
-    {
-        return blockService.getBlocksOfAsUserList(userId);
-    }
-
 }
