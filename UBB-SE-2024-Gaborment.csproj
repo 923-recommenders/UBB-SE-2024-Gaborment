@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TarGetFramework>net8.0-windows</TarGetFramework>
     <RootNamespace>UBB_SE_2024_Gaborment</RootNamespace>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -11,12 +11,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Fonts\Font Awesome 6 Free Regular.otf" />
+    <None Remove="Fonts\Font Awesome 6 Free Solid.otf" />
+    <None Remove="Images\gabornment.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="ResourceDictionary.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Server\Sorting\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
+    <Resource Include="Fonts\Font Awesome 6 Free Regular.otf" />
+    <Resource Include="Fonts\Font Awesome 6 Free Solid.otf" />
+    <Resource Include="Images\gabornment.png" />
+    <Resource Include="ResourceDictionary.xaml" />
   </ItemGroup>
 
 </Project>

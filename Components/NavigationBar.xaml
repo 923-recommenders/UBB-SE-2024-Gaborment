@@ -41,9 +41,7 @@
             </Border>
             <!-- Image -->
             <Image Grid.Column="4" MaxHeight="60" MaxWidth="60" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Image.Source>
-                    <BitmapImage DecodePixelWidth="60" UriSource="/Images/gabornment.png" />
-                </Image.Source>
+                <Image.Source>/Images/gabornment.png</Image.Source>
             </Image>
         </Grid>
     </Border>

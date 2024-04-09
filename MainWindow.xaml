@@ -16,7 +16,7 @@
 
         <!--Header-->
         <Grid Grid.Row="0">
-            <components:NavigationBar />
+            <components:NavigationBar Loaded="NavigationBar_Loaded" />
         </Grid>
 
         <!-- Main Content Section -->
