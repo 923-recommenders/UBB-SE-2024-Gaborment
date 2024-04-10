@@ -62,7 +62,36 @@ namespace UBB_SE_2024_Gaborment.Server.FollowSuggestions
                 followSuggestions.Add(followSuggestion);
             }
 
+            if (followSuggestions.Count() == 0)
+            {
+                return GetFollowSuggestionsWithSameLocation(userId);
+            }
 
+            followSuggestions = GetCustomSortedFollowSuggestions(followSuggestions, accountType);
+
+            return followSuggestions;
+        }
+
+        private List<FollowSuggestion> GetFollowSuggestionsWithSameLocation(string userId)
+        {
+            List<FollowSuggestion> followSuggestions = new List<FollowSuggestion>();
+            var currentUser = userService.GetUserById(userId);
+            foreach(var user in userService.GetAllUsers())
+            {
+                if (user.location == currentUser.location)
+                {
+                    followSuggestions.Add(
+                        new FollowSuggestion(
+                            user.userId,
+                            user.username,
+                            0,
+                            0,
+                            0,
+                            0,
+                            user.location
+                    ));
+                }
+            }
             return followSuggestions;
         }
 
