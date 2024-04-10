@@ -155,6 +155,13 @@ public List<FeedConfigurationDetails> getFeedConfigurationDetailsForUser(string 
         feedConfigurationService.DeleteCustomFeed(userId, customFeedId);
     }
 
+    public List<FollowSuggestion> GetFollowSuggestionsForUser()
+    {
+        var session = ApplicationSession.Instance;
+        return followSuggestionEngine.GetFollowSuggestionsForUser(session.CurrentUserId, AccountType.CASUAL_ACCOUNT);
+    }
+
+
     /*
     public List<PostMock> getFeedConfiguredPosts(string userId, int feedId)
     {

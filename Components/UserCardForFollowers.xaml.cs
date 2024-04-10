@@ -41,5 +41,10 @@ namespace UBB_SE_2024_Gaborment
         }
 
         public static readonly DependencyProperty LastNameProperty = DependencyProperty.Register("LastName", typeof(string), typeof(UserCardForFollowers));
+
+        private void UnfollowButtonFriends_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

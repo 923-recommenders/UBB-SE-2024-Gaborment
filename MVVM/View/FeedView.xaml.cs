@@ -50,7 +50,8 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
                 if (feedConfig.feedId != -1)
                 {
                     button.Content = feedConfig.feedName;
-                    button.Name = feedConfig.feedId.ToString();
+                    /*button.Name = feedConfig.feedId.ToString();*/
+                    button.Name = feedConfig.feedName;
                 }
                 else
                 {
@@ -103,7 +104,15 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
             string[] parts = nameString.Split(':');
             string tempButtonName = parts[1];
             parts = tempButtonName.Split(' ');
-            string buttonId = $"{parts[1]}{parts[2]}";
+            string buttonId;
+            if (parts.Length == 3)
+                buttonId = $"{parts[1]}{parts[2]}";
+            else
+            {
+                string temp = parts[1];
+                startIndex = temp.IndexOf("d");
+                buttonId = temp.Substring(startIndex+1);
+            }
 
             var applicationService = ApplicationService.Instance;
             var feedConfigurationDetails = applicationService.getFeedConfigurationDetailsForUser(ApplicationSession.Instance.CurrentUserId);
@@ -190,7 +199,17 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
 
         }
 
+        private void removeFeedButton_Click(object sender, RoutedEventArgs e)
+        {
+            var applicationSession = ApplicationSession.Instance;
+            var applicationService = ApplicationService.Instance;
+            if(applicationSession.CurrentFeedConfiguration.feedType == Server.FeedConfigurations.FeedTypes.CustomFeed)
+            {
+                applicationService.deleteCustomFeed(applicationSession.CurrentUserId, applicationSession.CurrentFeedConfiguration.feedId);
 
-
+                this.myList = GetButtonData();
+                dataGrid.ItemsSource = myList.Take(numberOfRecPerPage);
+            }
+        }
     }
 }

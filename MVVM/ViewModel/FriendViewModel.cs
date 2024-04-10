@@ -12,6 +12,8 @@ using UBB_SE_2024_Gaborment.Server.Mocks;
 using UBB_SE_2024_Gaborment.Server.Relationships.Follow;
 using Microsoft.VisualBasic.ApplicationServices;
 using System.Windows.Input;
+using UBB_SE_2024_Gaborment.Server.FollowSuggestions;
+using System.Windows;
 
 
 namespace UBB_SE_2024_Gaborment.MVVM.ViewModel
@@ -19,6 +21,7 @@ namespace UBB_SE_2024_Gaborment.MVVM.ViewModel
     internal class FriendViewModel : BaseViewModel
     {
         public ObservableCollection<UserMock> Users { get; set; }
+        public ObservableCollection<UserMock> UserSuggestionTrue { get; set; }
 
         private string _currentState;
         public string CurrentState
@@ -33,6 +36,7 @@ namespace UBB_SE_2024_Gaborment.MVVM.ViewModel
 
         public FriendViewModel()
         {
+            UserSuggestionTrue = new ObservableCollection<UserMock>();
             Users = new ObservableCollection<UserMock>();
             CurrentState = "Friends"; // Set the initial state
         }
@@ -69,6 +73,18 @@ namespace UBB_SE_2024_Gaborment.MVVM.ViewModel
             foreach (var user in users)
             {
                 Users.Add(user);
+            }
+
+        }
+        public void LoadFollowSuggestions()
+        {
+            ApplicationService service = ApplicationService.Instance;
+            List<FollowSuggestion> followSuggestions = service.GetFollowSuggestionsForUser();
+
+            UserSuggestionTrue.Clear();
+            foreach (var suggestion in followSuggestions.Take(3)) 
+            {
+                UserSuggestionTrue.Add(new UserMock { userId = suggestion.userId, username = suggestion.username});
             }
         }
     }

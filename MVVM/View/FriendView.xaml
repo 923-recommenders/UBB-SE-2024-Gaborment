@@ -7,6 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="Beige">
+
+
     <Grid Background="WhiteSmoke">
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -31,8 +33,6 @@
                         <StackPanel>
                             <TextBlock FontWeight="Bold" Text="Content"/>
 
-                            <!-- Display UserCards for each user -->
-                            <!-- You will populate this area dynamically based on user selection from the left side menu -->
                             <ItemsControl ItemsSource="{Binding Users}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
@@ -40,6 +40,7 @@
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
+
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
@@ -48,9 +49,15 @@
 
             <!-- Recent Friend Requests Section -->
             <StackPanel Grid.Column="2" MinWidth="200">
-                <TextBlock FontWeight="Bold" Text="Recent Friend Requests"/>
-                <!-- Display the 10 most recent friend requests -->
-                <!-- You will populate this area dynamically -->
+                <TextBlock FontWeight="Bold" Text="Recent Follow Suggestions"/>
+                <!-- Display the 3 most recent follow suggestions -->
+                <ItemsControl ItemsSource="{Binding UserSuggestionTrue}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <UBB_SE_2024_Gaborment:UserCardForFollowers FirstName="{Binding username}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </StackPanel>
         </Grid>
     </Grid>
