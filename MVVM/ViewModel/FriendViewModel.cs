@@ -13,6 +13,7 @@ using UBB_SE_2024_Gaborment.Server.Relationships.Follow;
 using Microsoft.VisualBasic.ApplicationServices;
 using System.Windows.Input;
 using UBB_SE_2024_Gaborment.Server.FollowSuggestions;
+using System.Windows;
 
 
 namespace UBB_SE_2024_Gaborment.MVVM.ViewModel
@@ -20,7 +21,7 @@ namespace UBB_SE_2024_Gaborment.MVVM.ViewModel
     internal class FriendViewModel : BaseViewModel
     {
         public ObservableCollection<UserMock> Users { get; set; }
-        public ObservableCollection<UserMock> UserSuggestion { get; set; }
+        public ObservableCollection<UserMock> UserSuggestionTrue { get; set; }
 
         private string _currentState;
         public string CurrentState
@@ -35,7 +36,7 @@ namespace UBB_SE_2024_Gaborment.MVVM.ViewModel
 
         public FriendViewModel()
         {
-            UserSuggestion = new ObservableCollection<UserMock>();
+            UserSuggestionTrue = new ObservableCollection<UserMock>();
             Users = new ObservableCollection<UserMock>();
             CurrentState = "Friends"; // Set the initial state
         }
@@ -78,12 +79,12 @@ namespace UBB_SE_2024_Gaborment.MVVM.ViewModel
         public void LoadFollowSuggestions()
         {
             ApplicationService service = ApplicationService.Instance;
-            List<FollowSuggestion> followSuggestions = service.GetFollowSuggestionsForUser(); // Replace AccountType.SomeType with the appropriate type
+            List<FollowSuggestion> followSuggestions = service.GetFollowSuggestionsForUser();
 
-            UserSuggestion.Clear();
-            foreach (var suggestion in followSuggestions.Take(3)) // Displaying only 3 suggestions in the recent friend request section
+            UserSuggestionTrue.Clear();
+            foreach (var suggestion in followSuggestions.Take(3)) 
             {
-                UserSuggestion.Add(new UserMock { userId = suggestion.userId, username = suggestion.username }); // Assuming UserMock has properties userId and username
+                UserSuggestionTrue.Add(new UserMock { userId = suggestion.userId, username = suggestion.username});
             }
         }
     }
