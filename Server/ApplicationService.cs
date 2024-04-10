@@ -86,6 +86,16 @@ internal class ApplicationService
 
 }
 
+    public void blockUser(string sender, string reciever, string reason)
+    {
+        blockService.createBlock(sender, reciever, reason);
+    }
+
+    public void unfollowUser(string sender, string reciever)
+    {
+        followService.removeFollow(sender, reciever);
+    }
+
 public List<FeedConfigurationDetails> getFeedConfigurationDetailsForUser(string userId)
     {
         return feedService.getFeedConfigurationDetailsForUser(userId);

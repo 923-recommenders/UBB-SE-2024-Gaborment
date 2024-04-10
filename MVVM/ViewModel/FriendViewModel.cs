@@ -24,7 +24,7 @@ namespace UBB_SE_2024_Gaborment.MVVM.ViewModel
             LoadUsers();
         }
 
-        private void LoadUsers()
+        public void LoadUsers()
         {
             ApplicationService service = ApplicationService.Instance;
             List<UserMock> users = new List<UserMock>();

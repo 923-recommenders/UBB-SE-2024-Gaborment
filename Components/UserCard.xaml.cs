@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UBB_SE_2024_Gaborment.Components;
+using UBB_SE_2024_Gaborment.MVVM.ViewModel;
+using UBB_SE_2024_Gaborment.Server.LoggerUtils;
+using UBB_SE_2024_Gaborment.Session;
 
 namespace UBB_SE_2024_Gaborment
 {
@@ -39,6 +42,32 @@ namespace UBB_SE_2024_Gaborment
             set { SetValue(LastNameProperty, value); }
         }
 
+
+        public static readonly DependencyProperty UserIdProperty =
+        DependencyProperty.Register("UserId", typeof(string), typeof(UserCard));
+
+
+        public string UserId
+        {
+            get { return (string)GetValue(UserIdProperty); }
+            set { SetValue(UserIdProperty, value); }
+        }
+
         public static readonly DependencyProperty LastNameProperty = DependencyProperty.Register("LastName", typeof(string), typeof(UserCard));
+
+        private void BlockButtonFriends_Click(object sender, RoutedEventArgs e)
+        {
+            ApplicationService service = ApplicationService.Instance;
+            var session = ApplicationSession.Instance;
+            service.blockUser(session.CurrentUserId, UserId, "I AM SICK OF THEM");
+        }
+
+        private void UnfollowButtonFriends_Click(object sender, RoutedEventArgs e)
+        {
+            ApplicationService service = ApplicationService.Instance;
+            var session = ApplicationSession.Instance;
+            service.unfollowUser(session.CurrentUserId, UserId);
+            
+        }
     }
 }
