@@ -17,14 +17,48 @@ using UBB_SE_2024_Gaborment.Session;
 
 namespace UBB_SE_2024_Gaborment.Components
 {
-    /// <summary>
-    /// Interaction logic for CreateCustomFeedPage.xaml
-    /// </summary>
     public partial class CreateCustomFeedPage : UserControl
     {
+        private List<string> usernames = new List<string>();
+        private List<string> hashtags = new List<string>();
+        private List<string> locations = new List<string>();
+        private string feedName;
+
         public CreateCustomFeedPage()
         {
             InitializeComponent();
+        }
+
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                TextBox textBox = sender as TextBox;
+                if (textBox != null)
+                {
+                    string input = textBox.Text.Trim();
+                    if (!string.IsNullOrEmpty(input))
+                    {
+                        if (textBox == txtUsernames)
+                        {
+                            usernames.Add(input);
+                        }
+                        else if (textBox == txtHashtags)
+                        {
+                            hashtags.Add(input);
+                        }
+                        else if (textBox == txtLocations)
+                        {
+                            locations.Add(input);
+                        }
+                        else if (textBox == txtFeedName)
+                        {
+                            feedName = input;
+                        }
+                        textBox.Clear();
+                    }
+                }
+            }
         }
 
         private void BtnConfirm_Click(object sender, RoutedEventArgs e)
@@ -32,6 +66,7 @@ namespace UBB_SE_2024_Gaborment.Components
             MessageBox.Show("Configuration confirmed.");
             var session = ApplicationSession.Instance;
             var applicationService = ApplicationService.Instance;
+            applicationService.addCustomFeed(session.CurrentUserId, hashtags, locations, usernames);
         }
     }
 }

@@ -19,13 +19,13 @@
 
         <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical" Margin="10" Width="500">
             <Label Content="Feed Name:" />
-            <TextBox x:Name="txtFeedName" MinWidth="100" Height="30" Margin="0,5,0,10" />
+            <TextBox x:Name="txtFeedName" MinWidth="100" Height="30" Margin="0,5,0,10" KeyDown="TextBox_KeyDown"/>
             <Label Content="Hashtags:" />
-            <TextBox x:Name="txtHashtags" MinWidth="100" Height="30" Margin="0,5,0,10" />
+            <TextBox x:Name="txtHashtags" MinWidth="100" Height="30" Margin="0,5,0,10" KeyDown="TextBox_KeyDown"/>
             <Label Content="Locations:" />
-            <TextBox x:Name="txtLocations" MinWidth="100" Height="30" Margin="0,5,0,10" />
+            <TextBox x:Name="txtLocations" MinWidth="100" Height="30" Margin="0,5,0,10" KeyDown="TextBox_KeyDown"/>
             <Label Content="Usernames:" />
-            <TextBox x:Name="txtUsernames" MinWidth="100" Height="30" Margin="0,5,0,10" />
+            <TextBox x:Name="txtUsernames" MinWidth="100" Height="30" Margin="0,5,0,10" KeyDown="TextBox_KeyDown"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" Height="50" HorizontalAlignment="Right" Margin="10">
