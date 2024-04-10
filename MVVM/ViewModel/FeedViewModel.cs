@@ -9,9 +9,10 @@ using UBB_SE_2024_Gaborment.Components;
 
 namespace UBB_SE_2024_Gaborment.MVVM.ViewModel
 {
-    public class FeedViewModel : BaseViewModel
+    internal class FeedViewModel : BaseViewModel
     {
-        private ObservableCollection<PostMock> Posts { get; set; }
+        public ObservableCollection<PostMock> Posts { get; set; }
+
         public FeedViewModel()
         {
             Posts = new ObservableCollection<PostMock>();
@@ -23,6 +24,13 @@ namespace UBB_SE_2024_Gaborment.MVVM.ViewModel
             var applicationService = ApplicationService.Instance;
             var postsMock = applicationService.getFeedConfiguredPosts();
             Posts = new ObservableCollection<PostMock>(postsMock);
+        }
+
+        public void ReloadPosts()
+        {
+            Posts.Clear();
+            LoadPosts();
+            OnPropertyChanged(nameof(Posts));
         }
     }
 }

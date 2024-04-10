@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using UBB_SE_2024_Gaborment.MVVM.ViewModel;
 using UBB_SE_2024_Gaborment.Server;
 using UBB_SE_2024_Gaborment.Server.LoggerUtils;
 using UBB_SE_2024_Gaborment.Session;
@@ -96,8 +97,15 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
             FeedConfigurationDetails selectedFeedConfiguration = feedConfigurationDetails.FirstOrDefault(feed => feed.feedId.ToString() == buttonId || feed.feedName == buttonId);
 
             if (selectedFeedConfiguration != null)
+            {
                 ApplicationSession.Instance.CurrentFeedConfiguration = selectedFeedConfiguration;
-
+                var feedViewModel = this.DataContext as FeedViewModel;
+                if (feedViewModel != null)
+                {
+                    feedViewModel.ReloadPosts();
+                }
+            }
+            
         }
 
 
@@ -168,6 +176,8 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
             Navigate((int)PagingMode.Previous);
 
         }
+
+
 
     }
 }

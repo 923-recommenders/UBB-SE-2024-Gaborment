@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace UBB_SE_2024_Gaborment.Components;
 
-/// <summary>
-/// Interaction logic for NavigationBar.xaml
-/// </summary>
 public partial class NavigationBar : UserControl
 {
     public NavigationBar()
