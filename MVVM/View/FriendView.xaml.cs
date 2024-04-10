@@ -21,10 +21,38 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
     /// </summary>
     public partial class FriendView : UserControl
     {
+        private FriendViewModel _viewModel;
+
         public FriendView()
         {
             InitializeComponent();
-            DataContext = new FriendViewModel();
+            _viewModel = new FriendViewModel();
+            DataContext = _viewModel;
+        }
+
+        private void FriendsButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            _viewModel.CurrentState = "Friends";
+        }
+
+        private void FollowingButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            _viewModel.CurrentState = "Following";
+        }
+
+        private void FollowersButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            _viewModel.CurrentState = "Followers";
+        }
+
+        private void BlockedButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            _viewModel.CurrentState = "Blocked";
+        }
+
+        private void RequestsButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            _viewModel.CurrentState = "Requests";
         }
     }
 }
