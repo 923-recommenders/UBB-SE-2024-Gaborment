@@ -68,5 +68,13 @@ namespace UBB_SE_2024_Gaborment.Components
             var applicationService = ApplicationService.Instance;
             applicationService.addCustomFeed(session.CurrentUserId, hashtags, locations, usernames);
         }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Configuration cancelled.");
+            usernames.Clear();
+            hashtags.Clear();
+            locations.Clear();
+        }
     }
 }
