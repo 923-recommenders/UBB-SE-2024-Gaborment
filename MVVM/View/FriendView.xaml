@@ -33,8 +33,6 @@
                         <StackPanel>
                             <TextBlock FontWeight="Bold" Text="Content"/>
 
-                            <!-- Display UserCards for each user -->
-                            <!-- You will populate this area dynamically based on user selection from the left side menu -->
                             <ItemsControl ItemsSource="{Binding Users}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
@@ -52,8 +50,6 @@
             <!-- Recent Friend Requests Section -->
             <StackPanel Grid.Column="2" MinWidth="200">
                 <TextBlock FontWeight="Bold" Text="Recent Friend Requests"/>
-                <!-- Display the 10 most recent friend requests -->
-                <!-- You will populate this area dynamically -->
             </StackPanel>
         </Grid>
     </Grid>
