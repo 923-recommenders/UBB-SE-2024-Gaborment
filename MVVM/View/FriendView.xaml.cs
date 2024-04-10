@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UBB_SE_2024_Gaborment.MVVM.ViewModel;
 
 namespace UBB_SE_2024_Gaborment.MVVM.View
 {
@@ -23,6 +24,7 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
         public FriendView()
         {
             InitializeComponent();
+            DataContext = new FriendViewModel();
         }
     }
 }

@@ -69,7 +69,7 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
                 score += 1;
             }
 
-            score += (post.GetReactions().Values.Sum() / ReactionThreshold);
+            score += post.GetReactions().Values.Sum();
 
             return score;
         }

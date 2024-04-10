@@ -74,8 +74,8 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks.UserGeneration
                     
                 }
 
-                PostMock postMock = new PostMock(owner, text, location, mediaType, hashtags, 
-                    numberOfComments, numberOfViews, reactions, postingDate);
+                PostMock postMock = new PostMock(owner, text, location, mediaType, hashtags, numberOfViews,
+                    numberOfComments, reactions, postingDate);
                 posts.Add(postMock);
             }   
 
