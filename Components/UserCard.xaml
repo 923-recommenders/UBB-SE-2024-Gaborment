@@ -11,8 +11,8 @@
         <TextBlock HorizontalAlignment="Left" Height="188" Margin="3,10,0,0" TextWrapping="Wrap" Text="User" VerticalAlignment="Top" Width="172" RenderTransformOrigin="0.665,0.634" Background="LightGray"/>
         <Label Content="FIRST NAME: " HorizontalAlignment="Left" Margin="-1,34,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.297,0.27" FontFamily="{StaticResource FontAwesome}" FontSize="10" FontStyle="Italic"/>
         <Label Content="LAST NAME" HorizontalAlignment="Left" Margin="3,65,0,0" VerticalAlignment="Top" FontStyle="Italic" FontFamily="{StaticResource FontAwesome}" Height="26" Width="86" FontSize="10"/>
-        <Button Content="Unfollow" HorizontalAlignment="Left" Margin="60,106,0,0" VerticalAlignment="Top" Name="UnfollowButtonFriends" Background="CadetBlue"/>
-        <Button Content="Block" HorizontalAlignment="Left" Margin="70,140,0,0" VerticalAlignment="Top" Name="BlockButtonFriends" Background="Red" RenderTransformOrigin="0.5,0.5">
+        <Button Content="Unfollow" HorizontalAlignment="Left" Margin="60,106,0,0" VerticalAlignment="Top" Name="UnfollowButtonFriends" Background="CadetBlue" Click="UnfollowButtonFriends_Click"/>
+        <Button Content="Block" HorizontalAlignment="Left" Margin="70,140,0,0" VerticalAlignment="Top" Name="BlockButtonFriends" Background="Red" RenderTransformOrigin="0.5,0.5" Click="BlockButtonFriends_Click">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -24,6 +24,16 @@
         </Button>
         <TextBlock HorizontalAlignment="Left" Margin="86,39,0,0" TextWrapping="Wrap" Text="{Binding Path=FirstName,ElementName=FriendsUserCard}" VerticalAlignment="Top" Height="21" Width="68" Name="FirstNameTextBlock" RenderTransformOrigin="0.451,0.159"/>
         <TextBlock HorizontalAlignment="Left" Margin="86,70,0,0" TextWrapping="Wrap" Text="{Binding Path=LastName,ElementName=FriendsUserCard}" VerticalAlignment="Top" Height="21" Width="68" Name="LastNameTextBlock"/>
+        <TextBlock HorizontalAlignment="Left" Margin="29,18,0,0" TextWrapping="Wrap" Text="{Binding Path=UserId, ElementName=FriendsUserCard}" VerticalAlignment="Top" Height="21" Width="68" Name="IdTextBlock" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="94.312"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
 
 
     </Grid>

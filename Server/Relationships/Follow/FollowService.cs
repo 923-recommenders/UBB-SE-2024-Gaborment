@@ -45,10 +45,9 @@ namespace UBB_SE_2024_Gaborment.Server.Relationships.Follow
         }
         public void removeFollow(string sender, string receiver)
         {
-            if (!(_blockRepository.GetBlocksBySender(sender).Any(b => b.getReceiver() == receiver) || _blockRepository.GetBlocksOfReceiver(receiver).Any(b => b.getSender() == sender)))
-            {
-                _followRepository.RemoveFollow(sender, receiver);
-            }
+            
+            _followRepository.RemoveFollow(sender, receiver);
+            
         }
 
         public void updateCloseFriendStatus(string sender, string receiver)
