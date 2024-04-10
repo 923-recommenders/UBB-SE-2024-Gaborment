@@ -59,7 +59,7 @@ namespace UBB_SE_2024_Gaborment.MVVM.ViewModel
                     users = service.getPeopleUserBlocked("1");
                     break;
                 case "Requests":
-                    users = service.getRequestsUserSent("1");
+                    users = service.getRequestsUserReceived("1");
                     break;
                 default:
                     break;
