@@ -8,9 +8,9 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
 {
     internal abstract class FeedConfiguration
     {
-        protected int ID { get; set; }
-        protected string Name { get; set; }
-        protected int _ReactionThreshold;
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public int _ReactionThreshold;
    
         public int GetID()
         {
