@@ -33,10 +33,10 @@ internal class ApplicationService
     {
         logger = new Logger(true);
         ApplicationDatabaseContext applicationDatabaseContext = new ApplicationDatabaseContext();
-        RequestRepository requestRepository = new RequestRepository(applicationDatabaseContext);
-        FollowRepository followRepository = new FollowRepository(applicationDatabaseContext);
+        RequestRepository requestRepository = new RequestRepository(applicationDatabaseContext, logger);
+        FollowRepository followRepository = new FollowRepository(applicationDatabaseContext, logger);
         followRepository.GetFollowers().ForEach(follower => Console.WriteLine(follower.getSender(), follower.getReceiver()));
-        BlockRepository blockRepository = new BlockRepository(applicationDatabaseContext);
+        BlockRepository blockRepository = new BlockRepository(applicationDatabaseContext, logger);
         UserServiceMock userServiceMock = new UserServiceMock();    
         followService = new FollowService(blockRepository, followRepository, userServiceMock);
         blockService = new BlockService(blockRepository, followRepository, userServiceMock);
