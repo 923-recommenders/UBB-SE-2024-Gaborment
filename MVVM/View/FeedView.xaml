@@ -43,7 +43,7 @@
                     <DataGrid.CellStyle>
                         <Style TargetType="DataGridCell">
                             <Setter Property="Padding" Value="10"/>
-                            <!-- Adjust padding to increase cell size -->
+
                         </Style>
                     </DataGrid.CellStyle>
                     <DataGrid.ItemsPanel>
@@ -57,18 +57,6 @@
                 Name="btnNext" VerticalAlignment="Center" Width="40" 
                 Content="&gt;" Click="btnNext_Click" Opacity="0.75"/>
             </Grid>
-            <!--<TextBlock x:Name="feedTextBlock" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock.Text>aaaa</TextBlock.Text>
-            </TextBlock>-->
-
-            <!--<ScrollViewer Grid.Row="1" Margin="30 0 30 0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                <WrapPanel>
-                    <components:Post Username="User1" Reactions="2000" Comments="2000" Views="200" TextContent="232aa" Margin="10 10 10 10"/>
-                    <components:Post Username="User2" Reactions="2000" Comments="2000" Views="200" TextContent="232aa" Margin="10 10 10 10"/>
-                    <components:Post Username="User3" Reactions="2000" Comments="2000" Views="200" TextContent="232aa" Margin="10 10 10 10"/>
-                    <components:Post Username="User4" Reactions="2000" Comments="2000" Views="200" TextContent="232aa" Margin="10 10 10 10"/>
-                </WrapPanel>
-            </ScrollViewer>-->
 
             <StackPanel Grid.Row="1">
                 <Button x:Name="configureFeedButton" Content="Add Feed" Click="ConfigureFeedButton_Click" Height="30" Width="60" HorizontalAlignment="Left" Margin="0,5"/>
@@ -80,7 +68,7 @@
                     <ItemsControl ItemsSource="{Binding Posts}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <components:Post Username="{Binding Owner.username}" Reactions="{Binding ReactionsDictionary.Count}" Comments="{Binding NumberOfComments}" Views="{Binding NumberOfViews}" TextContent="{Binding Text}" />
+                                <components:Post Username="{Binding Owner.username}" Likes="{Binding NumberOfLikes}" Loves="{Binding NumberOfLoves}" Dislikes="{Binding NumberOfDislikes}" Angrys="{Binding NumberOfAngrys}" Comments="{Binding NumberOfComments}" Views="{Binding NumberOfViews}" TextContent="{Binding Text}" />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

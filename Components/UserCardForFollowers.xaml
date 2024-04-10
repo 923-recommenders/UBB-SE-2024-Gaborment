@@ -22,7 +22,16 @@
         </Button>
         <TextBlock HorizontalAlignment="Left" Margin="86,39,0,0" TextWrapping="Wrap" Text="{Binding Path=FirstName,ElementName=UserCardFollowers}" VerticalAlignment="Top" Height="21" Width="68" Name="FirstNameTextBlock" RenderTransformOrigin="0.451,0.159"/>
         <TextBlock HorizontalAlignment="Left" Margin="86,70,0,0" TextWrapping="Wrap" Text="{Binding Path=LastName,ElementName=UserCardFollowers}" VerticalAlignment="Top" Height="21" Width="68" Name="LastNameTextBlock"/>
-
+        <TextBlock HorizontalAlignment="Left" Margin="29,18,0,0" TextWrapping="Wrap" Text="{Binding Path=UserId, ElementName=FriendsUserCard}" VerticalAlignment="Top" Height="21" Width="68" Name="IdTextBlock" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="94.312"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
 
     </Grid>
 </UserControl>

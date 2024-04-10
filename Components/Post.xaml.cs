@@ -18,14 +18,33 @@ namespace UBB_SE_2024_Gaborment.Components
 
         public static readonly DependencyProperty UsernameProperty = DependencyProperty.Register("Username", typeof(string), typeof(Post));
 
-        public int Reactions
+        public static readonly DependencyProperty LikesProperty = DependencyProperty.Register("Likes", typeof(int), typeof(Post));
+        public static readonly DependencyProperty LovesProperty = DependencyProperty.Register("Loves", typeof(int), typeof(Post));
+        public static readonly DependencyProperty DislikesProperty = DependencyProperty.Register("Dislikes", typeof(int), typeof(Post));
+        public static readonly DependencyProperty AngrysProperty = DependencyProperty.Register("Angrys", typeof(int), typeof(Post));
+        public int Likes
         {
-            get { return (int)GetValue(ReactionsProperty); }
-            set { SetValue(ReactionsProperty, value); }
+            get { return (int)GetValue(LikesProperty); }
+            set { SetValue(LikesProperty, value); }
         }
 
-        public static readonly DependencyProperty ReactionsProperty = DependencyProperty.Register("Reactions", typeof(int), typeof(Post));
+        public int Loves
+        {
+            get { return (int)GetValue(LovesProperty); }
+            set { SetValue(LovesProperty, value); }
+        }
 
+        public int Dislikes
+        {
+            get { return (int)GetValue(DislikesProperty); }
+            set { SetValue(DislikesProperty, value); }
+        }
+        public int Angrys
+        {
+            get { return (int)GetValue(AngrysProperty); }
+            set { SetValue(AngrysProperty, value); }
+        }
+        
         public int Comments
         {
             get { return (int)GetValue(CommentsProperty); }
