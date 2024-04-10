@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UBB_SE_2024_Gaborment.Server.LoggerUtils;
+using UBB_SE_2024_Gaborment.Session;
 
 namespace UBB_SE_2024_Gaborment.Components
 {
@@ -27,9 +29,9 @@ namespace UBB_SE_2024_Gaborment.Components
 
         private void BtnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            // Implement your logic for confirming the configuration
-            // For example, you might want to save the input values and close the page
             MessageBox.Show("Configuration confirmed.");
+            var session = ApplicationSession.Instance;
+            var applicationService = ApplicationService.Instance;
         }
     }
 }
