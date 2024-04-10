@@ -50,12 +50,5 @@ namespace UBB_SE_2024_Gaborment.Components
 
         public static readonly DependencyProperty TextContentProperty = DependencyProperty.Register("TextContent", typeof(string), typeof(Post));
 
-        public string Date
-        {
-            get { return (string)GetValue(DateProperty); }
-            set { SetValue(DateProperty, value); }
-        }
-
-        public static readonly DependencyProperty DateProperty = DependencyProperty.Register("Date", typeof(DateTime), typeof(Post));
     }
 }

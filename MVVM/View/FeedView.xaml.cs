@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using UBB_SE_2024_Gaborment.Components;
 using UBB_SE_2024_Gaborment.MVVM.ViewModel;
 using UBB_SE_2024_Gaborment.Server;
 using UBB_SE_2024_Gaborment.Server.LoggerUtils;
@@ -70,7 +71,22 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
             } 
             return buttonList;
         }
-
+        private void ConfigureFeedButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (createCustomFeedPage.Visibility == Visibility.Collapsed)
+            {
+                createCustomFeedPage.Visibility = Visibility.Visible;
+                configureFeedButton.Content = "Cancel";
+                // Optionally, hide other parts of the UI or disable certain controls
+            }
+            else
+            {
+                MessageBox.Show("Configuration canceled.");
+                createCustomFeedPage.Visibility = Visibility.Collapsed;
+                configureFeedButton.Content = "Add Feed";
+                // Optionally, show other parts of the UI or enable certain controls
+            }
+        }
         private void CarouselButtonClicked(object sender, RoutedEventArgs e)
         {
             // ATTENTION!!!!
