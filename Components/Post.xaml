@@ -32,8 +32,14 @@
                 <Button Margin="10,0,2,0">
                     <TextBlock Text="&#xf004;" FontSize="30" FontFamily="{StaticResource FontAwesome}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Button>
-
-                <TextBlock Text="{Binding Path=Reactions,ElementName=post}" VerticalAlignment="Center"/>
+                <Label Content="Like"/>
+                <TextBlock Text="{Binding Path=Likes,ElementName=post}" VerticalAlignment="Center"/>
+                <Label Content="Love"/>
+                <TextBlock Text="{Binding Path=Loves,ElementName=post}" VerticalAlignment="Center"/>
+                <Label Content="Dislike"/>
+                <TextBlock Text="{Binding Path=Dislikes,ElementName=post}" VerticalAlignment="Center"/>
+                <Label Content="Angry"/>
+                <TextBlock Text="{Binding Path=Angrys,ElementName=post}" VerticalAlignment="Center"/>
                 
                 <Label Content="Views"/>
                 <TextBlock Text="{Binding Path=Views,ElementName=post}" VerticalAlignment="Center" Margin="10,0,0,0"/>

@@ -79,7 +79,7 @@
                     <ItemsControl ItemsSource="{Binding Posts}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <components:Post Username="{Binding Owner.username}" Reactions="{Binding ReactionsDictionary.Count}" Comments="{Binding NumberOfComments}" Views="{Binding NumberOfViews}" TextContent="{Binding Text}" />
+                                <components:Post Username="{Binding Owner.username}" Likes="{Binding NumberOfLikes}" Loves="{Binding NumberOfLoves}" Dislikes="{Binding NumberOfDislikes}" Angrys="{Binding NumberOfAngrys}" Comments="{Binding NumberOfComments}" Views="{Binding NumberOfViews}" TextContent="{Binding Text}" />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
