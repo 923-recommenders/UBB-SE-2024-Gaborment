@@ -20,7 +20,22 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
         public Dictionary<string, List<UserMock>> ReactionsDictionary { get; set; }
         public DateTime PostingDate { get; set; }
 
-
+        public int NumberOfLikes
+        {
+            get { return ReactionsDictionary["like"].Count(); }
+        }
+        public int NumberOfLoves
+        {
+            get { return ReactionsDictionary["love"].Count(); }
+        }
+        public int NumberOfDislikes
+        {
+            get { return ReactionsDictionary["dislike"].Count(); }
+        }
+        public int NumberOfAngrys
+        {
+            get { return ReactionsDictionary["angry"].Count(); }
+        }
         public PostMock(UserMock Owner, string Text, string Location,
             string MediaType, List<string> Hashtags, int NumberOfViews,
             int NumberOfComments, Dictionary<string, List<UserMock>> Reactions,
