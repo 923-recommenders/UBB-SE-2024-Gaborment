@@ -19,11 +19,11 @@
 
             <!-- Left Side Navigation Menu -->
             <StackPanel Grid.Row="0" Orientation="Vertical" MinWidth="200" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <Button Content="Friends" Height="60" FontSize="25" Margin="0,20,0,10" VerticalAlignment="Center" Click="FriendsButton_Click"/>
-                <Button Content="Following" Height="60" FontSize="25" Margin="0,10" VerticalAlignment="Center" Click="FollowingButton_Click"/>
-                <Button Content="Followers" Height="60" FontSize="25" Margin="0,10" VerticalAlignment="Center" Click="FollowersButton_Click"/>
-                <Button Content="Blocked" Height="60" FontSize="25" Margin="0,10" VerticalAlignment="Center" Click="BlockedButton_Click"/>
-                <Button Content="Requests" Height="60" FontSize="25" Margin="0,60,0,10" VerticalAlignment="Center" Click="RequestsButton_Click"/>
+                <Button Style="{DynamicResource FriendMenuNavigationButton}" Content="Friends" Height="60" FontSize="25" Margin="0,20,0,10" VerticalAlignment="Center" Click="FriendsButton_Click"/>
+                <Button Style="{DynamicResource FriendMenuNavigationButton}" Content="Following" Height="60" FontSize="25" Margin="0,10" VerticalAlignment="Center" Click="FollowingButton_Click"/>
+                <Button Style="{DynamicResource FriendMenuNavigationButton}" Content="Followers" Height="60" FontSize="25" Margin="0,10" VerticalAlignment="Center" Click="FollowersButton_Click"/>
+                <Button Style="{DynamicResource FriendMenuNavigationButton}" Content="Blocked" Height="60" FontSize="25" Margin="0,10" VerticalAlignment="Center" Click="BlockedButton_Click"/>
+                <Button Style="{DynamicResource FriendMenuNavigationButton}" Content="Requests" Height="60" FontSize="25" Margin="0,60,0,10" VerticalAlignment="Center" Click="RequestsButton_Click"/>
             </StackPanel>
 
             <!-- Main Content Area -->

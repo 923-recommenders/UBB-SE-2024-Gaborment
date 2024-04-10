@@ -9,15 +9,15 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
 {
     internal class PostMock : IComparable<PostMock>
     {
-        Guid ID { get; set; }
-        UserMock Owner { get; set; }
-        string Text { get; set; }
-        string Location { get; set; }
-        string MediaType { get; set; } // a file
-        List<string> Hashtags { get; set; }
-        int NumberOfComments { get; set; }
-        int NumberOfViews { get; set; }
-        Dictionary<string, List<UserMock>> ReactionsDictionary { get; set; }
+        public Guid ID { get; set; }
+        public UserMock Owner { get; set; }
+        public string Text { get; set; }
+        public string Location { get; set; }
+        public string MediaType { get; set; } // a file
+        public List<string> Hashtags { get; set; }
+        public int NumberOfComments { get; set; }
+        public int NumberOfViews { get; set; }
+        public Dictionary<string, List<UserMock>> ReactionsDictionary { get; set; }
         public DateTime PostingDate { get; set; }
 
 
