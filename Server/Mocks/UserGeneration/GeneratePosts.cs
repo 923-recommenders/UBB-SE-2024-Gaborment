@@ -11,6 +11,11 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks.UserGeneration
     {
         public static List<PostMock> generateRandomPosts(int count, List<UserMock> users)
         {
+            if(count < 0)
+            {
+                throw new ArgumentException("Invalid input -- please generate more than 0 elements.");
+            }
+
             List<PostMock> posts = new List<PostMock>();
             List<string> predefinedTags = new List<string>{
                 "instagood", "photooftheday", "beautiful", "happy", "cute", "love", "fashion", "tbt",
@@ -85,6 +90,17 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks.UserGeneration
         public static List<PostMock> GenerateGuaranteedControversialPosts(int count,
            int numberOfControversials, List<UserMock> users)
         {
+            if(count < 0 || numberOfControversials < 0)
+            {
+                throw new ArgumentException("Invalid input -- please generate more than 0 elements.");
+            }
+
+            if(count == 0 && numberOfControversials == 0)
+            {
+                throw new Exception("Invalid input -- please generate at least one element. Both parameters are 0.");
+            }
+
+
             List<PostMock> posts = generateRandomPosts(numberOfControversials, users);
 
             List<string> predefinedReactions = new List<string>
@@ -97,7 +113,7 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks.UserGeneration
                 int positiveReactions = post.GetReactions()["like"] + post.GetReactions()["love"];
                 int negativeReactions = post.GetReactions()["dislike"] + post.GetReactions()["angry"];
                 int difference = Math.Abs(positiveReactions - negativeReactions);
-                Console.WriteLine($"Difference: {difference}");
+          
 
                 if (difference > 5)
                 {
@@ -123,12 +139,8 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks.UserGeneration
                         }
                     }
                     
-                }
-                              
-                positiveReactions = post.GetReactions()["like"] + post.GetReactions()["love"];
-                negativeReactions = post.GetReactions()["dislike"] + post.GetReactions()["angry"];
-                difference = Math.Abs(positiveReactions - negativeReactions);
-                Console.WriteLine($"New difference: {difference}");
+                }          
+              
             }
             if(count > numberOfControversials)
             {
