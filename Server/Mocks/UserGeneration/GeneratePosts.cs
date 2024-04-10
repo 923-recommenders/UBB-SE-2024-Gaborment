@@ -82,7 +82,62 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks.UserGeneration
             return posts;
         }
 
-       
+        public static List<PostMock> GenerateGuaranteedControversialPosts(int count,
+           int numberOfControversials, List<UserMock> users)
+        {
+            List<PostMock> posts = generateRandomPosts(numberOfControversials, users);
+
+            List<string> predefinedReactions = new List<string>
+            {
+                "like", "love", "dislike", "angry"
+            };
+
+             foreach (PostMock post in posts)
+            {
+                int positiveReactions = post.GetReactions()["like"] + post.GetReactions()["love"];
+                int negativeReactions = post.GetReactions()["dislike"] + post.GetReactions()["angry"];
+                int difference = Math.Abs(positiveReactions - negativeReactions);
+                Console.WriteLine($"Difference: {difference}");
+
+                if (difference > 5)
+                {
+                    Random random = new Random();
+                    int randomNormalizationDifference = random.Next(0, 5);
+                    if(positiveReactions < negativeReactions)
+                    {
+                        List<UserMock> randomUsersAux = new List<UserMock>();
+                        for (int i = 0; i < difference - randomNormalizationDifference; i++)
+                        {
+                            UserMock randomUserAux = new UserMock();
+                            post.AddReaction("like", randomUserAux);
+
+                        }
+                    }
+                    else
+                    {
+                        List<UserMock> randomUsersAux = new List<UserMock>();
+                        for (int i = 0; i < difference - randomNormalizationDifference; i++)
+                        {
+                            UserMock randomUserAux = new UserMock();
+                            post.AddReaction("dislike", randomUserAux);
+                        }
+                    }
+                    
+                }
+                              
+                positiveReactions = post.GetReactions()["like"] + post.GetReactions()["love"];
+                negativeReactions = post.GetReactions()["dislike"] + post.GetReactions()["angry"];
+                difference = Math.Abs(positiveReactions - negativeReactions);
+                Console.WriteLine($"New difference: {difference}");
+            }
+            if(count > numberOfControversials)
+            {
+                List<PostMock> randomPosts = generateRandomPosts(count - numberOfControversials, users);
+                posts.AddRange(randomPosts);
+            } 
+            return posts;
+        }
+
     }
 
     //class Program
@@ -90,7 +145,8 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks.UserGeneration
     //    static void Main(string[] args)
     //    {
     //        List<UserMock> users = GenerateUsers.GenerateRandomUsers(10);
-    //        List<PostMock> posts = GeneratePosts.generateRandomPosts(20, users);
+    //        //List<PostMock> posts = GeneratePosts.generateRandomPosts(10, users);
+    //        List<PostMock> posts = GeneratePosts.GenerateGuaranteedControversialPosts(10, 5, users);
     //        foreach (PostMock post in posts)
     //        {
     //            Console.WriteLine("-------------------------------------------------");

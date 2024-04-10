@@ -159,6 +159,10 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks
             return reactions;
         }
 
+        public void SetReactions(Dictionary<string, List<UserMock>> Reactions)
+        {
+            this.ReactionsDictionary = Reactions;
+        }
         public List<CommentMock> GetComments()
         {
             return Comments;
