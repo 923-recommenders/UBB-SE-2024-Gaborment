@@ -60,6 +60,7 @@
 
             <StackPanel Grid.Row="1">
                 <Button x:Name="configureFeedButton" Content="Add Feed" Click="ConfigureFeedButton_Click" Height="30" Width="60" HorizontalAlignment="Left" Margin="0,5"/>
+                <Button x:Name="removeFeedButton" Content="Remove Feed" Click="removeFeedButton_Click" Height="30" Width="60" HorizontalAlignment="Left" Margin="0,5"/>
             </StackPanel>
 
             <ScrollViewer Grid.Row="2">
