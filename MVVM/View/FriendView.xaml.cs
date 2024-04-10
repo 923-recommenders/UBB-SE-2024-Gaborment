@@ -16,9 +16,6 @@ using UBB_SE_2024_Gaborment.MVVM.ViewModel;
 
 namespace UBB_SE_2024_Gaborment.MVVM.View
 {
-    /// <summary>
-    /// Interaction logic for FriendView.xaml
-    /// </summary>
     public partial class FriendView : UserControl
     {
         private FriendViewModel _viewModel;

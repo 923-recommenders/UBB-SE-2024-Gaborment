@@ -9,9 +9,6 @@ using UBB_SE_2024_Gaborment.Session;
 
 namespace UBB_SE_2024_Gaborment.MVVM.View
 {
-    /// <summary>
-    /// Interaction logic for FeedView.xaml
-    /// </summary>
     public partial class FeedView : UserControl
     {
         int pageIndex = 1;
@@ -76,15 +73,15 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
             if (createCustomFeedPage.Visibility == Visibility.Collapsed)
             {
                 createCustomFeedPage.Visibility = Visibility.Visible;
-                configureFeedButton.Content = "Cancel";
-                // Optionally, hide other parts of the UI or disable certain controls
+                configureFeedButton.Visibility = Visibility.Collapsed;
             }
             else
             {
                 MessageBox.Show("Configuration canceled.");
                 createCustomFeedPage.Visibility = Visibility.Collapsed;
                 configureFeedButton.Content = "Add Feed";
-                // Optionally, show other parts of the UI or enable certain controls
+                configureFeedButton.Visibility = Visibility.Visible;
+
             }
         }
         private void CarouselButtonClicked(object sender, RoutedEventArgs e)
