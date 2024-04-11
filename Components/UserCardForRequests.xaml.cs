@@ -75,7 +75,9 @@ namespace UBB_SE_2024_Gaborment
             ApplicationService service = ApplicationService.Instance;
             var session = ApplicationSession.Instance;
             service.deleteRequest(session.CurrentUserId, UserId);
-            
+            MessageBox.Show("Request deleted succesfully!");
+
+
         }
 
         private void AcceptRequestButton_Click(object sender, RoutedEventArgs e)
@@ -83,9 +85,7 @@ namespace UBB_SE_2024_Gaborment
             ApplicationService service = ApplicationService.Instance;
             var session = ApplicationSession.Instance;
             service.acceptRequest(session.CurrentUserId, UserId);
-            MessageBox.Show("ura");
-            MessageBox.Show(session.CurrentUserId);
-            MessageBox.Show(UserId);
+            MessageBox.Show("Request accepted succesfully!");
 
         }
     }

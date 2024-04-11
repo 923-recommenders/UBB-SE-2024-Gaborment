@@ -62,6 +62,7 @@ namespace UBB_SE_2024_Gaborment
             ApplicationService service = ApplicationService.Instance;
             var session = ApplicationSession.Instance;
             service.blockUser(session.CurrentUserId, UserId, "I AM SICK OF THEM");
+            MessageBox.Show("Blocked!");
         }
 
         private void UnfollowButtonFriends_Click(object sender, RoutedEventArgs e)
@@ -69,6 +70,7 @@ namespace UBB_SE_2024_Gaborment
             ApplicationService service = ApplicationService.Instance;
             var session = ApplicationSession.Instance;
             service.unfollowUser(session.CurrentUserId, UserId);
+            MessageBox.Show("Unfollowed!");
         }
     }
 }
