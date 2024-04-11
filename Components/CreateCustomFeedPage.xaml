@@ -14,21 +14,33 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical" Margin="10" Width="500">
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical" Margin="10" Width="270">
             <Label Content="Feed Name:" />
-            <TextBox x:Name="txtFeedName" MinWidth="100" Height="30" Margin="0,5,0,10" KeyDown="TextBox_KeyDown"/>
+            <TextBox x:Name="txtFeedName" MinWidth="250" Height="30" Margin="0,5,0,10" KeyDown="TextBox_KeyDown" HorizontalAlignment="Left"/>
             <Label Content="Hashtags:" />
-            <TextBox x:Name="txtHashtags" MinWidth="100" Height="30" Margin="0,5,0,10" KeyDown="TextBox_KeyDown"/>
+            <TextBox x:Name="txtHashtags" MinWidth="250" Height="30" Margin="0,5,0,10" KeyDown="TextBox_KeyDown" HorizontalAlignment="Left"/>
             <Label Content="Locations:" />
-            <TextBox x:Name="txtLocations" MinWidth="100" Height="30" Margin="0,5,0,10" KeyDown="TextBox_KeyDown"/>
+            <TextBox x:Name="txtLocations" MinWidth="250" Height="30" Margin="0,5,0,10" KeyDown="TextBox_KeyDown" HorizontalAlignment="Left"/>
             <Label Content="Usernames:" />
-            <TextBox x:Name="txtUsernames" MinWidth="100" Height="30" Margin="0,5,0,10" KeyDown="TextBox_KeyDown"/>
+            <TextBox x:Name="txtUsernames" MinWidth="250" Height="30" Margin="0,5,0,10" KeyDown="TextBox_KeyDown" HorizontalAlignment="Left"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" Height="50" HorizontalAlignment="Right" Margin="10">
+        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical" Margin="10" Width="270">
+            <Label Content="Your Feed Name (nice!)" />
+            <TextBox x:Name="txtFeedNameView" MinWidth="250" Height="30" Margin="0,5,0,10" KeyDown="TextBox_KeyDown" HorizontalAlignment="Left"/>
+            <Label Content="Your hashtags!" />
+            <TextBox x:Name="txtHashtagsView" MinWidth="250" Height="30" Margin="0,5,0,10" KeyDown="TextBox_KeyDown" HorizontalAlignment="Left"/>
+            <Label Content="Your locations!" />
+            <TextBox x:Name="txtLocationsView" MinWidth="250" Height="30" Margin="0,5,0,10" KeyDown="TextBox_KeyDown" HorizontalAlignment="Left"/>
+            <Label Content="The users!" />
+            <TextBox x:Name="txtUsernamesView" MinWidth="250" Height="30" Margin="0,5,0,10" KeyDown="TextBox_KeyDown" HorizontalAlignment="Left"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal" Height="50" HorizontalAlignment="Right" Margin="10">
             <Button x:Name="btnConfirm" Style="{DynamicResource BasicCarouselButtonStyle}" Content="Confirm" Margin="0,0,10,0" Click="BtnConfirm_Click"/>
             <Button x:Name="btnCancel" Style="{DynamicResource BasicCarouselButtonStyle}" Content="Cancel" Margin="0,0,10,0" Click="BtnCancel_Click"/>
         </StackPanel>
