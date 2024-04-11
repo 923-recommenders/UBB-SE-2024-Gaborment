@@ -55,27 +55,12 @@ namespace UBB_SE_2024_Gaborment
 
         public static readonly DependencyProperty LastNameProperty = DependencyProperty.Register("LastName", typeof(string), typeof(UserCardForRequests));
 
-        //private void BlockButtonFriends_Click(object sender, RoutedEventArgs e)
-        //{
-        //    ApplicationService service = ApplicationService.Instance;
-        //    var session = ApplicationSession.Instance;
-        //    service.blockUser(session.CurrentUserId, UserId, "I AM SICK OF THEM");
-        //}
-
-        //private void UnfollowButtonFriends_Click(object sender, RoutedEventArgs e)
-        //{
-        //    ApplicationService service = ApplicationService.Instance;
-        //    var session = ApplicationSession.Instance;
-        //    service.unfollowUser(session.CurrentUserId, UserId);
-
-        //}
-
         private void DeleteRequestButton_Click(object sender, RoutedEventArgs e)
         {
             ApplicationService service = ApplicationService.Instance;
             var session = ApplicationSession.Instance;
             service.deleteRequest(session.CurrentUserId, UserId);
-            
+            MessageBox.Show("Request deleted!");
         }
 
         private void AcceptRequestButton_Click(object sender, RoutedEventArgs e)
@@ -83,10 +68,7 @@ namespace UBB_SE_2024_Gaborment
             ApplicationService service = ApplicationService.Instance;
             var session = ApplicationSession.Instance;
             service.acceptRequest(session.CurrentUserId, UserId);
-            MessageBox.Show("ura");
-            MessageBox.Show(session.CurrentUserId);
-            MessageBox.Show(UserId);
-
+            MessageBox.Show("Request accepted!");
         }
     }
 }

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UBB_SE_2024_Gaborment.Server.LoggerUtils;
+using UBB_SE_2024_Gaborment.Session;
 
 namespace UBB_SE_2024_Gaborment
 {
@@ -41,6 +43,13 @@ namespace UBB_SE_2024_Gaborment
         }
 
         public static readonly DependencyProperty LastNameProperty = DependencyProperty.Register("LastName", typeof(string), typeof(BlockedUserCard));
+
+        private void BlockFriendsButton_Click(object sender, RoutedEventArgs e)
+        {
+            ApplicationService service = ApplicationService.Instance;
+            var session = ApplicationSession.Instance;
+            MessageBox.Show("User has been unblocked!");
+        }
     }
 }
 
