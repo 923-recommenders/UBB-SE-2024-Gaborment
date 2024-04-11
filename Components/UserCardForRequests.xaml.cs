@@ -34,7 +34,8 @@ namespace UBB_SE_2024_Gaborment
             set { SetValue(FirstNameProperty, value); }
         }
 
-        public static readonly DependencyProperty FirstNameProperty = DependencyProperty.Register("FirstName", typeof(string), typeof(UserCardForRequests));
+        public static readonly DependencyProperty FirstNameProperty = DependencyProperty
+            .Register("FirstName", typeof(string), typeof(UserCardForRequests));
 
         public string LastName
         {

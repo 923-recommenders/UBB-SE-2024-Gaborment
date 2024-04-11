@@ -91,6 +91,11 @@ internal class ApplicationService
         blockService.createBlock(sender, reciever, reason);
     }
 
+    public void removeBlock(string sender, string reciever)
+    {
+        blockService.RemoveBlock(reciever, sender);
+    }
+
     public void unfollowUser(string sender, string reciever)
     {
         followService.removeFollow(sender, reciever);
@@ -106,6 +111,8 @@ internal class ApplicationService
     {
         requestService.removeRequest(reciever, sender);
     }
+
+
 
     public List<FeedConfigurationDetails> getFeedConfigurationDetailsForUser(string userId)
     {

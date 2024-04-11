@@ -29,8 +29,9 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
             InitializeComponent();
             _viewModel = new FriendViewModel();
             DataContext = _viewModel;
-            RequestsControl.Visibility = Visibility.Collapsed;
             ItemsControl.Visibility = Visibility.Visible;
+            RequestsControl.Visibility = Visibility.Collapsed;
+            UnblocksControl.Visibility = Visibility.Collapsed;
             _viewModel.LoadFollowSuggestions();
 
         }
@@ -39,6 +40,7 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
         {
             _viewModel.CurrentState = "Friends";
             RequestsControl.Visibility = Visibility.Collapsed;
+            UnblocksControl.Visibility = Visibility.Collapsed;
             ItemsControl.Visibility = Visibility.Visible;
         }
 
@@ -46,6 +48,7 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
         {
             _viewModel.CurrentState = "Following";
             RequestsControl.Visibility = Visibility.Collapsed;
+            UnblocksControl.Visibility = Visibility.Collapsed;
             ItemsControl.Visibility = Visibility.Visible;
         }
 
@@ -53,6 +56,7 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
         {
             _viewModel.CurrentState = "Followers";
             RequestsControl.Visibility = Visibility.Collapsed;
+            UnblocksControl.Visibility = Visibility.Collapsed;
             ItemsControl.Visibility = Visibility.Visible;
         }
 
@@ -60,13 +64,15 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
         {
             _viewModel.CurrentState = "Blocked";
             RequestsControl.Visibility = Visibility.Collapsed;
-            ItemsControl.Visibility = Visibility.Visible;
+            ItemsControl.Visibility = Visibility.Collapsed;
+            UnblocksControl.Visibility = Visibility.Visible;
         }
 
         private void RequestsButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             _viewModel.CurrentState = "Requests";
             ItemsControl.Visibility = Visibility.Collapsed;
+            UnblocksControl.Visibility = Visibility.Collapsed;
             RequestsControl.Visibility = Visibility.Visible;
 
         }

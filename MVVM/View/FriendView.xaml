@@ -48,6 +48,14 @@
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
+
+                            <ItemsControl x:Name="UnblocksControl" ItemsSource="{Binding Users}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <UBB_SE_2024_Gaborment:BlockedUserCard  FirstName="{Binding firstname}" LastName="{Binding lastname}" UserId="{Binding userId}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
