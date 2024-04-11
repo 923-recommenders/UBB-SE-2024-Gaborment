@@ -61,8 +61,8 @@ namespace UBB_SE_2024_Gaborment
         {
             ApplicationService service = ApplicationService.Instance;
             var session = ApplicationSession.Instance;
-            service.blockUser(session.CurrentUserId, UserId, "I AM SICK OF THEM");
-            MessageBox.Show("Unblocked!");
+            service.removeBlock(session.CurrentUserId, UserId);
+            MessageBox.Show($"Unblocked {FirstName} {LastName}");
         }
 
         
