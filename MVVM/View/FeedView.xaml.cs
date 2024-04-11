@@ -50,7 +50,6 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
                 if (feedConfig.feedId != -1)
                 {
                     button.Content = feedConfig.feedName;
-                    /*button.Name = feedConfig.feedId.ToString();*/
                     button.Name = $"CustomFeed{feedConfig.feedId}";
                 }
                 else
