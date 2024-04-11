@@ -52,8 +52,7 @@ namespace UBB_SE_2024_Gaborment.Server.Request
 
         public void removeRequest(string sender, string receiver)
         {
-            
-                _requestRepository.RemoveRequest(sender, receiver);
+            _requestRepository.RemoveRequest(sender, receiver);
         }
 
         public List<Request> getRequestOf(string sender)

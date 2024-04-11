@@ -99,12 +99,12 @@ internal class ApplicationService
     public void acceptRequest(string sender, string reciever)
     {
         followService.createFollow(sender, reciever);
-        requestService.removeRequest(sender, reciever);
+        requestService.removeRequest(reciever, sender);
     }
 
     public void deleteRequest(string sender, string reciever)
     {
-        requestService.removeRequest(sender, reciever);
+        requestService.removeRequest(reciever, sender);
     }
 
     public List<FeedConfigurationDetails> getFeedConfigurationDetailsForUser(string userId)
