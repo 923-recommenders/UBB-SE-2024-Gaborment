@@ -31,9 +31,9 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
             return this.applicationContext.GetFeed(userId, searchedId);
         }
 
-        public void AddCustomFeed(string userId, List<string>? hashtagsList, List<string>? locations, List<string>? users)
+        public void AddCustomFeed(string userId, string name, List<string>? hashtagsList, List<string>? locations, List<string>? users)
         {
-            this.applicationContext.AddCustomFeedToRepository(userId, hashtagsList, locations, users);
+            this.applicationContext.AddCustomFeedToRepository(userId, name, hashtagsList, locations, users);
         }
 
         public void UpdateCustomFeed(string userId, int id, List<string>? hashtagsList, List<string>? locations, List<string>? users)

@@ -66,7 +66,7 @@ namespace UBB_SE_2024_Gaborment.Components
             MessageBox.Show("Configuration confirmed.");
             var session = ApplicationSession.Instance;
             var applicationService = ApplicationService.Instance;
-            applicationService.addCustomFeed(session.CurrentUserId, hashtags, locations, usernames);
+            applicationService.addCustomFeed(session.CurrentUserId, feedName, hashtags, locations, usernames);
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
@@ -75,6 +75,7 @@ namespace UBB_SE_2024_Gaborment.Components
             usernames.Clear();
             hashtags.Clear();
             locations.Clear();
+
         }
     }
 }

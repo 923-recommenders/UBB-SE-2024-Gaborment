@@ -29,8 +29,8 @@
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" Height="50" HorizontalAlignment="Right" Margin="10">
-            <Button x:Name="btnConfirm" Content="Confirm" Margin="0,0,10,0" Click="BtnConfirm_Click"/>
-            <Button x:Name="btnCancel" Content="Cancel" Margin="0,0,10,0" Click="BtnCancel_Click"/>
+            <Button x:Name="btnConfirm" Style="{DynamicResource BasicCarouselButtonStyle}" Content="Confirm" Margin="0,0,10,0" Click="BtnConfirm_Click"/>
+            <Button x:Name="btnCancel" Style="{DynamicResource BasicCarouselButtonStyle}" Content="Cancel" Margin="0,0,10,0" Click="BtnCancel_Click"/>
         </StackPanel>
     </Grid>
 </UserControl>

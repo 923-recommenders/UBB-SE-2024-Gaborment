@@ -14,6 +14,7 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
         public List<string> FollowedUsers { get; set; }
         public string User { get; set; }
 
+
         public CustomFeed(List<string> Hashtags, List<string> Locations, 
             List<string> FollowedUsers, string User)
         {

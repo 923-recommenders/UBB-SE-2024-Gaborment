@@ -151,9 +151,9 @@ internal class ApplicationService
     {
         return userServiceMock.searchUsers(searchToken);
     }
-    public void addCustomFeed(string userId, List<string> hashtagsList, List<string> locations, List<string> users)
+    public void addCustomFeed(string userId, string name, List<string> hashtagsList, List<string> locations, List<string> users)
     {
-        feedConfigurationService.AddCustomFeed(userId, hashtagsList, locations, users);
+        feedConfigurationService.AddCustomFeed(userId,name, hashtagsList, locations, users);
     }
 
     public void updateCustomFeed(string userId, int customFeedId, List<string> hashtagsList, List<string> locations, List<string> users)
