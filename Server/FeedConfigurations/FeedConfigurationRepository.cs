@@ -65,7 +65,7 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
          }
      }
 
-     public void AddCustomFeedToRepository(string userId, List<string>? hashtagsList, List<string>? locations, List<string>? users)
+     public void AddCustomFeedToRepository(string userId, string name, List<string>? hashtagsList, List<string>? locations, List<string>? users)
      {
          if (!userFeeds.ContainsKey(userId))
          {
@@ -74,6 +74,7 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
          }
 
          CustomFeedBuilder customFeedBuilder = new CustomFeedBuilder();
+            if(name!=null) { customFeedBuilder.SetName(name); }
          if (hashtagsList != null)
              customFeedBuilder.SetHashtags(hashtagsList);
          if (locations != null)

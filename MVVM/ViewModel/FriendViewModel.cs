@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UBB_SE_2024_Gaborment.MVVM;
-using UBB_SE_2024_Gaborment.MVVM.Model;
 using UBB_SE_2024_Gaborment.Server.LoggerUtils;
 using UBB_SE_2024_Gaborment.Server;
 using UBB_SE_2024_Gaborment.Server.Mocks;
