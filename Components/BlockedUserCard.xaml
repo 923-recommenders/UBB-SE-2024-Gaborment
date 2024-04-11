@@ -5,12 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:UBB_SE_2024_Gaborment"
              mc:Ignorable="d" 
-             d:DesignHeight="210.462" d:DesignWidth="188" Name="UserCardBlocked">
+             d:DesignHeight="210.462" d:DesignWidth="188" Name="BlockedCard">
     <Grid Margin="5,0,5,10">
         <TextBlock HorizontalAlignment="Left" Height="188" Margin="3,10,0,0" TextWrapping="Wrap" Text="User" VerticalAlignment="Top" Width="172" RenderTransformOrigin="0.665,0.634" Background="LightGray"/>
         <Label Content="FIRST NAME: " HorizontalAlignment="Left" Margin="-1,34,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.297,0.27" FontFamily="{StaticResource FontAwesome}" FontSize="10" FontStyle="Italic"/>
         <Label Content="LAST NAME" HorizontalAlignment="Left" Margin="3,65,0,0" VerticalAlignment="Top" FontStyle="Italic" FontFamily="{StaticResource FontAwesome}" Height="26" Width="86" FontSize="10"/>
-        <Button Content="UnBlock" HorizontalAlignment="Left" Margin="70,140,0,0" VerticalAlignment="Top" Name="BlockButtonFriends" Background="DeepPink" RenderTransformOrigin="0.5,0.5">
+        <Button Content="Unblock" HorizontalAlignment="Left" Margin="70,140,0,0" VerticalAlignment="Top" Name="UnblockButtonFriends" Background="DeepPink" RenderTransformOrigin="0.5,0.5" Click="UnblockButtonFriends_Click">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -20,9 +20,9 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <TextBlock HorizontalAlignment="Left" Margin="86,39,0,0" TextWrapping="Wrap" Text="{Binding Path=FirstName,ElementName=UserCardBlocked}" VerticalAlignment="Top" Height="21" Width="68" Name="FirstNameTextBlock" RenderTransformOrigin="0.451,0.159"/>
-        <TextBlock HorizontalAlignment="Left" Margin="86,70,0,0" TextWrapping="Wrap" Text="{Binding Path=LastName,ElementName=UserCardBlocked}" VerticalAlignment="Top" Height="21" Width="68" Name="LastNameTextBlock"/>
-        <TextBlock HorizontalAlignment="Left" Margin="29,18,0,0" TextWrapping="Wrap" Text="{Binding Path=UserId, ElementName=FriendsUserCard}" VerticalAlignment="Top" Height="21" Width="68" Name="IdTextBlock" RenderTransformOrigin="0.5,0.5">
+        <TextBlock HorizontalAlignment="Left" Margin="86,39,0,0" TextWrapping="Wrap" Text="{Binding Path=FirstName,ElementName=BlockedCard}" VerticalAlignment="Top" Height="21" Width="68" Name="FirstNameTextBlock" RenderTransformOrigin="0.451,0.159"/>
+        <TextBlock HorizontalAlignment="Left" Margin="86,70,0,0" TextWrapping="Wrap" Text="{Binding Path=LastName,ElementName=BlockedCard}" VerticalAlignment="Top" Height="21" Width="68" Name="LastNameTextBlock"/>
+        <TextBlock HorizontalAlignment="Left" Margin="29,18,0,0" TextWrapping="Wrap" Text="{Binding Path=UserId, ElementName=BlockedCard}" VerticalAlignment="Top" Height="21" Width="68" Name="IdTextBlock" RenderTransformOrigin="0.5,0.5">
             <TextBlock.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
