@@ -66,11 +66,32 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks.UserGeneration
                 int numberOfViews = faker.Random.Int(0, 1000);
                 DateTime postingDate = faker.Date.Past(1);
 
+                int countAtLeastHalfPostsHaveMorePositiveReactions = count / 2;
+                int positiveReactions = 0;
+                int negativeReactions = 0;
+
+
                 Dictionary<string, List<UserMock>> reactions = new Dictionary<string, List<UserMock>>();
                 foreach (string reaction in predefinedReactions)
                 {
                     List<UserMock> rand_users = new List<UserMock>();
                     int number_of_users = faker.Random.Int(0, 1000);
+                    if(reaction == "like" || reaction == "love")
+                    {
+                        positiveReactions += number_of_users;
+                    }
+                    if(reaction == "dislike")
+                    {
+                        negativeReactions += number_of_users;
+                    }
+                    if(reaction == "angry")
+                    {
+                        while((positiveReactions < negativeReactions + number_of_users) && (countAtLeastHalfPostsHaveMorePositiveReactions > 0))
+                        {
+                            number_of_users = faker.Random.Int(0, 1000);
+                            countAtLeastHalfPostsHaveMorePositiveReactions--;
+                        }
+                    }
                     for (int j = 0; j < number_of_users; j++)
                     {
                         rand_users.Add(new UserMock());
@@ -152,30 +173,38 @@ namespace UBB_SE_2024_Gaborment.Server.Mocks.UserGeneration
 
     }
 
-    //class Program
-    //{
-    //    static void Main(string[] args)
-    //    {
-    //        List<UserMock> users = GenerateUsers.GenerateRandomUsers(10);
-    //        //List<PostMock> posts = GeneratePosts.generateRandomPosts(10, users);
-    //        List<PostMock> posts = GeneratePosts.GenerateGuaranteedControversialPosts(10, 5, users);
-    //        foreach (PostMock post in posts)
-    //        {
-    //            Console.WriteLine("-------------------------------------------------");
-    //            Console.WriteLine($"Post ID: {post.GetID()}");
-    //            Console.WriteLine($"Owner: {post.GetOwner().username}");
-    //            Console.WriteLine($"Text: {post.GetText()}");
-    //            Console.WriteLine($"Location: {post.GetLocation()}");
-    //            Console.WriteLine($"Media Type: {post.GetMediaType()}");
-    //            Console.WriteLine($"Number of Views: {post.GetViews()}");
-    //            Console.WriteLine($"Number of comments: {post.GetNumberOfComments()}");
-    //            Console.WriteLine("Reactions: ");
-    //            foreach (string reaction in post.GetReactions().Keys)
-    //            {
-    //                Console.WriteLine($"{reaction}: {post.GetReactions()[reaction]}");
-    //            }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<UserMock> users = GenerateUsers.GenerateRandomUsers(10);
+            //List<PostMock> posts = GeneratePosts.generateRandomPosts(10, users);
+            List<PostMock> posts = GeneratePosts.GenerateGuaranteedControversialPosts(10, 5, users);
+            foreach (PostMock post in posts)
+            {
+                Console.WriteLine("-------------------------------------------------");
+                Console.WriteLine($"Post ID: {post.GetID()}");
+                Console.WriteLine($"Owner: {post.GetOwner().username}");
+                Console.WriteLine($"Text: {post.GetText()}");
+                Console.WriteLine($"Location: {post.GetLocation()}");
+                Console.WriteLine($"Media Type: {post.GetMediaType()}");
+                Console.WriteLine($"Number of Views: {post.GetViews()}");
+                Console.WriteLine($"Number of comments: {post.GetNumberOfComments()}");
+                Console.WriteLine("Reactions: ");
+                foreach (string reaction in post.GetReactions().Keys)
+                {
+                    Console.WriteLine($"{reaction}: {post.GetReactions()[reaction]}");
+                }
+                if (post.GetReactions()["like"] + post.GetReactions()["love"] > post.GetReactions()["dislike"] + post.GetReactions()["angry"])
+                {
+                    Console.WriteLine("This post is more positive than negative.");
+                }
+                else
+                {
+                    Console.WriteLine("This post is more negative than positive.");
+                }
 
-    //        }
-    //    }
-    //}
+            }
+        }
+    }
 }
