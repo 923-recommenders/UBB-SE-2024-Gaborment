@@ -62,7 +62,7 @@ namespace UBB_SE_2024_Gaborment
             ApplicationService service = ApplicationService.Instance;
             var session = ApplicationSession.Instance;
             service.removeBlock(session.CurrentUserId, UserId);
-            MessageBox.Show($"Unblocked {UserId}");
+            MessageBox.Show($"Unblocked {FirstName} {LastName}");
         }
 
         
