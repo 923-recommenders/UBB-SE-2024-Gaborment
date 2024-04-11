@@ -51,7 +51,7 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
                 {
                     button.Content = feedConfig.feedName;
                     /*button.Name = feedConfig.feedId.ToString();*/
-                    button.Name = feedConfig.feedName;
+                    button.Name = $"CustomFeed{feedConfig.feedId}";
                 }
                 else
                 {
@@ -74,15 +74,12 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
             if (createCustomFeedPage.Visibility == Visibility.Collapsed)
             {
                 createCustomFeedPage.Visibility = Visibility.Visible;
-                configureFeedButton.Visibility = Visibility.Collapsed;
+                configureFeedButton.Content = "Go back";
             }
             else
             {
-                MessageBox.Show("Configuration canceled.");
                 createCustomFeedPage.Visibility = Visibility.Collapsed;
-                configureFeedButton.Content = "Add Feed";
-                configureFeedButton.Visibility = Visibility.Visible;
-
+                configureFeedButton.Content = "Add Feed";       
             }
         }
         private void CarouselButtonClicked(object sender, RoutedEventArgs e)
@@ -102,20 +99,24 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
 
             // The name of the button is on pos 1
             string[] parts = nameString.Split(':');
-            string tempButtonName = parts[1];
-            parts = tempButtonName.Split(' ');
             string buttonId;
-            if (parts.Length == 3)
-                buttonId = $"{parts[1]}{parts[2]}";
-            else
-            {
-                string temp = parts[1];
-                startIndex = temp.IndexOf("d");
-                buttonId = temp.Substring(startIndex+1);
-            }
 
             var applicationService = ApplicationService.Instance;
             var feedConfigurationDetails = applicationService.getFeedConfigurationDetailsForUser(ApplicationSession.Instance.CurrentUserId);
+
+            string[] keywords = { "Following", "Home", "Controversial", "Trending" };
+            bool containsKeyword = keywords.Any(keyword => parts[1].Contains(keyword));
+
+            if (containsKeyword)
+            {
+                string[] tempButtonName = parts[1].Split(' ');
+                buttonId = $"{tempButtonName[1]}{tempButtonName[2]}";
+            }
+            else
+            {
+                buttonId = parts[1].Trim();
+            }
+
             FeedConfigurationDetails selectedFeedConfiguration = feedConfigurationDetails.FirstOrDefault(feed => feed.feedId.ToString() == buttonId || feed.feedName == buttonId);
 
             if (selectedFeedConfiguration != null)
@@ -206,7 +207,8 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
             if(applicationSession.CurrentFeedConfiguration.feedType == Server.FeedConfigurations.FeedTypes.CustomFeed)
             {
                 applicationService.deleteCustomFeed(applicationSession.CurrentUserId, applicationSession.CurrentFeedConfiguration.feedId);
-
+                FeedConfigurationDetails feedConfigurationDetails = new FeedConfigurationDetails("Trending Feed", Server.FeedConfigurations.FeedTypes.TrendingFeed, -1);
+                applicationSession.CurrentFeedConfiguration = feedConfigurationDetails;
                 this.myList = GetButtonData();
                 dataGrid.ItemsSource = myList.Take(numberOfRecPerPage);
             }

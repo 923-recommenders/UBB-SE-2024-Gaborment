@@ -41,6 +41,12 @@ namespace UBB_SE_2024_Gaborment.Server.FeedConfigurations
             return customFeed;
         }
 
+        public CustomFeedBuilder SetName(string Name)
+        {
+            customFeed.Name=Name;
+            return this;
+        }
+
     
         public override int GetPostScore(PostMock post)
         {
