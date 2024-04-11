@@ -93,7 +93,7 @@ internal class ApplicationService
 
     public void removeBlock(string sender, string reciever)
     {
-        blockService.RemoveBlock(reciever, sender);
+        blockService.RemoveBlock(sender, reciever);
     }
 
     public void unfollowUser(string sender, string reciever)
