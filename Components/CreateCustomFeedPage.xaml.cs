@@ -27,6 +27,10 @@ namespace UBB_SE_2024_Gaborment.Components
         public CreateCustomFeedPage()
         {
             InitializeComponent();
+            txtUsernamesView.Clear();
+            txtHashtagsView.Clear();
+            txtLocationsView.Clear();
+            txtFeedNameView.Clear();
         }
 
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
@@ -42,18 +46,23 @@ namespace UBB_SE_2024_Gaborment.Components
                         if (textBox == txtUsernames)
                         {
                             usernames.Add(input);
+                            txtUsernamesView.Text = $"{txtUsernamesView.Text} {input}";
                         }
                         else if (textBox == txtHashtags)
                         {
                             hashtags.Add(input);
+                            txtHashtagsView.Text = $"{txtHashtagsView.Text} {input}";
                         }
                         else if (textBox == txtLocations)
                         {
                             locations.Add(input);
+                            txtLocationsView.Text = $"{txtLocationsView.Text} {input}";
                         }
                         else if (textBox == txtFeedName)
                         {
+                            txtFeedNameView.Clear();
                             feedName = input;
+                            txtFeedNameView.Text = $"{input} ";
                         }
                         textBox.Clear();
                     }
