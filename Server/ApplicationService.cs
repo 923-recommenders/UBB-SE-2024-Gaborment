@@ -37,7 +37,7 @@ internal class ApplicationService
         FollowRepository followRepository = new FollowRepository(applicationDatabaseContext, logger);
         followRepository.GetFollowers().ForEach(follower => Console.WriteLine(follower.getSender(), follower.getReceiver()));
         BlockRepository blockRepository = new BlockRepository(applicationDatabaseContext, logger);
-        UserServiceMock userServiceMock = new UserServiceMock();    
+        UserServiceMock userServiceMock = new UserServiceMock();
         followService = new FollowService(blockRepository, followRepository, userServiceMock);
         blockService = new BlockService(blockRepository, followRepository, userServiceMock);
         requestService = new RequestService(requestRepository, followService, blockService, userServiceMock);
@@ -52,11 +52,11 @@ internal class ApplicationService
 
         int numberOfUserMock = 5;
         List<UserMock> userMocks = GenerateUsers.GenerateRandomUsers(numberOfUserMock);
-        List<PostMock> postMocks = GeneratePosts.generateRandomPosts(20,userMocks);
+        List<PostMock> postMocks = GeneratePosts.generateRandomPosts(20, userMocks);
         postRepositoryMock = new PostRepositoryMock(postMocks);
         postServiceMock = new PostServiceMock(postRepositoryMock, followService);
         feedConfigurationService = new FeedConfigurationService();
-        feedService = new FeedService(postServiceMock,feedConfigurationService,followService);
+        feedService = new FeedService(postServiceMock, feedConfigurationService, followService);
     }
 
     public static ApplicationService Instance
@@ -82,9 +82,9 @@ internal class ApplicationService
         var session = ApplicationSession.Instance;
         //Temporary, then we use getfeedconfiguredposts for custom feed or getpostsforfeed
         //return postServiceMock.searchVisiblePosts(idUser, startDate, endDate);
-        return feedService.getPostsForFeed(session.CurrentUserId, startDate, endDate,session.CurrentFeedConfiguration);
+        return feedService.getPostsForFeed(session.CurrentUserId, startDate, endDate, session.CurrentFeedConfiguration);
 
-}
+    }
 
     public void blockUser(string sender, string reciever, string reason)
     {
@@ -96,7 +96,18 @@ internal class ApplicationService
         followService.removeFollow(sender, reciever);
     }
 
-public List<FeedConfigurationDetails> getFeedConfigurationDetailsForUser(string userId)
+    public void acceptRequest(string sender, string reciever)
+    {
+        followService.createFollow(sender, reciever);
+        requestService.removeRequest(sender, reciever);
+    }
+
+    public void deleteRequest(string sender, string reciever)
+    {
+        requestService.removeRequest(sender, reciever);
+    }
+
+    public List<FeedConfigurationDetails> getFeedConfigurationDetailsForUser(string userId)
     {
         return feedService.getFeedConfigurationDetailsForUser(userId);
     }
@@ -111,7 +122,7 @@ public List<FeedConfigurationDetails> getFeedConfigurationDetailsForUser(string 
         return requestService.getRequestToAsUserList(userId);
     }
 
-    public List<UserMock> getPeopleUserIsFollowing(string userId) 
+    public List<UserMock> getPeopleUserIsFollowing(string userId)
     {
         return followService.getFollowersOfAsUserList(userId);
     }
@@ -160,19 +171,5 @@ public List<FeedConfigurationDetails> getFeedConfigurationDetailsForUser(string 
         var session = ApplicationSession.Instance;
         return followSuggestionEngine.GetFollowSuggestionsForUser(session.CurrentUserId, AccountType.CASUAL_ACCOUNT);
     }
-
-
-    /*
-    public List<PostMock> getFeedConfiguredPosts(string userId, int feedId)
-    {
-        List<FeedConfigurationDetails> feedConfigurationDetails = feedService.getFeedConfigurationDetailsForUser(userId);
-        FeedConfigurationDetails currentFeedConfigurations = new FeedConfigurationDetails();
-        foreach(FeedConfigurationDetails details in feedConfigurationDetails)
-        {
-            if (details.feedId == feedId)
-                currentFeedConfigurations = details;
-        }
-        return feedService.getPostsForFeed(userId, DateTime.Now.AddDays(-30), DateTime.Now, currentFeedConfigurations);
-    }
-    */
 }
+

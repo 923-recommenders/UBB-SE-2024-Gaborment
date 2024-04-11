@@ -33,7 +33,7 @@
                         <StackPanel>
                             <TextBlock FontWeight="Bold" Text="Content"/>
 
-                            <ItemsControl ItemsSource="{Binding Users}">
+                            <ItemsControl x:Name="ItemsControl" ItemsSource="{Binding Users}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <UBB_SE_2024_Gaborment:UserCard FirstName="{Binding firstname}" LastName="{Binding lastname}" UserId="{Binding userId}"/>
@@ -41,6 +41,13 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
 
+                            <ItemsControl x:Name="RequestsControl" ItemsSource="{Binding Users}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <UBB_SE_2024_Gaborment:UserCardForRequests  FirstName="{Binding firstname}" LastName="{Binding lastname}" UserId="{Binding userId}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>

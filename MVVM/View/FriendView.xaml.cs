@@ -32,32 +32,46 @@ namespace UBB_SE_2024_Gaborment.MVVM.View
             InitializeComponent();
             _viewModel = new FriendViewModel();
             DataContext = _viewModel;
+            RequestsControl.Visibility = Visibility.Collapsed;
+            ItemsControl.Visibility = Visibility.Visible;
             _viewModel.LoadFollowSuggestions();
+
         }
 
         private void FriendsButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             _viewModel.CurrentState = "Friends";
+            RequestsControl.Visibility = Visibility.Collapsed;
+            ItemsControl.Visibility = Visibility.Visible;
         }
 
         private void FollowingButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             _viewModel.CurrentState = "Following";
+            RequestsControl.Visibility = Visibility.Collapsed;
+            ItemsControl.Visibility = Visibility.Visible;
         }
 
         private void FollowersButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             _viewModel.CurrentState = "Followers";
+            RequestsControl.Visibility = Visibility.Collapsed;
+            ItemsControl.Visibility = Visibility.Visible;
         }
 
         private void BlockedButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             _viewModel.CurrentState = "Blocked";
+            RequestsControl.Visibility = Visibility.Collapsed;
+            ItemsControl.Visibility = Visibility.Visible;
         }
 
         private void RequestsButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             _viewModel.CurrentState = "Requests";
+            ItemsControl.Visibility = Visibility.Collapsed;
+            RequestsControl.Visibility = Visibility.Visible;
+
         }
     }
 }
