@@ -4,9 +4,6 @@ using UBB_SE_2024_Gaborment.Server.LoggerUtils;
 
 namespace UBB_SE_2024_Gaborment
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
         public App() {
@@ -14,6 +11,8 @@ namespace UBB_SE_2024_Gaborment
             var appService = ApplicationService.Instance;
             var session = Session.ApplicationSession.Instance;
             FeedConfigurationDetails feedConfigurationDetails = new FeedConfigurationDetails("Trending Feed", Server.FeedConfigurations.FeedTypes.TrendingFeed,-1);
+            session.FeedStartTime = DateTime.Now.AddYears(-1);
+            session.FeedEndTime = DateTime.Now;
             session.CurrentFeedConfiguration = feedConfigurationDetails;
         }
 

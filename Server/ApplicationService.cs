@@ -11,6 +11,7 @@ using Microsoft.VisualBasic.ApplicationServices;
 using Bogus;
 using UBB_SE_2024_Gaborment.Session;
 using UBB_SE_2024_Gaborment.Server.Mocks.UserGeneration;
+using System.Windows.Forms;
 
 
 namespace UBB_SE_2024_Gaborment.Server.LoggerUtils;
@@ -74,16 +75,24 @@ internal class ApplicationService
     public List<PostMock> getFeedConfiguredPosts()
     {
         //This is for the basic case
-        //DateTime startDate = DateTime.Now.AddHours(-3);
-        //DateTime endDate = DateTime.Now;
-        DateTime startDate = DateTime.Now.AddYears(-2);
+        DateTime startDate = DateTime.Now.AddYears(-1);
         DateTime endDate = DateTime.Now;
+        TimeSpan interval = TimeSpan.FromDays(3);
+        TimeSpan limit = TimeSpan.FromDays(365 * 2);
 
         var session = ApplicationSession.Instance;
         //Temporary, then we use getfeedconfiguredposts for custom feed or getpostsforfeed
         //return postServiceMock.searchVisiblePosts(idUser, startDate, endDate);
-        return feedService.getPostsForFeed(session.CurrentUserId, startDate, endDate, session.CurrentFeedConfiguration);
+        while (session.FeedStartTime > session.FeedEndTime-limit)
+        {
+            List<PostMock> list=feedService.getPostsForFeed(session.CurrentUserId, session.FeedStartTime, session.FeedEndTime, session.CurrentFeedConfiguration);
+            if(list.Count > 0) { return list; }
+            session.FeedStartTime = session.FeedStartTime - interval;
 
+        }
+        session.FeedEndTime = endDate;
+        session.FeedStartTime = startDate;
+        return feedService.getPostsForFeed(session.CurrentUserId, startDate, endDate, session.CurrentFeedConfiguration);
     }
 
     public void blockUser(string sender, string reciever, string reason)
