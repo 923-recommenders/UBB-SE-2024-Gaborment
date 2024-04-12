@@ -40,6 +40,8 @@
             <TextBox x:Name="txtUsernamesView" MinWidth="250" Height="30" Margin="0,5,0,10" KeyDown="TextBox_KeyDown" HorizontalAlignment="Left"/>
         </StackPanel>
 
+        <Label Grid.Column="2" Margin="0,15,0,131" Grid.RowSpan="2">Please press enter after every input.</Label>
+        <Label Grid.Column="2" Margin="0,51,0,95" Grid.RowSpan="2">Reload the page to see your new feeds!</Label>
         <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal" Height="50" HorizontalAlignment="Right" Margin="10">
             <Button x:Name="btnConfirm" Style="{DynamicResource BasicCarouselButtonStyle}" Content="Confirm" Margin="0,0,10,0" Click="BtnConfirm_Click"/>
             <Button x:Name="btnCancel" Style="{DynamicResource BasicCarouselButtonStyle}" Content="Cancel" Margin="0,0,10,0" Click="BtnCancel_Click"/>
