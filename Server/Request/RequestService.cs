@@ -52,11 +52,7 @@ namespace UBB_SE_2024_Gaborment.Server.Request
 
         public void removeRequest(string sender, string receiver)
         {
-            
-            if (!(_blockService.getBlocksBy(sender).Any(b => b.getReceiver() == receiver) || _blockService.getBlocksOf(receiver).Any(b => b.getSender() == sender) || _followService.getFollowersOf(sender).Any(f => f.getReceiver() == receiver)))
-            {
-                _requestRepository.RemoveRequest(sender, receiver);
-            }
+            _requestRepository.RemoveRequest(sender, receiver);
         }
 
         public List<Request> getRequestOf(string sender)

@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,20 +22,20 @@ namespace UBB_SE_2024_Gaborment
     /// <summary>
     /// Interaction logic for UserCard.xaml
     /// </summary>
-    public partial class UserCard : UserControl
+    public partial class UserCardForRequests : UserControl
     {
-        public UserCard()
+        public UserCardForRequests()
         {
             InitializeComponent();
         }
-
         public string FirstName
         {
             get { return (string)GetValue(FirstNameProperty); }
             set { SetValue(FirstNameProperty, value); }
         }
 
-        public static readonly DependencyProperty FirstNameProperty = DependencyProperty.Register("FirstName", typeof(string), typeof(UserCard));
+        public static readonly DependencyProperty FirstNameProperty = DependencyProperty
+            .Register("FirstName", typeof(string), typeof(UserCardForRequests));
 
         public string LastName
         {
@@ -46,7 +45,7 @@ namespace UBB_SE_2024_Gaborment
 
 
         public static readonly DependencyProperty UserIdProperty =
-        DependencyProperty.Register("UserId", typeof(string), typeof(UserCard));
+        DependencyProperty.Register("UserId", typeof(string), typeof(UserCardForRequests));
 
 
         public string UserId
@@ -55,22 +54,40 @@ namespace UBB_SE_2024_Gaborment
             set { SetValue(UserIdProperty, value); }
         }
 
-        public static readonly DependencyProperty LastNameProperty = DependencyProperty.Register("LastName", typeof(string), typeof(UserCard));
+        public static readonly DependencyProperty LastNameProperty = DependencyProperty.Register("LastName", typeof(string), typeof(UserCardForRequests));
 
-        private void BlockButtonFriends_Click(object sender, RoutedEventArgs e)
+        //private void BlockButtonFriends_Click(object sender, RoutedEventArgs e)
+        //{
+        //    ApplicationService service = ApplicationService.Instance;
+        //    var session = ApplicationSession.Instance;
+        //    service.blockUser(session.CurrentUserId, UserId, "I AM SICK OF THEM");
+        //}
+
+        //private void UnfollowButtonFriends_Click(object sender, RoutedEventArgs e)
+        //{
+        //    ApplicationService service = ApplicationService.Instance;
+        //    var session = ApplicationSession.Instance;
+        //    service.unfollowUser(session.CurrentUserId, UserId);
+
+        //}
+
+        private void DeleteRequestButton_Click(object sender, RoutedEventArgs e)
         {
             ApplicationService service = ApplicationService.Instance;
             var session = ApplicationSession.Instance;
-            service.blockUser(session.CurrentUserId, UserId, "I AM SICK OF THEM");
-            MessageBox.Show("Blocked!");
+            service.deleteRequest(session.CurrentUserId, UserId);
+            MessageBox.Show("Request deleted succesfully!");
+
+
         }
 
-        private void UnfollowButtonFriends_Click(object sender, RoutedEventArgs e)
+        private void AcceptRequestButton_Click(object sender, RoutedEventArgs e)
         {
             ApplicationService service = ApplicationService.Instance;
             var session = ApplicationSession.Instance;
-            service.unfollowUser(session.CurrentUserId, UserId);
-            MessageBox.Show("Unfollowed!");
+            service.acceptRequest(session.CurrentUserId, UserId);
+            MessageBox.Show("Request accepted succesfully!");
+
         }
     }
 }
